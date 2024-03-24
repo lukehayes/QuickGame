@@ -11,7 +11,7 @@ function player_init(x,y, scale)
         scale = scale,
         vx = 0,
         vy = 0,
-        color = {r = 0.5, g = 0.5, b = 0.5, a = 0.5},
+        --color = {r = 0.5, g = 0.5, b = 0.5, a = 0.5},
         style = 'fill'
     }
 
