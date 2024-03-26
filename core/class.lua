@@ -1,35 +1,41 @@
-local class = {
-    name = "class",
+local Object = {
+    name = "Object",
     x = 10,
     y = 10
 }
 
---class.__index = function(k,v)
-    --print('class __index searched')
-    --return class[v]
---end
+Object.__index = Object
 
-
-function tostring(class)
-    return "Instance of " .. class
+function has_index(obj)
+    return obj:find('__index')
 end
 
-function class.new()
-    local obj = {}
+function Object:new()
 
-    setmetatable(obj, class)
+    local instance = {}
 
-    -- Line below avoids the need to define class.__index = function() end ...
+    --for k,v in pairs(self) do
+
+        --if has_index(k) then
+            --print("instance[".. k .. "]" .. " = ", v)
+            --instance[k] = v
+        --end
+    --end
+
+    -- Line below avoids the need to define Object.__index = function() end ...
     -- line commented out above.
-    class.__index = class
-    return obj
+    instance.__index = Object
+    instance.super = self
+    setmetatable(instance, self)
+
+    return instance
+
 end
 
-function class:extends(child)
+function Object:extends(child)
 
     local t = setmetatable( child, {
-        __index = self,
-        __tostring = tostring(child.name),
+        __index = self
     })
 
     --t.__index = self
@@ -37,4 +43,4 @@ function class:extends(child)
     return t
 end
 
-return class
+return Object
