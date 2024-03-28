@@ -11,7 +11,9 @@ function Entity:new(x,y)
     instance.x    = x
     instance.y    = y or nil
 
-    setmetatable(instance, Object )
+    instance.__index = instance
+
+    setmetatable( instance, Object )
 
     return instance
 
