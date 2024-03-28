@@ -1,5 +1,6 @@
 local Object = require('core.object')
 local Entity = require('core.entity')
+local Mob = require('core.mob')
 
 o1 = Object:new()
 o2 = o1:new()
