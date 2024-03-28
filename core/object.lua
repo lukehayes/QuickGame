@@ -8,8 +8,14 @@ local Object = {
 
 Object.__index = Object -- This is needed for inheritance to work!.
 
+Object.__call = function()
+    print("Functor")
+end
+
 function Object:new()
-    return self
+    local instance = {}
+    setmetatable(instance, self)
+    return instance
 end
 
 return Object

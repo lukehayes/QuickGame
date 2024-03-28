@@ -3,16 +3,14 @@ local Object = require 'core.object'
 local Entity = {}
 Entity.__index = Entity
 
-function Entity:new()
-    local instance = {}
+function Entity:new(x,y)
 
-    instance.x = 300
-    instance.color = { r=0, g = 1, b = 0, a = 1 }
+    self.name = "Entity"
+    self.x = x
+    self.y = y or nil
 
-    setmetatable(instance, Object:new() )
-    instance.__index = self
+    return setmetatable(self, Object)
 
-    return instance
 end
 
 return Entity
