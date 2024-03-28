@@ -5,11 +5,15 @@ Entity.__index = Entity
 
 function Entity:new(x,y)
 
-    self.name = "Entity"
-    self.x = x
-    self.y = y or nil
+    local instance = {}
 
-    return setmetatable(self, Object)
+    instance.name = "Entity"
+    instance.x    = x
+    instance.y    = y or nil
+
+    setmetatable(instance, Object )
+
+    return instance
 
 end
 
