@@ -1,20 +1,17 @@
+local Entity = require('core.entity')
 
-function mob_create(x,y, scale)
-    scale = scale or 10
+local Mob = Entity:new()
 
-    local m = {
-        x = x,
-        y = y,
-        scale = scale,
-        vx = 0,
-        vy = 0,
-        color = {r = 0.5, g = 0.5, b = 0.5, a = 0.5},
-        style = 'fill',
-        dx = -1,
-        dy = 1
-    }
+function Mob:new()
+    local instance = {}
 
-    return m
+    --instance.__index = instance
+    instance.name = 'Mob'
+
+    setmetatable(instance, Mob)
+
+    return instance
 end
 
-return mob_create
+return Mob
+
