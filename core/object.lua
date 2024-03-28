@@ -14,7 +14,34 @@ end
 
 function Object:new()
     local instance = {}
-    return setmetatable(instance, self)
+    return setmetatable(instance, {__index = self})
+end
+
+--- Check if a class is of a particular type.
+--
+-- @param t The type to check - should be a string.
+--
+-- @return true if t == self.name
+function Object:isType(t)
+
+    -- Is the current object equal to t?
+    if self.name == t then
+        return true
+    else
+        local mt = getmetatable(self)
+
+        -- No, so check every child metatable until
+        -- we either find t or the end of the
+        -- metatable chain.
+        while mt do
+            if mt.name == t then
+                return true
+            end
+
+            mt = getmetatable(mt)
+        end
+        return false
+    end
 end
 
 
