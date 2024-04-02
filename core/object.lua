@@ -1,5 +1,7 @@
-local Object = {}
+local Object = {
+}
 Object.__index = Object -- This is needed for inheritance to work!.
+
 
 function Object:new(x,y)
 
