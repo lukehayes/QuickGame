@@ -1,46 +1,52 @@
+local Class = {name = "Class"}
+Class.__index = Class
 
-local Object = {
-    x = 10,
-    y = 10,
-    name = "Object"
-}
+function Class:new()
+    local instance = {}
+
+    print("Called")
+
+    setmetatable(instance, self)
+
+    return instance
+end
+
+function Class:getName()
+   print("Name:", self.name)
+end
+
+local Object = {}
 
 function Object:new()
-    print("Self:", self)
-    return setmetatable({}, { __index = Object })
+    local instance = Class:new()
+
+    instance.name = "Object"
+
+    setmetatable(instance, {__index = self})
+
+    return instance
 end
 
-function Object:extend(child)
-    print("Extend: ", self)
-    return setmetatable(child, {__index = self})
+local Mob = {}
+
+function Mob:new()
+    local instance = Object:new()
+
+    instance.name = "Mob"
+
+    setmetatable(instance, self)
+    self.__index = self
+
+    return instance
 end
 
-function Object:hello()
-    print("Hello from", self)
-end
 
 
+--c1 = Class:new()
+--c1:getName()
 
-local Entity = {}
-function Entity:new()
+--o1 = Object:new()
+--o1:getName()
 
-    local entity = {
-        name = "Entity"
-    }
+m1 = Mob:new()
 
-    return setmetatable(entity, {__index = Object})
-end
-
-o1 = Object:new()
-o2 = Object:new()
-e1 = {}
-e1 = Object:extend(Entity:new())
-
-print(e1.name)
-
-
---print(o1)
---print(o2)
---print(o1.name, o2.name)
---print(o1.x, o1.y)
---print(o2.x, o2.y)
