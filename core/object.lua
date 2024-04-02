@@ -1,20 +1,17 @@
-local Object = {
-    name  = "Object",
-    x     = 10,
-    y     = 10,
-    scale = 40,
-    color = {r=1, g = 0, b = 1, a = 1}
-}
-
+local Object = {}
 Object.__index = Object -- This is needed for inheritance to work!.
 
-Object.__call = function()
-    print("Functor")
-end
+function Object:new(x,y)
 
-function Object:new()
-    local instance = {}
-    return setmetatable(instance, {__index = self})
+    local instance = setmetatable({}, Object)
+
+    instance.name  = "Object"
+    instance.x     = x or 10
+    instance.y     = y or 10
+    instance.scale = 40
+    instance.color = {r=1, g = 0, b = 1, a = 1}
+
+    return instance
 end
 
 --- Check if a class is of a particular type.

@@ -1,25 +1,24 @@
 local Object = require('core.object')
 local Entity = require('core.entity')
-local Mob = require('core.mob')
+local Mob    = require('core.mob')
 
-o1 = Object:new()
-o2 = o1:new()
+local o1 = Object:new()
+local e1 = Entity:new(400,400)
+local m1 = Mob:new(230,440)
 
-e1 = Entity:new(200,300)
-e2 = Entity:new(400, 300)
-e2.y = 300
-
-local objects = {o1, e1, e2}
+e1.color.g = 1
+local objects = {o1, e1, m1}
 
 print(o1:get_name())
 print(e1:get_name())
+print(m1:get_name())
 
 function love.load()
-
 end
 
 function love.update(dt)
     e1.x = e1.x + 100 * dt
+    m1.y = m1.y + 100 * dt
 end
 
 function love.draw()

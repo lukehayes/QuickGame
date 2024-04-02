@@ -1,22 +1,14 @@
 local Object = require 'core.object'
 
-local Entity = {}
+local Entity = { name = "Entity" }
 Entity.__index = Entity
 
 function Entity:new(x,y)
+    local instance = setmetatable({}, { __index = Object:new(x,y) })
 
-    local instance = {}
-
-    instance.name = "Entity"
-    instance.x    = x
-    instance.y    = y or nil
-
-    instance.__index = instance
-
-    setmetatable( instance, Object )
-
+    --instance.__index = instance
+    
     return instance
-
 end
 
 return Entity

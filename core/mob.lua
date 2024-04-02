@@ -1,14 +1,11 @@
 local Entity = require('core.entity')
 
-local Mob = Entity:new()
+local Mob = {}
 
 function Mob:new()
-    local instance = {}
 
-    --instance.__index = instance
-    instance.name = 'Mob'
-
-    setmetatable(instance, Mob)
+    local instance   = setmetatable(self, { __index = Entity:new(x,y) })
+    instance.name    = 'Mob'
 
     return instance
 end
