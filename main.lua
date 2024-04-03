@@ -2,41 +2,33 @@ local Object = require('core.object')
 local Entity = require('core.entity')
 local Mob    = require('core.mob')
 
-local o1 = Object:new()
 
-local e1 = Entity:new(400,400)
-local e2 = Entity:new(800,600)
-local m1 = Mob:new(800,900)
+--o1 = Object:new(300,300)
+--o2 = Object:new(100,300)
+e1 = Entity:new(30,300)
+e2 = Entity:new(400,600)
+
+print(e1)
+print(e2)
+
+--local objects = {o1, o2, e1, e2}
+local objects = {e1, e2}
+
+--o2.color.r = 0
+--e2.color.r = 0
 
 
---e1.color.r = 0
---e1.color.b = 1
---e1.color.g = 1
-
-local objects = {o1, e1, e2, m1}
-
-print(o1:get_name())
+--print(o1:get_name())
+--print(o2:get_name())
 print(e1:get_name())
 print(e2:get_name())
-print(m1:get_name())
-print("--------")
---print(o1:isType('Object'))
---print(e1:isType('Entity'))
-
---print("MEtatables")
-
---local mt = getmetatable(m1)
---print(mt)
---mt = getmetatable(mt)
---print(mt)
-
-
 
 function love.load()
 end
 
 function love.update(dt)
-    --e1.x = e1.x + 100 * dt
+    e1.x = e1.x + 100 * dt
+    e2.x = e2.x + 50 * dt
     --m1.y = m1.y + 100 * dt
 end
 

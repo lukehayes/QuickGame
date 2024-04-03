@@ -11,7 +11,7 @@ function Object:new(x,y)
     instance.x     = x or 10
     instance.y     = y or 10
     instance.scale = 40
-    instance.color = {r=1, g = 0, b = 1, a = 1}
+    instance.color = {r=1, g = 0, b = 0, a = 1}
 
     return instance
 end

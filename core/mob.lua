@@ -6,7 +6,7 @@ Mob.__index = Mob
 
 function Mob:new(x,y)
 
-    local instance = setmetatable({}, Entity:new(x,y))
+    local instance = setmetatable(self, Entity:new(x,y))
 
     instance.name    = 'Mob'
     instance.color.r = 0
