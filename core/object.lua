@@ -5,6 +5,8 @@ Object.__index = Object -- This is needed for inheritance to work!.
 
 function Object:new(x,y)
 
+    print("Called")
+
     local instance = setmetatable({}, Object)
 
     instance.name  = "Object"
