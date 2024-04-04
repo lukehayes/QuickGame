@@ -1,16 +1,24 @@
 local Object = require('core.object')
 local Entity = require('core.entity')
 local Mob    = require('core.mob')
+local Factory = require('core.object-factory')
 
+local o1 = Factory:initObject(200,400)
+local e1 = Factory:initEntity(500,100)
+local e2 = Factory:initEntity(100,400)
+local m1 = Factory:initMob(400,100)
 
-local e1 = Entity:new(100,100)
-local m1 = Mob:new(300,200)
-local m2 = Mob:new(300)
+Factory:add(o1)
+Factory:add(e1)
+Factory:add(e2)
+Factory:add(m1)
 
-local objects = {e1, m1,m2}
+mt = getmetatable(m1)
 
-Object.check_type('Entity', e1)
-Object.check_type('Mob', m1)
+while mt do
+    print(".")
+    mt = getmetatable(mt)
+end
 
 
 function love.load()
@@ -18,13 +26,11 @@ end
 
 function love.update(dt)
     e1.x = e1.x + 100 * dt
-    m1.x = m1.x + 40 * dt
-    m2.x = m2.x + 80 * dt
 end
 
 function love.draw()
 
-    for _, e in pairs(objects) do
+    for _, e in pairs(Factory.render_list) do
 
         love.graphics.setColor(
             e.color.r,
