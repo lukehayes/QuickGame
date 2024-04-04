@@ -1,36 +1,57 @@
 -- All object, entity, mob creation functions are defined in here.
 --
 local ObjectFactory = {
-
-    name  = "Object",
-    x     = 10,
-    y     = 10,
-    scale = 40,
-    color = {r=1, g = 0, b = 1, a = 1},
-
+    name        = "Object",
+    scale       = 40,
+    color       = {r=1, g = 0, b = 1, a = 1},
     render_list = {}
 }
 ObjectFactory.__index = ObjectFactory
+
+print("ObjectFactory: ", ObjectFactory)
 
 function ObjectFactory:add(e)
     table.insert(self.render_list, e)
 end
 
-function ObjectFactory:initEntity(x,y, insert)
+function ObjectFactory:initObject(x,y)
 
-    local insert = insert or false
+    local instance = {}
+    instance.x = x
+    instance.y = y
 
-    local instance = setmetatable({}, ObjectFactory)
+    local newClass =  setmetatable(instance, ObjectFactory)
+    print(newClass)
+    return newClass
+end
 
+function ObjectFactory:initEntity(x,y)
+
+    --local instance = ObjectFactory:initObject(x,y)
+    local instance = setmetatable({},
+        {__index = ObjectFactory:initObject(x,y)}
+    )
+
+    instance.name  = "Entity"
     instance.color = {r=1, g = 0, b = 0, a = 1}
-
-    -- Automatically insert the object into the render list.
-    if insert then
-        self:add(instance)
-    end
 
     return instance
 end
+
+function ObjectFactory:initMob(x,y)
+
+    --local instance = ObjectFactory:initEntity(x,y)
+    local instance = setmetatable({},
+        {__index = ObjectFactory:initEntity(x,y)}
+    )
+
+    instance.name  = "Mob"
+    instance.scale = 10
+    instance.color = {r=0, g = 1, b = 0, a = 1}
+
+    return instance
+end
+
 
 
 return ObjectFactory
