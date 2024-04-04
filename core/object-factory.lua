@@ -8,18 +8,26 @@ local ObjectFactory = {
     scale = 40,
     color = {r=1, g = 0, b = 1, a = 1},
 
-    objects = {}
+    render_list = {}
 }
 ObjectFactory.__index = ObjectFactory
 
 function ObjectFactory:add(e)
-    table.insert(self.objects, e)
+    table.insert(self.render_list, e)
 end
 
-function ObjectFactory.initEntity(x,y)
+function ObjectFactory:initEntity(x,y, insert)
+
+    local insert = insert or false
+
     local instance = setmetatable({}, ObjectFactory)
 
     instance.color = {r=1, g = 0, b = 0, a = 1}
+
+    -- Automatically insert the object into the render list.
+    if insert then
+        self:add(instance)
+    end
 
     return instance
 end
