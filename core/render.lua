@@ -3,11 +3,12 @@ local Renderer = {
     render_list = {}
 }
 
+-- Add an entity to the render list.
 function Renderer:add(e)
     table.insert(self.render_list, e)
 end
 
-
+-- Draw everything that has been added to the render list.
 function Renderer:draw_batch()
     for _, e in pairs(self.render_list) do
 
@@ -30,6 +31,7 @@ function Renderer:draw_batch()
     end
 end
 
+-- Draw a single entity
 function Renderer.draw(entity)
 
     love.graphics.setColor(
@@ -38,7 +40,6 @@ function Renderer.draw(entity)
         entity.color.b,
         entity.color.a
     )
-
 
     love.graphics.rectangle(
         entity.style,
