@@ -1,3 +1,4 @@
+local Color = require "core.color"
 
 local Renderer = {
     render_list = {}
