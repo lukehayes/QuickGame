@@ -1,11 +1,6 @@
 -- All object, entity, mob creation functions are defined in here.
 --
 local ObjectFactory = {
-    name        = "Object",
-    x           = 10,
-    y           = 10,
-    scale       = 10,
-    color       = {r=1, g = 0, b = 1, a = 1},
     render_list = {}
 }
 ObjectFactory.__index = ObjectFactory
@@ -16,53 +11,53 @@ end
 
 function ObjectFactory:initObject(x,y)
 
-    local instance = {}
+    Object = {
+        name  = "Object",
+        x     = x,
+        y     = y,
+        scale = 30,
+        color = {r=1, g = 0, b = 1, a = 1}
+    }
 
-    instance.x = x
-    instance.y = y
+    Object.__index = Object
 
-    return setmetatable(instance, ObjectFactory)
+    return Object
 end
-
-local Entity = {}
-Entity.__index = Entity
 
 function ObjectFactory:initEntity(x,y)
 
-    --local instance = ObjectFactory:initObject(x,y)
-    local instance = setmetatable(Entity, ObjectFactory:initObject(x,y))
+    Entity = {
+        name  = "Entity",
+        color = {r=1, g = 0, b = 0, a = 1}
+    }
+    Entity.__index = Entity
 
-    instance.__index = instance
-
-    instance.name  = "Entity"
-    instance.color = {r=1, g = 0, b = 0, a = 1}
-
-    return instance
+    return setmetatable(Entity, {__index = ObjectFactory:initObject(x,y)})
 end
-
-local Mob = {}
-Mob.__index = Mob
 
 function ObjectFactory:initMob(x,y)
 
-    --local instance = ObjectFactory:initEntity(x,y)
-    local instance = setmetatable(Mob, ObjectFactory:initEntity(x,y))
+    local Mob = {
+        name  = "Mob",
+        color = {r=0, g = 1, b = 0, a = 1}
+    }
+    Mob.__index = Mob
 
-    instance.name  = "Mob"
-    instance.color = {r=0, g = 1, b = 0, a = 1}
+    local instance = setmetatable(Mob, ObjectFactory:initEntity(x,y))
 
     return instance
 end
 
-local MegaMob = {}
-MegaMob.__index = MegaMob
 function ObjectFactory:initMegaMob(x,y)
 
-    local instance = setmetatable({}, ObjectFactory:initMob(x,y))
+    local MegaMob = {
+        name  = "MegaMob",
+        scale = 100,
+        color = {r=0, g = 1, b = 1, a = 1}
+    }
+    MegaMob.__index = MegaMob
 
-    instance.name  = "MegaMob"
-    instance.scale = 100
-    instance.color = {r=0, g = 1, b = 1, a = 1}
+    local instance = setmetatable({}, ObjectFactory:initMob(x,y))
 
     return instance
 end
