@@ -32,7 +32,10 @@ function ObjectFactory:initEntity(x,y)
     }
     Entity.__index = Entity
 
-    return setmetatable(Entity, {__index = ObjectFactory:initObject(x,y)})
+    Object = ObjectFactory:initObject(x,y)
+    Object.__index = Object
+
+    return setmetatable(Entity, Object)
 end
 
 function ObjectFactory:initMob(x,y)
@@ -43,9 +46,11 @@ function ObjectFactory:initMob(x,y)
     }
     Mob.__index = Mob
 
-    local instance = setmetatable(Mob, ObjectFactory:initEntity(x,y))
+    Entity = ObjectFactory:initEntity(x,y)
+    Entity.__index = Object
 
-    return instance
+    return setmetatable(Mob, Entity)
+
 end
 
 function ObjectFactory:initMegaMob(x,y)
@@ -57,30 +62,10 @@ function ObjectFactory:initMegaMob(x,y)
     }
     MegaMob.__index = MegaMob
 
-    local instance = setmetatable({}, ObjectFactory:initMob(x,y))
+    Mob = ObjectFactory:initMob(x,y)
+    Mob.__index = Object
 
-    return instance
+    return setmetatable(MegaMob, Mob)
 end
-
---local AT = {}
---local BT = {}
---setmetatable(ObjectFactory, {__index = AT})
---setmetatable(AT, {__index = BT})
-
-
---mt = getmetatable(ObjectFactory:initObject(10,10))
---mt = getmetatable(ObjectFactory:initEntity(10,10))
---mt = getmetatable(ObjectFactory:initMob(10,10))
---mt = getmetatable(ObjectFactory:initMegaMob(10,10))
---local c = 0
-
---while mt do
-    --c = c + 1
-    --c = c .. "."
-    --print("Checking mt", c)
-    --print(c)
-    --mt = getmetatable(mt)
---end
-
 
 return ObjectFactory
