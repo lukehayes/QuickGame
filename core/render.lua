@@ -1,5 +1,36 @@
 
-function draw(entity)
+local Renderer = {
+    render_list = {}
+}
+
+function Renderer:add(e)
+    table.insert(self.render_list, e)
+end
+
+
+function Renderer:draw_batch()
+    for _, e in pairs(self.render_list) do
+
+        love.graphics.setColor(
+            e.color.r,
+            e.color.g,
+            e.color.b,
+            e.color.a
+        )
+
+        love.graphics.rectangle(
+            'fill',
+            e.x,
+            e.y,
+            e.scale,
+            e.scale
+        )
+
+        love.graphics.setColor(1,1,1,1)
+    end
+end
+
+function Renderer.draw(entity)
 
     love.graphics.setColor(
         entity.color.r,
@@ -21,4 +52,4 @@ function draw(entity)
 
 end
 
-return draw
+return Renderer

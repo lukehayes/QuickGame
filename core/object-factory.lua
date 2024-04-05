@@ -1,13 +1,7 @@
 -- All object, entity, mob creation functions are defined in here.
 --
-local ObjectFactory = {
-    render_list = {}
-}
+local ObjectFactory = {}
 ObjectFactory.__index = ObjectFactory
-
-function ObjectFactory:add(e)
-    table.insert(self.render_list, e)
-end
 
 function ObjectFactory:initObject(x,y)
 
