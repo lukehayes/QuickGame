@@ -10,7 +10,8 @@ function ObjectFactory:initObject(x,y)
         x     = x,
         y     = y,
         scale = 30,
-        color = {r=1, g = 0, b = 1, a = 1}
+        color = {r=1, g = 0, b = 1, a = 1},
+        style = 'fill'
     }
 
     Object.__index = Object
