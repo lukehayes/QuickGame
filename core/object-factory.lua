@@ -35,9 +35,14 @@ end
 
 function ObjectFactory:initMob(x,y)
 
+    local MobList = require('game.mobs')
+    local randomMob = MobList[love.math.random(#MobList)]
+
+
     local Mob = {
-        name  = "Mob",
-        color = {r=0, g = 1, b = 0, a = 1}
+        name  = randomMob.name,
+        color = randomMob.color,
+        speed = randomMob.speed
     }
     Mob.__index = Mob
 
