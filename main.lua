@@ -1,6 +1,3 @@
-local Object  = require('core.object')
-local Entity  = require('core.entity')
-local Mob     = require('core.mob')
 local Factory = require('core.object-factory')
 local R       = require('core.render')
 
