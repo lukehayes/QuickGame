@@ -40,7 +40,7 @@ end
 -- @param h     number    Height of grid
 -- @param scale number    Size of each cell
 -- @param color Color     Color of grid.
-function Renderer.draw_grid(xp,yp, w, h, scale, color)
+function Renderer:draw_grid(xp,yp, w, h, scale, color)
 
     local color = color or Color.WHITE
     local scale = scale or 16
