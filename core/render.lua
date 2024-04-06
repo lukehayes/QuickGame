@@ -59,6 +59,21 @@ function Renderer:draw_grid(xp,yp, w, h, scale, color)
     end
 end
 
+--- Draw an actual singular point.
+--
+-- @param x    number    X postion
+-- @param y    number    Y postion
+function Renderer:draw_actual_point(x,y,...)
+    love.graphics.points(x,y,...)
+end
+
+--- Draw a single pont,
+function Renderer:draw_point(x,y,point_size)
+
+    local point_size =  point_size or 1
+    love.graphics.rectangle('fill', x,y, point_size, point_size)
+end
+
 -- Draw a single entity
 function Renderer.draw(entity)
 
