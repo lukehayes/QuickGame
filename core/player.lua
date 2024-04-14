@@ -1,5 +1,4 @@
 
-local M = require('libs.math')
 local M     = require('libs.math')
 local Color = require 'core.color'
 
@@ -20,11 +19,11 @@ function player_init(x,y, scale)
     ----------------
     --  MOVEMENT  --
     ----------------
-    p.speed = 500
+    p.speed = 250
     p._ax = 0
     p._ay = 0
-    p.ACC_RATE = 0.5
-    p.SLOW_DOWN_RATE = 0.15
+    p.ACC_RATE = 0.07
+    p.SLOW_DOWN_RATE = 0.01
 
     return p
 end
