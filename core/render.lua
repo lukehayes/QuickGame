@@ -13,22 +13,11 @@ end
 function Renderer:draw_batch()
     for _, e in pairs(self.render_list) do
 
-        love.graphics.setColor(
-            e.color.r,
-            e.color.g,
-            e.color.b,
-            e.color.a
-        )
-
-        love.graphics.rectangle(
-            'fill',
-            e.x,
-            e.y,
-            e.scale,
-            e.scale
-        )
-
-        love.graphics.setColor(1,1,1,1)
+        if e.name == 'ColRect' then
+            Renderer:draw_collision(e)
+        else
+            Renderer:draw(e)
+        end
     end
 end
 
@@ -95,7 +84,7 @@ function Renderer:draw_collision(collision)
 end
 
 -- Draw a single entity
-function Renderer.draw(entity)
+function Renderer:draw(entity)
 
     love.graphics.setColor(
         entity.color.r,
@@ -112,7 +101,7 @@ function Renderer.draw(entity)
         entity.scale
     )
 
-    love.graphics.setColor(1,1,0,1)
+    love.graphics.setColor(1,1,1,1)
 
 end
 
