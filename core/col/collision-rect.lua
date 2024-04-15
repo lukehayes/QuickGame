@@ -20,14 +20,10 @@ function ColRect:new(x,y, scale)
 
     local col = setmetatable({}, ColRect)
 
-    -- Private
-    --
-    local _scale = scale or 1
-
     -- Public
     --
     col.position = V2:new(x,y)
-    col.scale    = _scale
+    col.scale    = scale or 160
     col.color    = {r=1,g=1,b=1,a=1}
     col.name     = "ColRect"
 
