@@ -226,16 +226,16 @@ end
 
 -- Is the bounding box OVERLAPPING another? COLLISION RECT VERSION.
 --
--- @param entity_a
--- @param entity_b
+-- @param col_rect_a
+-- @param col_rect_b
 --
 -- @return bool True if overlap occured, false otherwise.
-function CoreMath.BBOverlapsCR(cr_a, cr_b)
+function CoreMath.overlaps(col_rect_a, col_rect_b)
 
-    return cr_a.position.x < cr_b.position.x + cr_b.scale and
-         cr_b.position.x < cr_a.position.x + cr_a.scale and
-         cr_a.position.y < cr_b.position.y + cr_b.scale and
-         cr_b.position.y < cr_a.position.y + cr_a.scale
+    return col_rect_a.position.x < col_rect_b.position.x + col_rect_b.scale and
+         col_rect_b.position.x < col_rect_a.position.x + col_rect_a.scale and
+         col_rect_a.position.y < col_rect_b.position.y + col_rect_b.scale and
+         col_rect_b.position.y < col_rect_a.position.y + col_rect_a.scale
 end
 
 -- Is a BoundingBox COMPLETELY inside another?

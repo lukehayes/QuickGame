@@ -68,7 +68,7 @@ end
 -- @return bool If the entity is contained.
 function ColRect:overlaps(entity)
     --print(entity)
-    return M.BBOverlapsCR(self, entity)
+    return M.overlaps(self, entity)
 end
 
 --- Is another entity totally inside this collision rect?
