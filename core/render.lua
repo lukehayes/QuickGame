@@ -74,6 +74,26 @@ function Renderer:draw_point(x,y,point_size)
     love.graphics.rectangle('fill', x,y, point_size, point_size)
 end
 
+function Renderer:draw_collision(collision)
+
+    love.graphics.setColor(
+        collision.color.r,
+        collision.color.g,
+        collision.color.b,
+        collision.color.a
+    )
+
+    love.graphics.rectangle(
+        'line',
+        collision.position.x,
+        collision.position.y,
+        collision.scale,
+        collision.scale
+    )
+
+    love.graphics.setColor(1,1,1,1)
+end
+
 -- Draw a single entity
 function Renderer.draw(entity)
 
