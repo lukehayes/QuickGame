@@ -20,8 +20,8 @@ end
 function love.update(dt)
     player_update(p, dt)
 
-    a.position.x = p.x
-    a.position.y = p.y
+    a.position.x = p.position.x
+    a.position.y = p.position.y
 
     if a:overlaps(b) then
         print("Overlap")

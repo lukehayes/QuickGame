@@ -1,5 +1,8 @@
 -- All object, entity, mob creation functions are defined in here.
 --
+
+local V2 = require('core.math.vec2')
+
 local ObjectFactory = {}
 ObjectFactory.__index = ObjectFactory
 
@@ -7,8 +10,7 @@ function ObjectFactory:initObject(x,y)
 
     Object = {
         name  = "Object",
-        x     = x,
-        y     = y,
+        position = V2:new(x,y),
         scale = 30,
         color = {r=1, g = 0, b = 1, a = 1},
         style = 'fill'

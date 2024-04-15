@@ -85,9 +85,9 @@ function Renderer.draw(entity)
     )
 
     love.graphics.rectangle(
-        entity.style,
-        entity.x,
-        entity.y,
+        'fill',
+        entity.position.x,
+        entity.position.y,
         entity.scale,
         entity.scale
     )
