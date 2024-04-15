@@ -28,7 +28,7 @@ function ColRect:new(x,y, scale)
     --
     col.position = V2:new(x,y)
     col.scale    = _scale
-    col.color    = {r=1,g=0,b=0.0,a=0}
+    col.color    = {r=1,g=1,b=1,a=1}
     col.name     = "ColRect"
 
     -- Can the collision rect be seen?
