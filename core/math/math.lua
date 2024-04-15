@@ -226,19 +226,19 @@ end
 
 -- Is the bounding box OVERLAPPING another? COLLISION RECT VERSION.
 --
--- @param col_rect_a
--- @param col_rect_b
+-- @param a    The first entity to check.
+-- @param b    The second entity to check.
 --
 -- @return bool True if overlap occured, false otherwise.
-function CoreMath.overlaps(col_rect_a, col_rect_b)
+function CoreMath.overlaps(a, b)
 
-    return col_rect_a.position.x < col_rect_b.position.x + col_rect_b.scale and
-         col_rect_b.position.x < col_rect_a.position.x + col_rect_a.scale and
-         col_rect_a.position.y < col_rect_b.position.y + col_rect_b.scale and
-         col_rect_b.position.y < col_rect_a.position.y + col_rect_a.scale
+    return a.position.x < b.position.x + b.scale and
+         b.position.x < a.position.x + a.scale and
+         a.position.y < b.position.y + b.scale and
+         b.position.y < a.position.y + a.scale
 end
 
--- Is a BoundingBox COMPLETELY inside another?
+-- Check if an entity is completely inside a boundary which is usually a rectangle.
 --
 -- @param cr_a
 -- @param cr_b
