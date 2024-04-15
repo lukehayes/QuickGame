@@ -1,8 +1,9 @@
 local Node = {}
+Node.__index = Node
 
 function Node:new(width, height)
 
-    local node = {}
+    local node = setmetatable({}, Node)
 
     node.children  = {}
     node.max_elems = 4
