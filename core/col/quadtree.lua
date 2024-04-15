@@ -7,7 +7,7 @@ function QuadTree:new(width, height)
     local qt = {}
 
     qt.children = {}
-    qt.max_elems = 4
+    qt.max_children = 4
     qt.width  = width
     qt.height = height
 
