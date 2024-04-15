@@ -1,5 +1,5 @@
 
-local M     = require('libs.math')
+local M     = require('core.math.math')
 local Color = require 'core.color'
 local V2    = require('core.math.vec2')
 
