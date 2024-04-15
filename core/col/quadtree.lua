@@ -1,10 +1,13 @@
 local Rectangle = require('core.math.rectangle')
 
 local QuadTree = {}
-QuadTree.__index = QuadTree
+--QuadTree.__index = QuadTree
 
 function QuadTree:new(boundary)
-    local qt = setmetatable({}, QuadTree)
+
+    local qt = setmetatable({}, {__index = QuadTree})
+
+    print("New Ctor SubDiv", boundary.width / 2, boundary.height / 2)
 
     qt.boundary = boundary
     qt.points   = {}
@@ -20,13 +23,15 @@ end
 
 function QuadTree:insert(point)
 
+    print("Insert")
     local size = #self.points
 
-    if not Rectangle.inside(point, self.boundary) then
+
+    if not Rectangle.inside(self.boundary, point) then
         return
     end
 
-    if size < self.capacity then
+    if size <= self.capacity then
         table.insert(self.points, point)
     else
         self:subdivide()
@@ -40,15 +45,11 @@ end
 
 function QuadTree:subdivide()
 
-    print("Subdividing...")
+    local ne = Rectangle:new(self.boundary.x, self.boundary.y, self.boundary.width / 2, self.boundary.height / 2)
+    local nw = Rectangle:new(self.boundary.x + self.boundary.width / 2, self.boundary.y, self.boundary.width / 2, self.boundary.height / 2)
 
-    local boundary = self.boundary
-
-    local ne = Rectangle:new(boundary.x, boundary.y, boundary.width / 2, boundary.height / 2)
-    local nw = Rectangle:new(boundary.x + boundary.width / 2, boundary.y, boundary.width / 2, boundary.height / 2)
-
-    local se = Rectangle:new(boundary.x, boundary.y + boundary.height / 2, boundary.width / 2, boundary.height / 2)
-    local sw = Rectangle:new(boundary.x + boundary.width / 2, boundary.y + boundary.height / 2, boundary.width / 2, boundary.height / 2)
+    local se = Rectangle:new(self.boundary.x, self.boundary.y + self.boundary.height / 2, self.boundary.width / 2, self.boundary.height / 2)
+    local sw = Rectangle:new(self.boundary.x + self.boundary.width / 2, self.boundary.y + self.boundary.height / 2, self.boundary.width / 2, self.boundary.height / 2)
 
     self.ne = QuadTree:new(ne)
     self.nw = QuadTree:new(nw)
