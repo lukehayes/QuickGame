@@ -13,7 +13,8 @@ function player_init(x,y, scale)
         vx = 0,
         vy = 0,
         color = Color.DEBUG,
-        style = 'fill'
+        style = 'fill',
+        name = 'Player'
     }
 
     ----------------
