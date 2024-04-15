@@ -244,7 +244,7 @@ end
 -- @param cr_b
 --
 -- @return bool True if overlap occured, false otherwise.
-function CoreMath.BBInsideCR(a,b)
+function CoreMath.inside(a,b)
 
     return a.position.x > b.position.x and
            a.position.x + a.scale < b.scale + b.position.x and

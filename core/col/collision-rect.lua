@@ -73,7 +73,7 @@ end
 --
 -- @return bool If the entity is contained.
 function ColRect:inside(entity)
-    return M.BBInsideCR(self, entity)
+    return M.inside(self, entity)
 end
 
 
