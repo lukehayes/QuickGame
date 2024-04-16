@@ -7,33 +7,35 @@ function QuadTree:new(boundary)
 
     local qt = setmetatable({}, {__index = QuadTree})
 
-    print("New Ctor SubDiv", boundary.width / 2, boundary.height / 2)
+    print("Boundary QT", boundary.width / 2)
 
     qt.boundary = boundary
     qt.points   = {}
-    qt.capacity = 4
+    qt.capacity = 25
 
-    self.ne = nil
-    self.nw = nil
-    self.se = nil
-    self.sw = nil
+    print("-----------------------------------")
+    print("BD Width", qt.boundary.width)
+    print("BD Width / 2", qt.boundary.width / 2)
+    print("-----------------------------------")
 
     return qt
 end
 
 function QuadTree:insert(point)
 
-    print("Insert")
-    local size = #self.points
+    local size = #self.points 
 
-
-    if not Rectangle.inside(self.boundary, point) then
-        return
+    if not Rectangle.inside(point, self.boundary) then
+        print("Point not inside boundary.")
+        --return
     end
 
     if size <= self.capacity then
+        print("Current size: ", size)
         table.insert(self.points, point)
     else
+        print("-------------")
+
         self:subdivide()
 
         self.ne:insert(point)
@@ -45,17 +47,21 @@ end
 
 function QuadTree:subdivide()
 
+    print("Subdividing")
+
+    --print("WIDTH", self.boundary.width)
+
     local ne = Rectangle:new(self.boundary.x, self.boundary.y, self.boundary.width / 2, self.boundary.height / 2)
     local nw = Rectangle:new(self.boundary.x + self.boundary.width / 2, self.boundary.y, self.boundary.width / 2, self.boundary.height / 2)
-
     local se = Rectangle:new(self.boundary.x, self.boundary.y + self.boundary.height / 2, self.boundary.width / 2, self.boundary.height / 2)
     local sw = Rectangle:new(self.boundary.x + self.boundary.width / 2, self.boundary.y + self.boundary.height / 2, self.boundary.width / 2, self.boundary.height / 2)
+
+    print("self:", self)
 
     self.ne = QuadTree:new(ne)
     self.nw = QuadTree:new(nw)
     self.se = QuadTree:new(se)
     self.sw = QuadTree:new(sw)
-
 end
 
 function QuadTree:draw()
@@ -77,7 +83,6 @@ function QuadTree:draw()
     if self.sw then
         self.sw:draw()
     end
-
 end
 
 return QuadTree
