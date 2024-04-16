@@ -9,7 +9,7 @@ function QuadTree.new(boundary)
 
     qt.boundary = boundary
     qt.points   = {}
-    qt.capacity = 1
+    qt.capacity = 4
     qt.divided = false
 
     qt.nw = nil
@@ -18,6 +18,26 @@ function QuadTree.new(boundary)
     qt.se = nil
 
     return qt
+end
+
+function QuadTree.clear(qt)
+
+    if #qt.ne.points > 0 then
+        qt.ne = {}
+    end
+
+    if #qt.nw.points > 0 then
+        qt.nw = {}
+    end
+
+    if #qt.se.points > 0 then
+        qt.se = {}
+    end
+
+    if #qt.se.points > 0 then
+        qt.se = {}
+    end
+
 end
 
 function QuadTree.insert(qt,point)
