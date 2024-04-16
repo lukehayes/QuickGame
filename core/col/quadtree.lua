@@ -1,88 +1,77 @@
 local Rectangle = require('core.math.rectangle')
 
 local QuadTree = {}
---QuadTree.__index = QuadTree
+QuadTree.__index = QuadTree
 
-function QuadTree:new(boundary)
+function QuadTree.new(boundary)
 
-    local qt = setmetatable({}, {__index = QuadTree})
-
-    print("Boundary QT", boundary.width / 2)
+    local qt = setmetatable({}, QuadTree)
 
     qt.boundary = boundary
     qt.points   = {}
-    qt.capacity = 25
+    qt.capacity = 1
+    qt.divided = false
 
-    print("-----------------------------------")
-    print("BD Width", qt.boundary.width)
-    print("BD Width / 2", qt.boundary.width / 2)
-    print("-----------------------------------")
+    qt.nw = nil
+    qt.ne = nil
+    qt.sw = nil
+    qt.se = nil
 
     return qt
 end
 
-function QuadTree:insert(point)
+function QuadTree.insert(qt,point)
 
-    local size = #self.points 
-
-    if not Rectangle.inside(point, self.boundary) then
-        print("Point not inside boundary.")
-        --return
+    if not Rectangle.inside(point, qt.boundary) then
+        return
     end
 
-    if size <= self.capacity then
-        print("Current size: ", size)
-        table.insert(self.points, point)
+    if #qt.points < qt.capacity then
+        table.insert(qt.points, point)
     else
-        print("-------------")
 
-        self:subdivide()
+        if not qt.divided then
+            QuadTree.subdivide(qt, point)
+            qt.divided = true
+        end
 
-        self.ne:insert(point)
-        self.nw:insert(point)
-        self.se:insert(point)
-        self.sw:insert(point)
+        QuadTree.insert(qt.ne, point)
+        QuadTree.insert(qt.nw, point)
+        QuadTree.insert(qt.se, point)
+        QuadTree.insert(qt.sw, point)
     end
 end
 
-function QuadTree:subdivide()
+function QuadTree.subdivide(qt, point)
 
-    print("Subdividing")
+    local newXP = qt.boundary.x
+    local newYP = qt.boundary.y
+    local newWidth = qt.boundary.width / 2
+    local newHeight = qt.boundary.height / 2
 
-    --print("WIDTH", self.boundary.width)
+    local nw = Rectangle:new(newXP, newYP, newWidth, newHeight)
+    local ne = Rectangle:new(newXP + newWidth, newYP, newWidth, newHeight)
+    local sw = Rectangle:new(newXP, newYP + newHeight, newWidth, newHeight)
+    local se = Rectangle:new(newXP + newWidth, newYP + newHeight, newWidth, newHeight)
 
-    local ne = Rectangle:new(self.boundary.x, self.boundary.y, self.boundary.width / 2, self.boundary.height / 2)
-    local nw = Rectangle:new(self.boundary.x + self.boundary.width / 2, self.boundary.y, self.boundary.width / 2, self.boundary.height / 2)
-    local se = Rectangle:new(self.boundary.x, self.boundary.y + self.boundary.height / 2, self.boundary.width / 2, self.boundary.height / 2)
-    local sw = Rectangle:new(self.boundary.x + self.boundary.width / 2, self.boundary.y + self.boundary.height / 2, self.boundary.width / 2, self.boundary.height / 2)
-
-    print("self:", self)
-
-    self.ne = QuadTree:new(ne)
-    self.nw = QuadTree:new(nw)
-    self.se = QuadTree:new(se)
-    self.sw = QuadTree:new(sw)
+    qt.ne = QuadTree.new(ne)
+    qt.nw = QuadTree.new(nw)
+    qt.se = QuadTree.new(se)
+    qt.sw = QuadTree.new(sw)
 end
 
-function QuadTree:draw()
+function QuadTree.draw(qt)
 
-    love.graphics.rectangle('line', self.boundary.x, self.boundary.y, self.boundary.width, self.boundary.height)
-
-    if self.ne then
-        self.ne:draw()
+    if not qt then
+        return
     end
 
-    if self.nw then
-        self.nw:draw()
-    end
+    love.graphics.rectangle('line', qt.boundary.x, qt.boundary.y, qt.boundary.width, qt.boundary.height)
 
-    if self.se then
-        self.se:draw()
-    end
-
-    if self.sw then
-        self.sw:draw()
-    end
+    QuadTree.draw(qt.ne)
+    QuadTree.draw(qt.nw)
+    QuadTree.draw(qt.se)
+    QuadTree.draw(qt.sw)
 end
 
 return QuadTree
