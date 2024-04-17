@@ -40,7 +40,6 @@ function ObjectFactory:initMob(x,y)
     local MobList = require('game.mobs')
     local randomMob = MobList[love.math.random(#MobList)]
 
-
     local Mob = {
         name  = randomMob.name,
         color = randomMob.color,
@@ -68,6 +67,24 @@ function ObjectFactory:initMegaMob(x,y)
     Mob.__index = Object
 
     return setmetatable(MegaMob, Mob)
+end
+
+function ObjectFactory:initRock(x,y)
+
+    local Rock = {
+        name  = "Rock",
+        scale = love.math.random(1,4),
+        color = {r=0, g = 1, b = 1, a = 1},
+        sprite = love.graphics.newImage('assets/rock1.png')
+    }
+    Rock.__index = Rock
+
+    Rock.sprite:setFilter('nearest', 'nearest')
+
+    Mob = ObjectFactory:initEntity(x,y)
+    Mob.__index = Object
+
+    return setmetatable(Rock, Mob)
 end
 
 return ObjectFactory

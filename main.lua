@@ -1,69 +1,49 @@
 local Factory = require('core.object-factory')
 local R       = require('core.render')
 local P       = require('core.player')
-local QT      = require('core.col.quadtree')
 local Rect    = require('core.math.rectangle')
+local QT      = require('core.ds.quadtree')
+local Stack   = require('core.ds.stack')
+local State   = require('core.state.state')
+local Util    = require('core.util')
 
-mm = Factory:initEntity(10,10)
-R:add(mm)
+st = State.new()
 
-local p = player_init(100,100, 10)
-R:add(p)
+local p = P.new(100,100)
+local rect = Rect:new(10,10,10,10)
 
-local rect = Rect:new(0,0,1920,1080)
-local qtObj = QT.new(rect)
+local rocks = {}
 
-local rects = {}
+for i=1,10 do
 
-local prssed = false
+    local rx = love.math.random(10,1900)
+    local ry = love.math.random(10,1080)
 
-for i=1,1000 do
-    local rx = love.math.random(10,1910)
-    local ry = love.math.random(10,1070)
-
-    local rect = Rect:new(rx,ry, 3,3)
-    QT.insert(qtObj,rect)
-    table.insert(rects, rect)
+    local rock = Factory:initRock(rx,ry)
+    table.insert(rocks, rock)
 end
 
 function love.load()
 end
 
 function love.update(dt)
-    player_update(p, dt)
+    P.update(p, dt)
 
-    for k,v in pairs(rects) do
-        --v:update(dt)
-        --QT.insert(qtObj,v)
-        --table.insert(rects, v) -- Causes lock up!
-    end
+    print("State: ", st:current())
 end
 
 function love.draw()
     R:draw_batch()
 
-    for k,rect in pairs(rects) do
-        love.graphics.rectangle('line', rect.x, rect.y, rect.width, rect.height)
+    R:draw_sprite(p)
+    --R:draw_sprite(rock)
+
+    for _,r in pairs(rocks) do
+        print(r.position)
+        R:draw_sprite(r)
     end
-
-    QT.draw(qtObj)
-
 end
 
+
 function love.mousepressed(x, y, button, istouch)
-    --local mx,my = love.mouse.getPosition()
-    --local rect = Rect:new(mx,my, 1,1)
-    --QT.insert(qtObj,rect)
-    --table.insert(rects, rect)
-
-    for i=1,#rects do
-        rects[i] = nil
-    end
-
-    --for k,v in pairs(rects) do
-        --QT.insert(qtObj,v)
-        --table.insert(rects, v)
-    --end
-
-    QT.clear(qtObj)
 end
