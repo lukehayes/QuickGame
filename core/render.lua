@@ -58,6 +58,10 @@ function Renderer:draw_actual_point(x,y,...)
 end
 
 --- Draw a single pont,
+--
+-- @param x    number    X postion
+-- @param y    number    Y postion
+-- @param number    point_size    The size of the point.
 function Renderer:draw_point(x,y,point_size)
 
     local point_size =  point_size or 1
