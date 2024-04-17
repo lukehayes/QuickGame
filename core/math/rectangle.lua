@@ -14,7 +14,7 @@ function Rectangle:new(x,y,width,height)
 
     r.dx = love.math.random(-1,1)
     r.dy = love.math.random(-1,1)
-    
+
     if r.dx == 0 then
         r.dx = love.math.random(-1,1)
     end
@@ -24,7 +24,7 @@ function Rectangle:new(x,y,width,height)
     end
 
     r.speed = love.math.random(10,60)
-    
+
     return r
 end
 
@@ -33,15 +33,13 @@ function Rectangle:update(dt)
     self.x = self.x + self.dx + self.speed * dt
     self.y = self.y + self.dy + self.speed * dt
 
-    if self.x < 0 or self.x > 1900 then
+    if self.x < 0 or self.x > 1919 then
         self.dx = -self.dx
     end
 
-    if self.y < 0 or self.y > 1050 then
+    if self.y < 0 or self.y > 1079 then
         self.dy = -self.dy
     end
-
-    print(self.dx, self.dy)
 end
 
 
