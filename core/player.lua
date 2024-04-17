@@ -13,7 +13,7 @@ function Player.new(x,y, scale)
 
     p.name  = 'Player'
     p.color = Color.DEBUG
-    p.scale = scale or 100
+    p.scale = scale or 3
 
     ----------------
     --  MOVEMENT  --
@@ -23,6 +23,11 @@ function Player.new(x,y, scale)
     p.acceleration   = V2:new(0,0)
     p.ACC_RATE       = 0.07
     p.SLOW_DOWN_RATE = 0.01
+    p.sprite = love.graphics.newImage('assets/spaceship2.png')
+    p.sprite:setFilter('nearest', 'nearest')
+
+    p.blur = love.graphics.newImage('assets/spaceship2-blur.png')
+    p.blur:setFilter('nearest', 'nearest')
 
     return p
 end

@@ -3,6 +3,7 @@ local Color = require "core.color"
 local Renderer = {
     render_list = {}
 }
+c = 0
 
 --- Add an entity to the render list.
 function Renderer:add(e)
@@ -103,6 +104,10 @@ function Renderer:draw(entity)
 
     love.graphics.setColor(1,1,1,1)
 
+end
+
+function Renderer:draw_sprite(entity)
+    love.graphics.draw(entity.sprite, entity.position.x, entity.position.y, 0, entity.scale,entity.scale)
 end
 
 return Renderer
