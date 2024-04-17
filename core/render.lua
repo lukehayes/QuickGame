@@ -13,22 +13,11 @@ end
 function Renderer:draw_batch()
     for _, e in pairs(self.render_list) do
 
-        love.graphics.setColor(
-            e.color.r,
-            e.color.g,
-            e.color.b,
-            e.color.a
-        )
-
-        love.graphics.rectangle(
-            'fill',
-            e.x,
-            e.y,
-            e.scale,
-            e.scale
-        )
-
-        love.graphics.setColor(1,1,1,1)
+        if e.name == 'ColRect' then
+            Renderer:draw_collision(e)
+        else
+            Renderer:draw(e)
+        end
     end
 end
 
@@ -74,8 +63,28 @@ function Renderer:draw_point(x,y,point_size)
     love.graphics.rectangle('fill', x,y, point_size, point_size)
 end
 
+function Renderer:draw_collision(collision)
+
+    love.graphics.setColor(
+        collision.color.r,
+        collision.color.g,
+        collision.color.b,
+        collision.color.a
+    )
+
+    love.graphics.rectangle(
+        'line',
+        collision.position.x,
+        collision.position.y,
+        collision.scale,
+        collision.scale
+    )
+
+    love.graphics.setColor(1,1,1,1)
+end
+
 -- Draw a single entity
-function Renderer.draw(entity)
+function Renderer:draw(entity)
 
     love.graphics.setColor(
         entity.color.r,
@@ -85,14 +94,14 @@ function Renderer.draw(entity)
     )
 
     love.graphics.rectangle(
-        entity.style,
-        entity.x,
-        entity.y,
+        'fill',
+        entity.position.x,
+        entity.position.y,
         entity.scale,
         entity.scale
     )
 
-    love.graphics.setColor(1,1,0,1)
+    love.graphics.setColor(1,1,1,1)
 
 end
 

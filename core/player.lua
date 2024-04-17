@@ -1,30 +1,30 @@
 
-local M = require('libs.math')
-local M     = require('libs.math')
+local M     = require('core.math.math')
 local Color = require 'core.color'
+local V2    = require('core.math.vec2')
 
 function player_init(x,y, scale)
 
     scale = scale or 10
 
     local p = {
-        x = x,
-        y = y,
+        position = V2:new(x,y),
         scale = scale,
         vx = 0,
         vy = 0,
         color = Color.DEBUG,
-        style = 'fill'
+        style = 'fill',
+        name = 'Player'
     }
 
     ----------------
     --  MOVEMENT  --
     ----------------
-    p.speed = 500
+    p.speed = 250
     p._ax = 0
     p._ay = 0
-    p.ACC_RATE = 0.5
-    p.SLOW_DOWN_RATE = 0.15
+    p.ACC_RATE = 0.07
+    p.SLOW_DOWN_RATE = 0.01
 
     return p
 end
@@ -60,8 +60,8 @@ function player_input(p, dt)
         p._ay = M.lerp(p._ay,0 , p.SLOW_DOWN_RATE)
     end
 
-    p.x = p.x + p._ax * dt
-    p.y = p.y + p._ay * dt
+    p.position.x = p.position.x + p._ax * dt
+    p.position.y = p.position.y + p._ay * dt
 end
 
 return player_init, player_update
