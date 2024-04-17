@@ -1,7 +1,7 @@
 
-local M     = require('core.math.math')
-local Color = require 'core.color'
-local V2    = require('core.math.vec2')
+local M       = require('core.math.math')
+local Color   = require 'core.color'
+local V2      = require('core.math.vec2')
 local Factory = require('core.object-factory')
 
 local Player = {}
@@ -18,7 +18,7 @@ function Player.new(x,y, scale)
     ----------------
     --  MOVEMENT  --
     ----------------
-    p.speed          = 250
+    p.speed          = 550
     p.velocity       = V2:new(0,0)
     p.acceleration   = V2:new(0,0)
     p.ACC_RATE       = 0.07
@@ -30,7 +30,6 @@ end
 function Player.update(p, dt)
     Player.input(p, dt)
 end
-
 
 function Player.input(p, dt)
 
