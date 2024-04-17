@@ -264,7 +264,7 @@ end
 -- @param float dt    Delta time.
 --
 -- @param number threshold    The distance to stop moving the entity.
-function M.move_towards(entity_a, entity_b, dt, threshold)
+function CoreMath.move_towards(entity_a, entity_b, dt, threshold)
 
     local angle = M.angle(entity_a.x, entity_a.y, entity_b.x, entity_b.y)
     local dist  = M.distance(entity_a.x, entity_a.y, entity_b.x, entity_b.y)
