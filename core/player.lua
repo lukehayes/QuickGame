@@ -2,66 +2,64 @@
 local M     = require('core.math.math')
 local Color = require 'core.color'
 local V2    = require('core.math.vec2')
+local Factory = require('core.object-factory')
 
-function player_init(x,y, scale)
+local Player = {}
 
-    scale = scale or 10
 
-    local p = {
-        position = V2:new(x,y),
-        scale = scale,
-        vx = 0,
-        vy = 0,
-        color = Color.DEBUG,
-        style = 'fill',
-        name = 'Player'
-    }
+function Player.new(x,y, scale)
+
+    local p = setmetatable({}, {__index = Factory:initObject(x,y)})
+
+    p.name  = 'Player'
+    p.color = Color.DEBUG
+    p.scale = scale or 100
 
     ----------------
     --  MOVEMENT  --
     ----------------
-    p.speed = 250
-    p._ax = 0
-    p._ay = 0
-    p.ACC_RATE = 0.07
+    p.speed          = 250
+    p.velocity       = V2:new(0,0)
+    p.acceleration   = V2:new(0,0)
+    p.ACC_RATE       = 0.07
     p.SLOW_DOWN_RATE = 0.01
 
     return p
 end
 
-function player_update(p, dt)
-    player_input(p, dt)
+function Player.update(p, dt)
+    Player.input(p, dt)
 end
 
 
-function player_input(p, dt)
+function Player.input(p, dt)
 
     if love.keyboard.isDown('d') then
-        p._ax = M.lerp(p._ax,p.speed, p.ACC_RATE)
+        p.acceleration.x = M.lerp(p.acceleration.x,p.speed, p.ACC_RATE)
     else
-        p._ax = M.lerp(p._ax,0 , p.SLOW_DOWN_RATE)
+        p.acceleration.x = M.lerp(p.acceleration.x,0 , p.SLOW_DOWN_RATE)
     end
 
     if love.keyboard.isDown('a') then
-        p._ax = M.lerp(p._ax,-p.speed, p.ACC_RATE)
+        p.acceleration.x = M.lerp(p.acceleration.x,-p.speed, p.ACC_RATE)
     else
-        p._ax = M.lerp(p._ax,0 , p.SLOW_DOWN_RATE)
+        p.acceleration.x = M.lerp(p.acceleration.x,0 , p.SLOW_DOWN_RATE)
     end
 
     if love.keyboard.isDown('w') then
-        p._ay = M.lerp(p._ay,-p.speed, p.ACC_RATE)
+        p.acceleration.y = M.lerp(p.acceleration.y,-p.speed, p.ACC_RATE)
     else
-        p._ay = M.lerp(p._ay,0 , p.SLOW_DOWN_RATE)
+        p.acceleration.y = M.lerp(p.acceleration.y,0 , p.SLOW_DOWN_RATE)
     end
 
     if love.keyboard.isDown('s') then
-        p._ay = M.lerp(p._ay,p.speed, p.ACC_RATE)
+        p.acceleration.y = M.lerp(p.acceleration.y,p.speed, p.ACC_RATE)
     else
-        p._ay = M.lerp(p._ay,0 , p.SLOW_DOWN_RATE)
+        p.acceleration.y = M.lerp(p.acceleration.y,0 , p.SLOW_DOWN_RATE)
     end
 
-    p.position.x = p.position.x + p._ax * dt
-    p.position.y = p.position.y + p._ay * dt
+    p.position.x = p.position.x + p.acceleration.x * dt
+    p.position.y = p.position.y + p.acceleration.y * dt
 end
 
-return player_init, player_update
+return Player
