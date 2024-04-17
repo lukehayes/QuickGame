@@ -20,26 +20,30 @@ function QuadTree.new(boundary)
     return qt
 end
 
+--- Clear every point in each Quadtree by setting it to nil.
+--
+-- @param qt    The quad tree.
 function QuadTree.clear(qt)
 
-    if #qt.ne.points > 0 then
-        qt.ne = {}
+    if not qt then
+        return
     end
 
-    if #qt.nw.points > 0 then
-        qt.nw = {}
+    for i=1,#qt.points do
+        qt.points[i] = nil
     end
 
-    if #qt.se.points > 0 then
-        qt.se = {}
-    end
-
-    if #qt.se.points > 0 then
-        qt.se = {}
-    end
+    QuadTree.clear(qt.nw)
+    QuadTree.clear(qt.ne)
+    QuadTree.clear(qt.sw)
+    QuadTree.clear(qt.se)
 
 end
 
+--- Insert a new point into the quadtree.
+--
+-- @param qt       The quad tree.
+-- @param point    The point(Rectangle) to insert.
 function QuadTree.insert(qt,point)
 
     if not Rectangle.inside(point, qt.boundary) then
@@ -51,7 +55,7 @@ function QuadTree.insert(qt,point)
     else
 
         if not qt.divided then
-            QuadTree.subdivide(qt, point)
+            QuadTree.subdivide(qt)
             qt.divided = true
         end
 
@@ -62,7 +66,10 @@ function QuadTree.insert(qt,point)
     end
 end
 
-function QuadTree.subdivide(qt, point)
+--- Insert a new point into the quadtree.
+--
+-- @param qt       The quad tree.
+function QuadTree.subdivide(qt)
 
     local newXP = qt.boundary.x
     local newYP = qt.boundary.y
@@ -80,6 +87,9 @@ function QuadTree.subdivide(qt, point)
     qt.sw = QuadTree.new(sw)
 end
 
+--- Draw the quad tree.
+--
+-- @param qt       The quad tree.
 function QuadTree.draw(qt)
 
     if not qt then
