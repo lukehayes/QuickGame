@@ -7,4 +7,6 @@ Game.states = {
     "PlayerLose"
 }
 
+Game.width, Game.height = love.window.getMode()
+
 return Game
