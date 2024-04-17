@@ -17,11 +17,11 @@ local rects = {}
 
 local prssed = false
 
-for i=1,100 do
-    local rx = love.math.random(10,1920)
-    local ry = love.math.random(10,1080)
+for i=1,1000 do
+    local rx = love.math.random(10,1910)
+    local ry = love.math.random(10,1070)
 
-    local rect = Rect:new(rx,ry, 10,10)
+    local rect = Rect:new(rx,ry, 3,3)
     QT.insert(qtObj,rect)
     table.insert(rects, rect)
 end
@@ -32,13 +32,10 @@ end
 function love.update(dt)
     player_update(p, dt)
 
-    --print("Clear")
-    --QT.clear(qtObj)
-
     for k,v in pairs(rects) do
-        v:update(dt)
+        --v:update(dt)
         --QT.insert(qtObj,v)
-        --table.insert(rects, v)
+        --table.insert(rects, v) -- Causes lock up!
     end
 end
 
@@ -58,5 +55,15 @@ function love.mousepressed(x, y, button, istouch)
     --local rect = Rect:new(mx,my, 1,1)
     --QT.insert(qtObj,rect)
     --table.insert(rects, rect)
+
+    for i=1,#rects do
+        rects[i] = nil
+    end
+
+    --for k,v in pairs(rects) do
+        --QT.insert(qtObj,v)
+        --table.insert(rects, v)
+    --end
+
     QT.clear(qtObj)
 end
