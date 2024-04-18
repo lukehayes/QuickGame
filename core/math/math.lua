@@ -129,8 +129,8 @@ end
 -- @param v2 The second vector.
 --
 -- @return The angle.
-function CoreMath.angle(v1,v2) 
-    return math.atan2(v2.y - v1.y, v2.x - v1.x) 
+function CoreMath.angle(v1,v2)
+    return math.atan(v2.y - v1.y, v2.x - v1.x)
 end
 
 --- Get the angle between two vectors - in degrees.
