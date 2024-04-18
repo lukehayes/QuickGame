@@ -66,6 +66,26 @@ function Player.input(p, dt)
 
     p.position.x = p.position.x + p.acceleration.x * dt
     p.position.y = p.position.y + p.acceleration.y * dt
+
+end
+
+
+--- Show a line representing velocity ontop of the player
+-- (In the top left corner)
+--
+-- @param Player p    The player.
+function Player.show_velocity(p)
+
+    local N = p.acceleration:length() / 10
+    p.direction.x = -p.direction.x
+    p.direction.y = -p.direction.y
+
+    love.graphics.line(
+        p.position.x - p.direction.x,
+        p.position.y - p.direction.y,
+        p.position.x - p.direction.x * N,
+        p.position.y - p.direction.y * N
+    )
 end
 
 return Player
