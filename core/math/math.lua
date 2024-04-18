@@ -90,7 +90,7 @@ end
 --
 -- @return The dot product between v1 and v2.
 function CoreMath.dot(v1,v2)
-    return NGVec2:new(v1.x * v2.x, v1.y * v2.y)
+    return V2:new(v1.x * v2.x, v1.y * v2.y)
 end
 
 -- Normalize a vector - (reduce its length to 1 but keep direction)
@@ -103,14 +103,23 @@ function CoreMath.norm(v)
     local length = math.sqrt( (v.x * v.x) + (v.y * v.y) )
 
     if length ==0 then
-        return NGVec2:new(0,0)
+        return V2:new(0,0)
     else
         local ilength = 1.0/length
-        return NGVec2:new(
+        return V2:new(
             v.x*ilength,
             v.y*ilength
         )
     end
+end
+
+--- Get the length of a vector.
+--
+-- @param v The vector.
+--
+-- @return The length.
+function CoreMath.length(v)
+    return math.sqrt( (v.x * v.x) + (v.y * v.y) )
 end
 
 --- Get the distance between two vectors.
@@ -129,8 +138,8 @@ end
 -- @param v2 The second vector.
 --
 -- @return The angle.
-function CoreMath.angle(v1,v2)
-    return math.atan(v2.y - v1.y, v2.x - v1.x)
+function CoreMath.angle(v1,v2) 
+    return math.atan(v2.y - v1.y, v2.x - v1.x) 
 end
 
 --- Get the angle between two vectors - in degrees.
@@ -149,10 +158,10 @@ end
 -- @param v1 The first vector.
 -- @param v2 The second vector.
 --
--- @return Angle/Direction NGVec2.
+-- @return Angle/Direction V2.
 function CoreMath.direction(v1,v2)
     local angle = CoreMath.angle(v1,v2)
-    return NGVec2:new(math.cos(angle), math.sin(angle))
+    return V2:new(math.cos(angle), math.sin(angle))
 end
 
 ------------------------------------------------------------------------

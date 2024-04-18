@@ -40,6 +40,10 @@ function Vec2:dot(other)
     return Vec2:new(self.x * other.x, self.y * other.y)
 end
 
+function Vec2:length()
+    return math.sqrt( (self.x * self.x) + (self.y * self.y) )
+end
+
 Vec2.__add = Vec2.add
 Vec2.__sub = Vec2.sub
 
