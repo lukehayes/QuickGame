@@ -3,6 +3,7 @@ local M       = require('core.math.math')
 local Color   = require 'core.color'
 local V2      = require('core.math.vec2')
 local Factory = require('core.object-factory')
+local SF      = require('core.sprite-factory')
 
 local Player = {}
 
@@ -23,17 +24,18 @@ function Player.new(x,y, scale)
     p.acceleration   = V2:new(0,0)
     p.ACC_RATE       = 0.07
     p.SLOW_DOWN_RATE = 0.01
-    p.sprite = love.graphics.newImage('assets/spaceship2.png')
-    p.sprite:setFilter('nearest', 'nearest')
+    p.direction      = V2:new(0,0)
 
-    p.blur = love.graphics.newImage('assets/spaceship2-blur.png')
-    p.blur:setFilter('nearest', 'nearest')
+    p.sprite = SF.spaceship
+    p.blur = SF.spaceship_blur
 
     return p
 end
 
 function Player.update(p, dt)
     Player.input(p, dt)
+
+    p.direction = M.norm(p.acceleration)
 end
 
 function Player.input(p, dt)
