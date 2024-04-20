@@ -30,25 +30,45 @@ end
 function TiledMap:draw()
     local tilePositions = self.map.layers[1].data
 
+    local x = 1
     local y = 1
 
-    for  x = 1, self.width * self.height do
+    local xc = 0
+    local yc = 0
 
-        local quad = self.quads[tilePositions[x]]
-        local tile = tilePositions[x]
+    while  xc <= self.width * self.height do
+        xc = xc + 1
+        --yc = yc + 1
 
-        if x % 16 == 0 then
-            y = y + 1
-        end
+        local tile = tilePositions[xc]
+        local quad = self.quads[tile]
 
         if quad then
-            love.graphics.draw(self.texture, self.quads[tile], x * 16, y)
+            love.graphics.draw(self.texture, quad, y * 16, x * 16)
         else
-            x = x + 16
+            --love.graphics.setColor(1,0,0,0.2)
+            --love.graphics.rectangle('fill', x * 16, y * 16, 16,16)
+            --love.graphics.setColor(1,1,1,1)
+        end
+
+        if xc % 16 == 0 then
+            x = x + 1
+
+            if x == 16 then
+                x = 1
+            end
+        end
+
+        if yc % 16 == 0 then
+            y = y + 1
+
+            if y == 16 then
+                y = 1
+            end
         end
     end
 
-    y = 0
+
 end
 
 return TiledMap
