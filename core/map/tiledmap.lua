@@ -28,47 +28,41 @@ function TiledMap.new(map, tile_image)
 end
 
 function TiledMap:draw()
+
     local tilePositions = self.map.layers[1].data
+    local MAX_TILES = self.width * self.height
 
     local x = 1
     local y = 1
 
-    local xc = 0
-    local yc = 0
+    while x <= MAX_TILES do
 
-    while  xc <= self.width * self.height do
-        xc = xc + 1
-        --yc = yc + 1
-
-        local tile = tilePositions[xc]
+        local tile = tilePositions[x]
         local quad = self.quads[tile]
 
+        xx = x % 16 * (self.tilewidth)
+
+        print(x, "Mod X % 16", x % 16, MAX_TILES)
+
         if quad then
-            love.graphics.draw(self.texture, quad, y * 16, x * 16)
-        else
-            --love.graphics.setColor(1,0,0,0.2)
-            --love.graphics.rectangle('fill', x * 16, y * 16, 16,16)
-            --love.graphics.setColor(1,1,1,1)
+            love.graphics.draw(self.texture, quad,  xx,y % 16 * 16 )
         end
 
-        if xc % 16 == 0 then
-            x = x + 1
-
-            if x == 16 then
-                x = 1
-            end
-        end
-
-        if yc % 16 == 0 then
+        if x % self.tilewidth == 0 then
+            print(x)
             y = y + 1
-
-            if y == 16 then
-                y = 1
-            end
         end
+
+        x = x + 1
+
+        --print("X:",x,"Y:",y, "Mod X", x % 16, "Mod Y", y % 16)
+
     end
 
+    print()
 
+    --io.write("-----------------------------")
+    --io.write("\n")
 end
 
 return TiledMap
