@@ -28,7 +28,10 @@ function TiledMap.new(map, tile_image)
 end
 
 function TiledMap:draw()
+function TiledMap:draw(xp,yp)
 
+    local xp = xp or 0
+    local yp = yp or 0
     local tilePositions = self.map.layers[1].data
     local MAX_TILES = self.width * self.height
 
@@ -45,7 +48,7 @@ function TiledMap:draw()
         print(x, "Mod X % 16", x % 16, MAX_TILES)
 
         if quad then
-            love.graphics.draw(self.texture, quad,  xx,y % 16 * 16 )
+            love.graphics.draw(self.texture, quad,  xp + xx, yp + yy )
         end
 
         if x % self.tilewidth == 0 then
