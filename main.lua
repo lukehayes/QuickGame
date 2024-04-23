@@ -4,8 +4,9 @@ local TM    = require('core.map.tiledmap')
 local Game  = require('core.game')
 local M     = require('core.math.math')
 local V2    = require('core.math.vec2')
+local STI   = require('libs.sti')
 
-map = TM.new('assets/maps/map', 'assets/maps/tiles.png')
+map = STI('assets/maps/map.lua')
 
 function love.load()
     p = P.new(100,100)
@@ -15,12 +16,11 @@ function love.update(dt)
     P.update(p, dt)
 end
 
-
 function love.draw()
     --R:draw_batch()
-    R:draw_sprite(p)
+    --R:draw_sprite(p)
 
-    --love.graphics.setBackgroundColor(1,1,1,1)
+    love.graphics.setBackgroundColor(0.5,0.5,0.5,1)
     map:draw()
 end
 
