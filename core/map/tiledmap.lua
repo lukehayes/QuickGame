@@ -27,7 +27,7 @@ function TiledMap:draw(xp,yp)
     local xp = xp or 0
     local yp = yp or 0
 
-    local tilePositions = self.map.layers[1].data
+    local tilePositions = self.map.layers[2].data
     local MAX_TILES = self.width * self.height - 1
 
     local x = 1
