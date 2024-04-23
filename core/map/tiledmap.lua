@@ -38,31 +38,21 @@ function TiledMap:draw(xp,yp)
         local tile = tilePositions[x]
         local quad = self.quads[tile]
 
-        local _mod = function(n) return n % self.tilesize end
+        local _mod = function(n)
+            local calc = n % self.tilesize
 
-        local _debug = function(s1, v1, s2, v2, s3, v3)
-            print(s1, " is at zero --> ", v1, s2, " is ->", v2)
-            print(s3, v3)
+            if calc < 1 then
+                return 16
+            else
+                return calc
+            end
         end
 
-        local modx = _mod(x)
-        local mody = _mod(y)
+        local xx = _mod(x) * self.tilesize
+        local yy = y * self.tilesize
 
-        xx = modx * (self.tilesize)
-        yy = mody * (self.tilesize)
-
-        --if xx == 0 then
-            --print("******************************************")
-            --_debug("XX", xx, "X", x, "MODX", modx)
-            --print(". . . . .")
-            --_debug("YY", xx, "Y", y, "MODY", mody)
-            --print("******************************************")
-        --end
-        
         if quad then
             love.graphics.draw(self.texture, quad,  xp + xx, yp + yy )
-        else
-            --print("No Quad...")
         end
 
         if x % self.tilesize == 0 then
