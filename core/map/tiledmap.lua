@@ -13,12 +13,6 @@ function TiledMap.new(map, tile_image, tilesize)
     obj.tilesize   = tilesize or 16
     obj.scale = 1
 
-    --obj.quads = {
-    --love.graphics.newQuad(0, 0, obj.tilewidth, obj.tileheight, obj.scale, obj.scale),
-    --love.graphics.newQuad(16,0, obj.tilewidth, obj.tileheight, obj.scale, obj.scale),
-    --love.graphics.newQuad(32,0, obj.tilewidth, obj.tileheight, obj.scale, obj.scale)
-    --}
-
     obj.quads = {
         love.graphics.newQuad(0,  0, obj.tilewidth, obj.tileheight, obj.texture),
         love.graphics.newQuad(16, 0, obj.tilewidth, obj.tileheight, obj.texture),
