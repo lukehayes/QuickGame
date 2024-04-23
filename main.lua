@@ -6,7 +6,7 @@ local M     = require('core.math.math')
 local V2    = require('core.math.vec2')
 local STI   = require('libs.sti')
 
-map = STI('assets/maps/map.lua')
+map = TM.new('assets/maps/map', 'assets/maps/tiles.png')
 
 function love.load()
     p = P.new(100,100)
