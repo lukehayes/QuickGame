@@ -1,8 +1,9 @@
---- Color Tables.
--- Predefined colors for making it easier to add colors, mostly for testing.
+-----------------------------------------------------------
+-- Color.
 --
--- @module Color
-
+-- Helper methods and static color fields.
+--
+-- @module core.Color
 local Color = {}
 
 --- Color.RED

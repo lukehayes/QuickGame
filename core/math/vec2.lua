@@ -1,12 +1,14 @@
---- Vec2
+-----------------------------------------------------------
+-- Vector2.
+-- Class that defines a two dimensional vector.
 --
--- A Vec2 class
---
--- @classmod NGRenderer
+-- @classmod core.math.vec2
+
 local Vec2 = {}
 Vec2.__index = Vec2
 
---- Constructor
+-----------------------------------------------------------
+-- Constructor
 --
 -- Create a new instance of the Vec2 class.
 --

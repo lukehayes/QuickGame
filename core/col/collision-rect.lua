@@ -1,20 +1,20 @@
---- ColRect
+-----------------------------------------------------------
+-- Collision Rectangle.
+-- Class that defines a rectangle and manages simple collisions.
 --
--- A Collision Box.
---
--- @classmod ColRect
-
+-- @classmod core.col.col-rect
 local M  = require('core.math.math')
 local V2 = require('core.math.vec2')
 
 local ColRect = {}
 ColRect.__index = ColRect
 
---- Constructor
+-----------------------------------------------------------
+-- Constructor
 --
--- @param x The x position.
--- @param y The y position.
--- @param scale The width and height of the entity. Defalts to 10.
+-- @tparam number x The x position.
+-- @tparam number y The y position.
+-- @tparam number scale The width and height of the entity. Defalts to 10.
 --
 function ColRect:new(x,y, scale)
 
@@ -40,24 +40,26 @@ function ColRect:new(x,y, scale)
     col.collisionCooldown = 0.5
     col.collisionCooldownTimer = 0
 
-
     return col
 end
 
---- Set the collision rect to be visible.
+-----------------------------------------------------------
+-- Set the collision rect to visible.
 --
 function ColRect:setVisible()
     self.color.a = 0.75
     self.visible = true
 end
 
---- Disable this collision rects collision.
+-----------------------------------------------------------
+-- Disable this collision rects collision.
 --
 function ColRect:disable()
     self.disabled = true
 end
 
---- Is another entity totally inside this collision rect?
+-----------------------------------------------------------
+-- Is another entity totally inside this collision rect?
 ---
 -- @param entity The entity to check.
 --
@@ -67,7 +69,8 @@ function ColRect:overlaps(entity)
     return M.overlaps(self, entity)
 end
 
---- Is another entity totally inside this collision rect?
+-----------------------------------------------------------
+-- Is another entity totally inside this collision rect?
 ---
 -- @param entity The entity to check.
 --
@@ -77,13 +80,15 @@ function ColRect:inside(entity)
 end
 
 
---- Update the entity.
+-----------------------------------------------------------
+-- Update the entity.
 --
 -- @param dt Delta time.
 function ColRect:update(dt)
 end
 
---- Draw the entity,
+-----------------------------------------------------------
+-- Draw the entity.
 --
 function ColRect:draw()
     self.gfx:drawEntity(self)

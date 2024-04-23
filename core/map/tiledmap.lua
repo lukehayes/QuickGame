@@ -1,6 +1,25 @@
+----------------------------------------
+-- TiledMap Renderer.
+-- Class that can draw a tilemap made inside the Tiled map editor.
+--
+-- @usage
+--
+-- local TM = require('core.map.tiledmap')
+-- local map = TM:new('assets/maps/map.png', 'assets/maps/tiles.png')
+--
+-- @classmod core.map.tiledmap
+--
 local TiledMap = {}
 TiledMap.__index = TiledMap
 
+----------------------------------------
+-- Create a new instance of TiledMap.
+--
+-- @tparam string map           The full path to the '.lua' map file.
+-- @tparam string tile_image    The full path to the '.png' image file.
+-- @tparam number tilesize    The size of each tile. Defaults to 16.
+--
+-- @treturn table A new instance of a tilemap.
 function TiledMap.new(map, tile_image, tilesize)
     local obj = setmetatable({}, TiledMap)
 
@@ -22,6 +41,12 @@ function TiledMap.new(map, tile_image, tilesize)
     return obj
 end
 
+----------------------------------------
+-- Draw the tilemap.
+--
+-- @tparam number xp    The x position of the tilemap.
+-- @tparam number yp    The y position of the tilemap.
+--
 function TiledMap:draw(xp,yp)
 
     local xp = xp or 0
