@@ -1,4 +1,4 @@
-----------------------------------------
+-----------------------------------------------------------
 -- TiledMap Renderer.
 -- Class that can draw a tilemap made inside the Tiled map editor.
 --
@@ -32,16 +32,37 @@ function TiledMap.new(map, tile_image, tilesize)
     obj.tilesize   = tilesize or 16
     obj.scale = 1
 
-    obj.quads = {
-        love.graphics.newQuad(0,  0, obj.tilewidth, obj.tileheight, obj.texture),
-        love.graphics.newQuad(16, 0, obj.tilewidth, obj.tileheight, obj.texture),
-        love.graphics.newQuad(32, 0, obj.tilewidth, obj.tileheight, obj.texture)
-    }
+    -- Generate all of the quads for the tilemap.
+    obj.quads = {}
+    for i=1,obj.texture:getWidth() / obj.tilesize do
+
+        local x = i * obj.tilesize - obj.tilesize
+        local quad = love.graphics.newQuad(x,0, obj.tilewidth, obj.tileheight, obj.texture)
+        table.insert(obj.quads, quad)
+    end
 
     return obj
 end
 
-----------------------------------------
+-----------------------------------------------------------
+-- Generate all the quads for the tileset.
+--
+-- @treturn table   A table full of love2d Quads.
+--
+function TiledMap:_generate_quads()
+    local quads = {}
+
+    for i=1,self.texture:getWidth() / self.tilesize do
+
+        local x = i * self.tilesize - self.tilesize
+        local quad = love.graphics.newQuad(x,0, self.tilewidth, self.tileheight, self.texture)
+        table.insert(quads, quad)
+    end
+
+    return quads
+end
+
+-----------------------------------------------------------
 -- Draw the tilemap.
 --
 -- @tparam number xp    The x position of the tilemap.
@@ -52,7 +73,7 @@ function TiledMap:draw(xp,yp)
     local xp = xp or 0
     local yp = yp or 0
 
-    local tilePositions = self.map.layers[2].data
+    local tilePositions = self.map.layers[1].data
     local MAX_TILES = self.width * self.height - 1
 
     local x = 1
@@ -67,7 +88,7 @@ function TiledMap:draw(xp,yp)
             local calc = n % self.tilesize
 
             if calc < 1 then
-                return 16
+                return self.tilesize
             else
                 return calc
             end
