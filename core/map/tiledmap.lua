@@ -30,7 +30,7 @@ function TiledMap.new(map, tile_image, tilesize)
     obj.tilewidth  = obj.map.tilewidth
     obj.tileheight = obj.map.tileheight
     obj.tilesize   = tilesize or 16
-    obj.scale = 1
+    obj.scale = 2
 
     -- Generate all of the quads for the tilemap.
     obj.quads = {}
@@ -74,10 +74,10 @@ function TiledMap:draw(xp,yp)
     local yp = yp or 0
 
     local tilePositions = self.map.layers[1].data
-    local MAX_TILES = self.width * self.height - 1
+    local MAX_TILES = self.width * self.height
 
-    local x = 1
-    local y = 1
+    local x = 0
+    local y = 0
 
     while x <= MAX_TILES do
  
@@ -94,11 +94,11 @@ function TiledMap:draw(xp,yp)
             end
         end
 
-        local xx = _mod(x) * self.tilesize
-        local yy = y * self.tilesize
+        local xx = _mod(x) * self.tilesize * self.scale
+        local yy = y * self.tilesize * self.scale
 
         if quad then
-            love.graphics.draw(self.texture, quad,  xp + xx, yp + yy )
+            love.graphics.draw(self.texture, quad,  xp + xx, yp + yy, 0, self.scale, self.scale)
         end
 
         if x % self.tilesize == 0 then
