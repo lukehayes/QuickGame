@@ -1,10 +1,17 @@
+-----------------------------------------------------------
+-- Stack.
+-- A stack data structure.
+--
+-- @classmod core.ds.stack
 local Stack = {}
 Stack.__index = Stack
 
---- Constructor.
---- Create a new Stack object.
+-----------------------------------------------------------
+-- Constructor.
 --
--- @return Stack.
+-- Create a new Stack object.
+--
+-- @treturn Stack    A new instance of Stack.
 function Stack.new()
 
     local obj = setmetatable({}, Stack)
@@ -14,14 +21,16 @@ function Stack.new()
     return obj
 end
 
---- Push an item onto the stack.
+-----------------------------------------------------------
+-- Push an item onto the stack.
 --
 -- @param item    The item to be pushed.
 function Stack:push(item)
     table.insert(self.items, 1, item)
 end
 
---- Pop an item from the stack.
+-----------------------------------------------------------
+-- Pop an item from the stack.
 --
 -- @return Returns the item if exists, false otherwise.
 function Stack:pop()
@@ -32,16 +41,18 @@ function Stack:pop()
     end
 end
 
---- Check if there are any items inside the stack.
+-----------------------------------------------------------
+-- Check if there are any items inside the stack.
 --
--- @return Returns true if there are ZERO items, false otherwise.
+-- @treturn number Returns true if there are ZERO items, false otherwise.
 function Stack:empty()
     return self:size() == 0
 end
 
---- Get the amount of elements inside the stack.
+-----------------------------------------------------------
+-- Get the amount of elements inside the stack.
 --
--- @return number    The number of items.
+-- @treturn number    The number of items.
 function Stack:size()
     return #self.items
 end

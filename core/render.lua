@@ -107,7 +107,6 @@ function Renderer:draw(entity)
     )
 
     love.graphics.setColor(1,1,1,1)
-
 end
 
 function Renderer:draw_sprite(entity)

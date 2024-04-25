@@ -1,8 +1,20 @@
+-----------------------------------------------------------
+-- Quadtree.
+-- A simple quad tree implementation.
+-- A quadtree data structure.
+--
+-- @classmod core.ds.quadtree
 local Rectangle = require('core.math.rectangle')
 
 local QuadTree = {}
 QuadTree.__index = QuadTree
 
+-----------------------------------------------------------
+-- Constructor.
+--
+-- Create a new quad tree object.
+--
+-- @return Quadtree.
 function QuadTree.new(boundary)
 
     local qt = setmetatable({}, QuadTree)
@@ -20,7 +32,8 @@ function QuadTree.new(boundary)
     return qt
 end
 
---- Clear every point in each Quadtree by setting it to nil.
+-----------------------------------------------------------
+-- Clear every point in each Quadtree by setting it to nil.
 --
 -- @param qt    The quad tree.
 function QuadTree.clear(qt)
@@ -40,7 +53,8 @@ function QuadTree.clear(qt)
 
 end
 
---- Insert a new point into the quadtree.
+-----------------------------------------------------------
+-- Insert a new point into the quadtree.
 --
 -- @param qt       The quad tree.
 -- @param point    The point(Rectangle) to insert.
@@ -66,7 +80,8 @@ function QuadTree.insert(qt,point)
     end
 end
 
---- Insert a new point into the quadtree.
+-----------------------------------------------------------
+-- Insert a new point into the quadtree.
 --
 -- @param qt       The quad tree.
 function QuadTree.subdivide(qt)
@@ -87,7 +102,8 @@ function QuadTree.subdivide(qt)
     qt.sw = QuadTree.new(sw)
 end
 
---- Draw the quad tree.
+-----------------------------------------------------------
+-- Draw the quad tree.
 --
 -- @param qt       The quad tree.
 function QuadTree.draw(qt)

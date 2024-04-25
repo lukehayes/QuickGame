@@ -7,7 +7,7 @@
 --    Cam:draw()
 -- Cam:end()
 --
--- @classmod core.camera.camera.
+-- @classmod core.camera.camera
 local Camera = {}
 Camera.__index = Camera
 
@@ -76,7 +76,7 @@ function Camera:draw()
             (self.target.scale - self.target.position.y) + self.screenHeight / 2
         )
     else
-        love.graphics.scale(self.zoom, self.zoom)
+        love.graphics.scale(2 * self.zoom, self.zoom)
         love.graphics.translate(self.x, self.y)
     end
 
