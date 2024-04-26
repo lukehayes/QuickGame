@@ -2,7 +2,12 @@
 -- CoreMath
 -- Mathematics helper functions.
 --
--- @classmod core.math.math
+-- @usage
+--
+-- local M = require('core.math.math')
+-- local clamped_value = M.clamp(10,50,100)
+--
+-- @module math
 --
 local CoreMath = {}
 
