@@ -15,6 +15,7 @@ function Rectangle:new(x,y,width,height)
 
     r.dx = love.math.random(-1,1)
     r.dy = love.math.random(-1,1)
+    r.color = {r=0.3, g = 0, b = 1, a = 1}
 
     if r.dx == 0 then
         r.dx = love.math.random(-1,1)
