@@ -24,32 +24,7 @@ function CoreMath.averageAngles(...)
 end
 
 ------------------------------------------------------------------------
--- Returns the distance between two points.
---
--- @tparam number x1
--- @tparam number y1
--- @tparam number x2
--- @tparam number y2
---
--- @treturn number    The distance.
-function CoreMath.distance(x1,y1, x2,y2) return ((x2-x1)^2+(y2-y1)^2)^0.5 end
-
-------------------------------------------------------------------------
--- Returns the distance between two points.
---
--- @tparam number x1
--- @tparam number y1
--- @tparam number z1
--- @tparam number x2
--- @tparam number y2
--- @tparam number z2
---
--- @treturn number    The distance in 3D space.
-function CoreMath.distance3d(x1,y1,z1, x2,y2,z2) return ((x2-x1)^2+(y2-y1)^2+(z2-z1)^2)^0.5 end
-
-
-------------------------------------------------------------------------
--- Returns the distance between two points.
+-- Returns the angle between two points.
 --
 -- @tparam number x1
 -- @tparam number y1
@@ -257,7 +232,7 @@ end
 -- @tparam Vec2 v2     The second vector.
 --
 -- @treturn number The distance.
-function CoreMath.dist(v1,v2)
+function CoreMath.distance(v1,v2)
     return ((v2.x-v1.x)^2+(v2.y-v1.y)^2)^0.5
 end
 
@@ -280,19 +255,8 @@ function CoreMath.averageAngles(...)
     return math.atan2(y, x)
 end
 
--- Returns the distance between two points.
-function CoreMath.distance(x1,y1, x2,y2) return ((x2-x1)^2+(y2-y1)^2)^0.5 end
--- Distance between two 3D points:
-function CoreMath.distance3d(x1,y1,z1, x2,y2,z2) return ((x2-x1)^2+(y2-y1)^2+(z2-z1)^2)^0.5 end
-
-
--- Returns the angle between two points.
---function CoreMath.angle(x1,y1, x2,y2) return math.atan2(y2-y1, x2-x1) end
-
-
 -- Returns the closest multiple of 'size' (defaulting to 10).
 function CoreMath.multiple(n, size) size = size or 10 return math.round(n/size)*size end
-
 
 -- Clamps a number to within a certain range.
 function CoreMath.clamp(low, n, high) return math.min(math.max(low, n), high) end
