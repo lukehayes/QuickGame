@@ -1,6 +1,7 @@
---- Represents a generic rectangle shape with an x,y position and a width and height.
+---------------------------------------------------------------------------------
+-- Represents a generic rectangle shape with an x,y position and a width and height.
 --
-
+-- @classmod core.math.rectangle
 local V2    = require('core.math.vec2')
 
 local Rectangle = {}
@@ -45,10 +46,12 @@ function Rectangle:update(dt)
 end
 
 
---- Check if another Rectangle object is completely inside this one.
+---------------------------------------------------------------------------------
+-- Check if another Rectangle object is completely inside this one.
 --
--- @param Rectangle     rect    The other Rectangle to check.
--- @return boolean    True if inside, false otherwise.
+-- @tparam Rectangle     rect    The other Rectangle to check.
+--
+-- @treturn boolean    True if inside, false otherwise.
 function Rectangle:inside(rect)
 
     return self.x >= rect.x and
@@ -58,11 +61,13 @@ function Rectangle:inside(rect)
 end
 
 
---- Check if another Rectangle object is completely inside this one.
---- This is the generic/'static' version.
+---------------------------------------------------------------------------------
+-- Check if another Rectangle object is completely inside this one.
+-- This is the generic/'static' version.
 --
--- @param Rectangle     rect    The other Rectangle to check.
--- @return boolean    True if inside, false otherwise.
+-- @tparam Rectangle     rect    The other Rectangle to check.
+--
+-- @treturn boolean    True if inside, false otherwise.
 function Rectangle.inside(a,b)
 
     return a.x >= b.x and

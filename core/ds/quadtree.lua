@@ -14,6 +14,8 @@ QuadTree.__index = QuadTree
 --
 -- Create a new quad tree object.
 --
+-- @tparam Rectangle boundary
+--
 -- @return Quadtree.
 function QuadTree.new(boundary)
 
