@@ -1,14 +1,15 @@
 --- Represents a generic rectangle shape with an x,y position and a width and height.
 --
 
+local V2    = require('core.math.vec2')
+
 local Rectangle = {}
 Rectangle.__index = Rectangle
 
 function Rectangle:new(x,y,width,height)
     local r = setmetatable({}, Rectangle)
 
-    r.x      = x
-    r.y      = y
+    r.position = V2:new(x,y)
     r.width  = width
     r.height = height
 
