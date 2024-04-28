@@ -63,6 +63,7 @@ end
 function QuadTree.insert(qt,point)
 
     if not Rectangle.inside(point, qt.boundary) then
+        print("NO RECT!")
         return
     end
 
@@ -88,9 +89,9 @@ end
 -- @param qt       The quad tree.
 function QuadTree.subdivide(qt)
 
-    local newXP = qt.boundary.x
-    local newYP = qt.boundary.y
-    local newWidth = qt.boundary.width / 2
+    local newXP     = qt.boundary.x
+    local newYP     = qt.boundary.y
+    local newWidth  = qt.boundary.width / 2
     local newHeight = qt.boundary.height / 2
 
     local nw = Rectangle:new(newXP, newYP, newWidth, newHeight)
