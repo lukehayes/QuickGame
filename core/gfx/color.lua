@@ -3,10 +3,11 @@
 --
 -- Helper methods and static color fields.
 --
--- @module core.Color
+-- @module core.gfx.color
 local Color = {}
 
 --- Color.RED
+-- @table Color.Red
 Color.RED   = {r = 1, g = 0, b = 0, a = 1}
 
 --- Color.GREEN
