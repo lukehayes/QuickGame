@@ -19,7 +19,7 @@ function Entity.new(x,y)
     local obj = {}
 
     obj.name  = "Entity"
-    obj.color = {r=1, g = 0, b = 0, a = 1}
+    obj.color = {r=0, g = 0, b = 0, a = 1}
 
     return setmetatable(obj, {__index = Factory:initObject(x,y)})
 end
