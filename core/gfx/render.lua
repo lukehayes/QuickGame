@@ -1,3 +1,9 @@
+---------------------------------------------------------------------------------
+-- Renderer.
+-- Renderer holds helper functions for all kinds of drawing.
+--
+-- @classmod core.gfx.renderer
+--
 local Color = require "core.color"
 
 local Renderer = {
@@ -5,12 +11,17 @@ local Renderer = {
 }
 c = 0
 
---- Add an entity to the render list.
+---------------------------------------------------------------------------------
+-- Add an entity to the render list.
+--
+-- @tparam Entity e.
+--
 function Renderer:add(e)
     table.insert(self.render_list, e)
 end
 
---- Draw everything that has been added to the render list.
+---------------------------------------------------------------------------------
+-- Draw everything that has been added to the render list.
 function Renderer:draw_batch()
     for _, e in pairs(self.render_list) do
 
@@ -22,8 +33,9 @@ function Renderer:draw_batch()
     end
 end
 
---- Draw a x by y grid grid.
----
+---------------------------------------------------------------------------------
+-- Draw a x by y grid grid.
+--
 -- @param xp    number    X postion
 -- @param yp    number    Y postion
 -- @param w     number    Width of grid
@@ -49,7 +61,8 @@ function Renderer:draw_grid(xp,yp, w, h, scale, color)
     end
 end
 
---- Draw an actual singular point.
+---------------------------------------------------------------------------------
+-- Draw an actual singular point.
 --
 -- @param x    number    X postion
 -- @param y    number    Y postion
@@ -57,7 +70,8 @@ function Renderer:draw_actual_point(x,y,...)
     love.graphics.points(x,y,...)
 end
 
---- Draw a single pont,
+---------------------------------------------------------------------------------
+-- Draw a single point.
 --
 -- @param x    number    X postion
 -- @param y    number    Y postion
@@ -68,6 +82,12 @@ function Renderer:draw_point(x,y,point_size)
     love.graphics.rectangle('fill', x,y, point_size, point_size)
 end
 
+---------------------------------------------------------------------------------
+-- Draw a collision box.
+--
+-- @param x    number    X postion
+-- @param y    number    Y postion
+-- @param number    point_size    The size of the point.
 function Renderer:draw_collision(collision)
 
     love.graphics.setColor(
@@ -88,7 +108,10 @@ function Renderer:draw_collision(collision)
     love.graphics.setColor(1,1,1,1)
 end
 
--- Draw a single entity
+---------------------------------------------------------------------------------
+-- Draw a single entity.
+--
+-- @tparam Entity entity.
 function Renderer:draw(entity)
 
     love.graphics.setColor(
@@ -109,6 +132,10 @@ function Renderer:draw(entity)
     love.graphics.setColor(1,1,1,1)
 end
 
+---------------------------------------------------------------------------------
+-- Draw a single sprite.
+--
+-- @tparam Entity entity.
 function Renderer:draw_sprite(entity)
     love.graphics.draw(entity.sprite, entity.position.x, entity.position.y, 0, entity.scale,entity.scale)
 end
