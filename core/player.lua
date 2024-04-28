@@ -2,11 +2,10 @@
 local M       = require('core.math.math')
 local Color   = require 'core.color'
 local V2      = require('core.math.vec2')
-local Factory = require('core.object-factory')
-local SF      = require('core.sprite-factory')
+local Factory = require('core.factory.object-factory')
+local SF      = require('core.factory.sprite-factory')
 
 local Player = {}
-
 
 function Player.new(x,y, scale)
 

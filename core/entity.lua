@@ -3,7 +3,7 @@
 -- The Entity base class
 --
 -- @classmod core.entity
-local Factory = require('core.object-factory')
+local Factory = require('core.factory.object-factory')
 
 local Entity = {}
 Entity.__index = Entity
