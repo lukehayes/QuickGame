@@ -4,7 +4,7 @@
 --
 -- @classmod core.gfx.renderer
 --
-local Color = require "core.color"
+local Color = require "core.gfx.color"
 
 local Renderer = {
     render_list = {}
