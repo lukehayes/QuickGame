@@ -1,11 +1,18 @@
+---------------------------------------------------------------------------------
+-- Util
+-- Utility helper functions are defined here.
+--
+-- @module core.util
+--
 local Util = {}
 
---- Find a value in a table.
+---------------------------------------------------------------------------------
+-- Find a value in a table.
 --
--- @param t    The table to search.
--- @param e    The element to search for.
+-- @tparam table t    The table to search.
+-- @param  e          The element to search for.
 --
--- @return Element if found, false otherwise.
+-- @treturn Element if found, false otherwise.
 Util.find = function(t,e)
 
     if #t == 0 then
@@ -19,6 +26,16 @@ Util.find = function(t,e)
     end
 
     return false
+end
+
+---------------------------------------------------------------------------------
+-- Is the parameter of type table?
+--
+-- @tparam table t
+--
+-- @treturn bool    True if t is table,false otherwise.
+Util.is_table = function(t)
+    return type(t) == 'table'
 end
 
 
