@@ -21,9 +21,11 @@ function Object.new(x,y)
         name  = "Object",
         position = V2:new(x,y),
         scale = 5,
-        color = {r=0, g = 0, b = 1, a = 1},
+        color = {r=1, g = 0, b = 1, a = 1},
         style = 'fill'
     }
 
     return Object
 end
+
+return Object
