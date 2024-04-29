@@ -27,6 +27,8 @@ function Renderer:draw_batch()
 
         if e.name == 'ColRect' then
             Renderer:draw_collision(e)
+        elseif e.name == 'Sprite' then
+            Renderer:draw_sprite(e)
         else
             Renderer:draw(e)
         end
