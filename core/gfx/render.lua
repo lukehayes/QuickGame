@@ -137,9 +137,9 @@ end
 ---------------------------------------------------------------------------------
 -- Draw a single sprite.
 --
--- @tparam Entity entity.
-function Renderer:draw_sprite(entity)
-    love.graphics.draw(entity.sprite, entity.position.x, entity.position.y, 0, entity.scale,entity.scale)
+-- @tparam Sprite sprite.
+function Renderer:draw_sprite(sprite)
+    love.graphics.draw(sprite.image, sprite.position.x, sprite.position.y, 0, sprite.scale,sprite.scale)
 end
 
 return Renderer
