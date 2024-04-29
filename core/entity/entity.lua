@@ -4,7 +4,6 @@
 --
 -- @classmod core.entity.entity
 local Object  = require('core.object')
-local Factory = require('core.factory.object-factory')
 
 local Entity = {}
 Entity.__index = Entity
@@ -17,12 +16,13 @@ Entity.__index = Entity
 -- @treturn Entity A new instance of Entity.
 function Entity.new(x,y)
 
-    local obj = {}
+    local obj = Object.new(x,y)
+    setmetatable(obj, Entity)
 
     obj.name  = "Entity"
     obj.color = {r=0.5, g = 0.6, b = 1, a = 1}
 
-    return setmetatable(obj, {__index = Object.new(x,y)})
+    return obj
 end
 
 -----------------------------------------------------------
@@ -34,7 +34,12 @@ end
 --
 function Entity:update(dt)
     print("Entity update")
+
+    self.position.x = self.position.x * 100 * dt
 end
 
+function Entity:draw()
+    love.graphics.rectangle('fill', self.position.x, self.position.y,  self.scale,self.scale)
+end
 
 return Entity

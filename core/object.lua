@@ -17,15 +17,15 @@ Object.__index = Object
 -- @treturn Object A new instance of Object..
 function Object.new(x,y)
 
-    Object = {
-        name  = "Object",
-        position = V2:new(x,y),
-        scale = 5,
-        color = {r=1, g = 0, b = 1, a = 1},
-        style = 'fill'
-    }
+    local obj = setmetatable({}, Object)
 
-    return Object
+    obj.name  = "Object"
+    obj.position = V2:new(x,y)
+    obj.scale = 5
+    obj.color = {r=1, g = 0, b = 1, a = 1}
+    obj.style = 'fill'
+
+    return obj
 end
 
 return Object
