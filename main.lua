@@ -1,15 +1,14 @@
 local R        = require('core.gfx.render')
 local P        = require('core.player')
-local TM       = require('core.map.tiledmap')
-local Game     = require('core.game')
-local M        = require('core.math.math')
-local V2       = require('core.math.vec2')
-local Camera   = require('core.camera.camera')
 local Entity   = require('core.entity.entity')
+local Sprite   = require('core.gfx.sprite')
+local Assets   = require('core.assets')
 
-local e1 = Entity.new(10,10,100)
-R:add(e1)
 
+s1 = Sprite.new(200,100, Assets.get_image('Pico8-Man'))
+s2 = Sprite.new(200,400, Assets.get_image('Pico8-Man'))
+R:add(s1)
+R:add(s2)
 
 function love.load()
     p = P.new(100,100)
@@ -20,7 +19,11 @@ function love.update(dt)
 end
 
 function love.draw()
-    love.graphics.setBackgroundColor(0.5,0.5,0.5,1)
+    love.graphics.setBackgroundColor(0.2,0.2,0.2,1)
+
+    --R:draw_sprite(s1)
+    --R:draw_sprite(s2)
+
     R:draw_batch()
 end
 
