@@ -5,7 +5,7 @@ local Game     = require('core.game')
 local M        = require('core.math.math')
 local V2       = require('core.math.vec2')
 local Camera   = require('core.camera.camera')
-local Entity   = require('core.entity')
+local Entity   = require('core.entity.entity')
 
 local e1 = Entity.new(10,10,100)
 R:add(e1)
