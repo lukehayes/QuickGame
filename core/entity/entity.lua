@@ -2,7 +2,8 @@
 -- Entity.
 -- The Entity base class
 --
--- @classmod core.entity
+-- @classmod core.entity.entity
+local Object  = require('core.object')
 local Factory = require('core.factory.object-factory')
 
 local Entity = {}
@@ -19,9 +20,9 @@ function Entity.new(x,y)
     local obj = {}
 
     obj.name  = "Entity"
-    obj.color = {r=0, g = 0, b = 0, a = 1}
+    obj.color = {r=0.5, g = 0.6, b = 1, a = 1}
 
-    return setmetatable(obj, {__index = Factory:initObject(x,y)})
+    return setmetatable(obj, {__index = Object.new(x,y)})
 end
 
 -----------------------------------------------------------
