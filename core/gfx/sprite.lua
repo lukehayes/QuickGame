@@ -5,6 +5,7 @@
 -- @classmod core.gfx.sprite
 --
 local Entity  = require('core.entity.entity')
+local Object  = require('core.object')
 
 local Sprite = {}
 Sprite.__index = Sprite
@@ -22,18 +23,18 @@ Sprite.__index = Sprite
 -- @treturn Sprite A new instance of Sprite..
 function Sprite.new(x,y, image)
 
-    local sprite = Entity.new(x,y)
-    setmetatable(sprite, Sprite)
+    local obj = Entity.new(x,y)
+    setmetatable(obj, Sprite)
+    setmetatable(Sprite, Entity)
 
-    sprite.name = "Sprite"
-    sprite.image = love.graphics.newImage(image)
-    sprite.image:setFilter('nearest', 'nearest')
+    obj.name  = "Sprite"
+    obj.image = love.graphics.newImage(image)
+    obj.image:setFilter('nearest', 'nearest')
 
-    return sprite
+    return obj
 end
 
 function Sprite:draw()
-    print(self.position.x, self.position.y)
     love.graphics.draw(self.image, self.position.x, self.position.y, 0, self.scale,self.scale)
 end
 
