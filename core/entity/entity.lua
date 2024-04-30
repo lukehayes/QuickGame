@@ -18,6 +18,7 @@ function Entity.new(x,y)
 
     local obj = Object.new(x,y)
     setmetatable(obj, Entity)
+    setmetatable(Entity, Object)
 
     obj.name  = "Entity"
     obj.color = {r=0.5, g = 0.6, b = 1, a = 1}
