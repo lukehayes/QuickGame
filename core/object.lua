@@ -24,6 +24,7 @@ function Object.new(x,y)
     obj.scale = 5
     obj.color = {r=1, g = 0, b = 1, a = 1}
     obj.style = 'fill'
+    obj.speed    = 100
 
     return obj
 end
