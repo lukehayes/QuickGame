@@ -29,6 +29,19 @@ Util.find = function(t,e)
 end
 
 ---------------------------------------------------------------------------------
+-- Read a entire file into a string and return it.
+--
+-- @tparam string file    Full path the file.
+--
+-- @treturn string    The whole file contents.
+Util.read_file = function(file)
+    local fh = io.open(file)
+    local str = fh:read("*all")
+    fh:close()
+    return str
+end
+
+---------------------------------------------------------------------------------
 -- Is the parameter of type table?
 --
 -- @tparam table t
