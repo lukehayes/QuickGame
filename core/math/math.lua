@@ -7,7 +7,7 @@
 -- local M = require('core.math.math')
 -- local clamped_value = M.clamp(10,50,100)
 --
--- @module math
+-- @module core.math
 --
 local CoreMath = {}
 

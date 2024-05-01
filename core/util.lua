@@ -1,5 +1,4 @@
 ---------------------------------------------------------------------------------
--- Util
 -- Utility helper functions are defined here.
 --
 -- @module core.util
