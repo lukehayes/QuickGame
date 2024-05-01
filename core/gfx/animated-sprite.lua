@@ -6,6 +6,7 @@
 --
 local Sprite  = require('core.gfx.sprite')
 local JSON    = require('libs.json')
+local Util    = require('core.util')
 
 local AnimatedSprite = {}
 AnimatedSprite.__index = AnimatedSprite
@@ -22,9 +23,8 @@ function AnimatedSprite.new(x,y,image, speed)
     setmetatable(obj, AnimatedSprite)
     setmetatable(AnimatedSprite, Sprite)
 
-    local fh = io.open('assets/images/Pico8-Man.json')
-    obj.frame_data = JSON.decode(fh:read("*all"))
-    fh:close()
+    local str = Util.read_file('assets/images/Pico8-Man.json')
+    obj.frame_data = JSON.decode(str)
 
     obj.frame       = 5
     obj.max_frame   = 9
