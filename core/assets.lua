@@ -7,7 +7,7 @@ local Assets = {}
 --
 --
 -- @treturn String    The full path to the image, nil otherwise.
-function Assets.get_image(image)
+function Assets.image(image)
     return 'assets/images/' .. image .. '.png'
 end
 
@@ -17,7 +17,7 @@ end
 -- @tparam string json    The name of the json file.
 --
 -- @treturn String    The full path to the json file, nil otherwise.
-function Assets.get_json(json)
+function Assets.json(json)
     return 'assets/json/' .. json .. '.json'
 end
 
