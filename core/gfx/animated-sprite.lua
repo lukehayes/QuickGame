@@ -7,6 +7,7 @@
 local Sprite  = require('core.gfx.sprite')
 local JSON    = require('libs.json')
 local Util    = require('core.util')
+local Data    = require('core.gfx.animation-data')
 
 local AnimatedSprite = {}
 AnimatedSprite.__index = AnimatedSprite
@@ -23,14 +24,15 @@ function AnimatedSprite.new(x,y,image, speed)
     setmetatable(obj, AnimatedSprite)
     setmetatable(AnimatedSprite, Sprite)
 
-    local str = Util.read_file('assets/images/Pico8-Man.json')
-    obj.frame_data = JSON.decode(str)
+    obj.data = Data.new('assets/images/Pico8-Man.json')
 
     obj.frame       = 5
     obj.max_frame   = 9
     obj.frame_timer = 0
     obj.tile_size   = 8
     obj.playing     = false
+    obj.current_animation = 'Idle'
+    obj.animation = obj.data:get_animation(obj.current_animation)
 
     -- Generate all of the quads for the tilemap.
     obj.quads = {}
@@ -41,7 +43,7 @@ function AnimatedSprite.new(x,y,image, speed)
         table.insert(obj.quads, quad)
     end
 
-    obj.anim_speed = 0.2
+    obj.anim_speed = speed or 0.2
 
     return obj
 end

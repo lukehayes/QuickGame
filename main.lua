@@ -4,14 +4,20 @@ local Entity   = require('core.entity.entity')
 local Sprite   = require('core.gfx.sprite')
 local Assets   = require('core.assets')
 local RNG      = require('core.math.random')
-local AnimSprite   = require('core.gfx.animated-sprite')
+local AnimSprite      = require('core.gfx.animated-sprite')
+local AnimationData   = require('core.gfx.animation-data')
 
-s1 = Sprite.new(20,10, Assets.get_image('rock1'))
+
+s1 = Sprite.new(20,10, Assets.image('rock1'))
 --R:add(s1)
 
-as1 = AnimSprite.new(10,10, Assets.get_image('Pico8-Man'))
+as1 = AnimSprite.new(100,100, Assets.image('Pico8-Man'))
 R:add(as1)
+as1.scale = 5
 
+local data = AnimationData.new('assets/images/Pico8-Man.json')
+
+local anim = data:get_animation('Idle')
 
 function love.load()
     p = P.new(100,100)
