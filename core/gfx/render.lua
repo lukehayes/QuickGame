@@ -142,4 +142,13 @@ function Renderer:draw_sprite(sprite)
     love.graphics.draw(sprite.image, sprite.position.x, sprite.position.y, 0, sprite.scale,sprite.scale)
 end
 
+---------------------------------------------------------------------------------
+-- Clear the screen, optionally with a color.
+--
+-- @tparam Color color    The clear color.
+function Renderer:clear(color)
+    color = color or Color.BLACK
+    love.graphics.setBackgroundColor(color.r, color.g, color.b, color.a)
+end
+
 return Renderer

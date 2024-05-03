@@ -6,6 +6,7 @@ local Assets   = require('core.assets')
 local RNG      = require('core.math.random')
 local AnimSprite      = require('core.gfx.animated-sprite')
 local AnimationData   = require('core.gfx.animation-data')
+local Color   = require('core.gfx.color')
 
 
 s1 = Sprite.new(20,10, Assets.image('rock1'))
@@ -48,7 +49,8 @@ end
 
 function love.draw()
 
-    love.graphics.setBackgroundColor(0.2,0.2,0.2,1)
+    R:clear(Color.BLACK)
+
     as1:draw()
 
     --R:draw_batch()
