@@ -37,11 +37,14 @@ function love.update(dt)
         as1.animation,
         as1.start_frame,
         as1.end_frame = as1.data:get_animation("Walk")
+        as1.flip = true
+
 
     else
         as1.animation,
         as1.start_frame,
         as1.end_frame = as1.data:get_animation("Idle")
+        as1.flip = false
     end
 
     as1:update(dt)
