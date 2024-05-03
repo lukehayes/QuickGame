@@ -36,7 +36,7 @@ function AnimatedSprite.new(x,y,image, speed)
 
     -- Generate all of the quads for the tilemap.
     obj.quads = {}
-    for i=1,obj.image:getWidth() / obj.tile_size do
+    for i=1,obj.data:get_size() do
 
         local x = i * obj.tile_size - obj.tile_size
         local quad = love.graphics.newQuad(x,0, obj.tile_size, obj.tile_size, obj.image)
