@@ -43,7 +43,7 @@ function AnimatedSprite.new(x,y,image, speed)
         table.insert(obj.quads, quad)
     end
 
-    obj.anim_speed = speed or 0.2
+    obj.anim_speed = speed or 0.08
 
     return obj
 end
