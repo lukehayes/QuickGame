@@ -73,7 +73,7 @@ function AnimatedSprite:update(dt)
 end
 
 function AnimatedSprite:draw()
-    love.graphics.draw(self.image, self.quads[self.frame],  self.position.x, self.position.y, 0, self.scale, self.scale)
+    love.graphics.draw(self.image, self.quads[self.frame + 1],  self.position.x, self.position.y, 0, self.scale, self.scale)
 end
 
 return AnimatedSprite
