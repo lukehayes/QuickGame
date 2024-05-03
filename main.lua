@@ -17,49 +17,38 @@ as1.scale = 5
 
 local data = AnimationData.new('assets/images/Pico8-Man.json')
 
-local anim = data:get_animation('Idle')
+print(data:get_size())
+
+local anim, from, to = data:get_animation('Idle')
+print(as1.from_frame)
+print(as1.to_frame)
+
 
 function love.load()
     p = P.new(100,100)
 end
 
 function love.update(dt)
-    P.update(p, dt)
-
-    as1:update(dt)
-
-    if love.keyboard.isDown('s') then
-        as1.position.y = as1.position.y + as1.speed * dt
-        as1.playing = true
-    else
-        as1.playing = false
-    end
-
-    if love.keyboard.isDown('w') then
-        as1.position.y = as1.position.y - as1.speed * dt
-        as1.playing = true
-    else
-        as1.playing = false
-    end
-
-    if love.keyboard.isDown('a') then
-        as1.position.x = as1.position.x - as1.speed * dt
-        as1.playing = true
-    else
-        as1.playing = false
-    end
 
     if love.keyboard.isDown('d') then
         as1.position.x = as1.position.x + as1.speed * dt
-        as1.playing = true
+
+        as1.animation,
+        as1.start_frame,
+        as1.end_frame = as1.data:get_animation("Walk")
+
     else
-        as1.playing = false
+        as1.animation,
+        as1.start_frame,
+        as1.end_frame = as1.data:get_animation("Idle")
     end
+
+    as1:update(dt)
 end
 
 function love.draw()
-    love.graphics.setBackgroundColor(0.2,0.2,0.2,1)
 
+    love.graphics.setBackgroundColor(0.2,0.2,0.2,1)
     as1:draw()
 
     --R:draw_batch()
