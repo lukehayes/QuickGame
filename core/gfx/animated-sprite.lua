@@ -57,8 +57,6 @@ end
 
 function AnimatedSprite:update(dt)
 
-    print(self.animation, self.start_frame, self.end_frame, self.frame)
-
     self.frame_timer = self.frame_timer + dt
 
     if self.frame_timer >= self.anim_speed then
@@ -72,7 +70,13 @@ function AnimatedSprite:update(dt)
 end
 
 function AnimatedSprite:draw()
-    love.graphics.draw(self.image, self.quads[self.frame + 1],  self.position.x, self.position.y, 0, self.scale, self.scale)
+
+    if self.flip then
+        love.graphics.draw(self.image, self.quads[self.frame + 1],  self.position.x, self.position.y, 0, self.scale * -1, self.scale, self.origin_x, self.origin_y)
+    else
+        love.graphics.draw(self.image, self.quads[self.frame + 1],  self.position.x, self.position.y, 0, self.scale, self.scale, self.origin_x, self.origin_y)
+    end
+
 end
 
 return AnimatedSprite
