@@ -48,6 +48,13 @@ function AnimatedSprite.new(x,y,image, speed)
     return obj
 end
 
+function AnimatedSprite:play(animation)
+    self.animation,
+    self.start_frame,
+    self.end_frame = self.data:get_animation(animation)
+
+end
+
 function AnimatedSprite:update(dt)
 
     if self.playing then
