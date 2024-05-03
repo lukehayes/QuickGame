@@ -18,21 +18,21 @@ AnimatedSprite.__index = AnimatedSprite
 -- Create a new AnimatedSprite.
 --
 -- @treturn AnimatedSprite A new instance of AnimatedSprite..
-function AnimatedSprite.new(x,y,image, speed)
+function AnimatedSprite.new(x,y,image, speed, animation)
 
     local obj = Sprite.new(x,y, image)
     setmetatable(obj, AnimatedSprite)
-    setmetatable(AnimatedSprite, Sprite)
 
     obj.data = Data.new('assets/images/Pico8-Man.json')
 
-    obj.frame       = 5
-    obj.max_frame   = 9
     obj.frame_timer = 0
     obj.tile_size   = 8
     obj.playing     = false
-    obj.current_animation = 'Idle'
-    obj.animation = obj.data:get_animation(obj.current_animation)
+
+    obj.animation,
+    obj.start_frame,
+    obj.end_frame = obj.data:get_animation('Idle')
+    obj.frame     = obj.start_frame
 
     -- Generate all of the quads for the tilemap.
     obj.quads = {}
@@ -57,19 +57,18 @@ end
 
 function AnimatedSprite:update(dt)
 
-    if self.playing then
-        self.frame_timer = self.frame_timer + dt
+    print(self.animation, self.start_frame, self.end_frame, self.frame)
 
-        if self.frame_timer > self.anim_speed then
-            self.frame = self.frame + 1
-            self.frame_timer = 0
-        end
+    self.frame_timer = self.frame_timer + dt
 
-        if self.frame >= self.max_frame then
-            self.frame = 5
-        end
+    if self.frame_timer >= self.anim_speed then
+        self.frame = self.frame + 1
+        self.frame_timer = 0
     end
 
+    if self.frame >= self.end_frame then
+        self.frame = self.start_frame
+    end
 end
 
 function AnimatedSprite:draw()
