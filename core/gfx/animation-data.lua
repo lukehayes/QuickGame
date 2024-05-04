@@ -44,12 +44,21 @@ end
 ------------------------------------------------------------------------
 -- Get the width of the animation image as it was set in Aseprite.
 --
--- The value is width as I amm only using horizontal rows
+-- The value is width as I am only using horizontal rows
 -- currently and not a full texture atlas.
 --
 -- @treturn number    The image size (width).
 function AnimationData:get_size()
     return self.data.meta.size.w
+end
+
+------------------------------------------------------------------------
+-- Get the size of an individual tile.
+-- I usually use a perfect square so unusual tile sizes aren't supported.
+--
+-- @treturn number    The tile size (width).
+function AnimationData:get_tile_size()
+    return self.data.meta.size.h
 end
 
 return AnimationData

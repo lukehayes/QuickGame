@@ -33,6 +33,10 @@ function AnimatedSprite.new(x,y,image, speed, animation)
     obj.start_frame,
     obj.end_frame = obj.data:get_animation('Idle')
     obj.frame     = obj.start_frame
+    obj.origin_x = obj.data:get_tile_size() / 2
+    obj.origin_y = obj.data:get_tile_size() / 2
+
+    print(obj.data:get_size())
 
     -- Generate all of the quads for the tilemap.
     obj.quads = {}

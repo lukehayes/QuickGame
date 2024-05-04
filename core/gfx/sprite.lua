@@ -31,8 +31,6 @@ function Sprite.new(x,y, image)
     obj.image = love.graphics.newImage(image)
     obj.image:setFilter('nearest', 'nearest')
     obj.flip = false
-    obj.origin_x = 4
-    obj.origin_y = 4
 
     return obj
 end
