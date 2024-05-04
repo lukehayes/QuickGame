@@ -9,7 +9,6 @@ local Color = require "core.gfx.color"
 local Renderer = {
     render_list = {}
 }
-c = 0
 
 ---------------------------------------------------------------------------------
 -- Add an entity to the render list.
