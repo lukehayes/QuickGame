@@ -39,12 +39,32 @@ function love.update(dt)
         as1.end_frame = as1.data:get_animation("Walk")
         as1.flip = true
 
+        print(as1.frame)
 
+    elseif love.keyboard.isDown('a') then
+        as1.position.x = as1.position.x - as1.speed * dt
+
+        as1.animation,
+        as1.start_frame,
+        as1.end_frame = as1.data:get_animation("Walk")
+        as1.flip = false
+    elseif love.keyboard.isDown('w') then
+        as1.position.y = as1.position.y - as1.speed * dt
+
+        as1.animation,
+        as1.start_frame,
+        as1.end_frame = as1.data:get_animation("Walk")
+    elseif love.keyboard.isDown('s') then
+        as1.position.y = as1.position.y + as1.speed * dt
+
+        as1.animation,
+        as1.start_frame,
+        as1.end_frame = as1.data:get_animation("Walk")
     else
+
         as1.animation,
         as1.start_frame,
         as1.end_frame = as1.data:get_animation("Idle")
-        as1.flip = false
     end
 
     as1:update(dt)
