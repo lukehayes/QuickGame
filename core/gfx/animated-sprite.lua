@@ -36,7 +36,7 @@ function AnimatedSprite.new(x,y,image, speed, animation)
     obj.origin_x = obj.data:get_tile_size() / 2
     obj.origin_y = obj.data:get_tile_size() / 2
 
-    print(obj.data:get_size())
+    obj.anim_changed = false
 
     -- Generate all of the quads for the tilemap.
     obj.quads = {}
@@ -53,10 +53,16 @@ function AnimatedSprite.new(x,y,image, speed, animation)
 end
 
 function AnimatedSprite:play(animation)
+
+    self.anim_changed = true
+
     self.animation,
     self.start_frame,
     self.end_frame = self.data:get_animation(animation)
 
+    if self.anim_changed then
+        self.frame = self.start_frame
+    end
 end
 
 function AnimatedSprite:update(dt)
@@ -66,10 +72,18 @@ function AnimatedSprite:update(dt)
     if self.frame_timer >= self.anim_speed then
         self.frame = self.frame + 1
         self.frame_timer = 0
+        print("Frame ", self.frame)
+    end
+
+    if self.anim_changed then
+        print("CHANGED")
+        self.frame = self.start_frame
     end
 
     if self.frame >= self.end_frame + 1 then
+
         self.frame = self.start_frame
+        print("Reset Frame to ", self.start_frame)
     end
 end
 
