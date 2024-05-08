@@ -8,22 +8,10 @@ local AnimSprite      = require('core.gfx.animated-sprite')
 local AnimationData   = require('core.gfx.animation-data')
 local Color   = require('core.gfx.color')
 
-
 s1 = Sprite.new(20,10, Assets.image('rock1'))
 --R:add(s1)
 
 as1 = AnimSprite.new(100,100, Assets.image('Pico8-Man'))
-R:add(as1)
-as1.scale = 5
-
-local data = AnimationData.new('assets/images/Pico8-Man.json')
-
-print(data:get_size())
-
-local anim, from, to = data:get_animation('Idle')
-print(as1.from_frame)
-print(as1.to_frame)
-
 
 function love.load()
     p = P.new(100,100)
@@ -32,28 +20,21 @@ end
 function love.update(dt)
 
     if love.keyboard.isDown('d') then
-        as1.position.x = as1.position.x + as1.speed * dt
 
-        as1.animation,
-        as1.start_frame,
-        as1.end_frame = as1.data:get_animation("Walk")
+        as1:play('Walk')
         as1.flip = true
-
-        print(as1.frame)
+        as1.position.x = as1.position.x + as1.speed * dt
 
     elseif love.keyboard.isDown('a') then
         as1.position.x = as1.position.x - as1.speed * dt
 
-        as1.animation,
-        as1.start_frame,
-        as1.end_frame = as1.data:get_animation("Walk")
+        as1:play('Walk')
         as1.flip = false
     elseif love.keyboard.isDown('w') then
-        as1.position.y = as1.position.y - as1.speed * dt
 
-        as1.animation,
-        as1.start_frame,
-        as1.end_frame = as1.data:get_animation("Walk")
+        as1.position.y = as1.position.y - as1.speed * dt
+        as1:play('Walk')
+
     elseif love.keyboard.isDown('s') then
         as1.position.y = as1.position.y + as1.speed * dt
 
@@ -61,10 +42,7 @@ function love.update(dt)
         as1.start_frame,
         as1.end_frame = as1.data:get_animation("Walk")
     else
-
-        as1.animation,
-        as1.start_frame,
-        as1.end_frame = as1.data:get_animation("Idle")
+        as1:play('Idle')
     end
 
     as1:update(dt)
