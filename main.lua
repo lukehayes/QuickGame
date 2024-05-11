@@ -25,13 +25,15 @@ function love.update(dt)
     as1.anim_changed = false
     as1:update(dt)
 
-    if down then
-        if not toggled then
-            print("xxxxxxxxxxxxxxxxxxx")
-            toggled = true
-        end
-
+    if down == true and toggled ~= true then
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        toggled = true
     end
+    
+    if down == false and toggled == true then
+        toggled = false
+    end
+
 
     if love.keyboard.isDown('d') then
 
@@ -60,6 +62,9 @@ function love.update(dt)
         as1:play('Idle')
         down = false
     end
+
+
+    print("Down: ", down, "Toggled", toggled)
 
 end
 
