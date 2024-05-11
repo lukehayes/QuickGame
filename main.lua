@@ -13,6 +13,9 @@ s1 = Sprite.new(20,10, Assets.image('rock1'))
 
 as1 = AnimSprite.new(100,100, Assets.image('Pico8-Man'))
 
+down = false
+toggled = false
+
 function love.load()
     p = P.new(100,100)
 end
@@ -22,12 +25,20 @@ function love.update(dt)
     as1.anim_changed = false
     as1:update(dt)
 
+    if down then
+        if not toggled then
+            print("xxxxxxxxxxxxxxxxxxx")
+            toggled = true
+        end
+
+    end
+
     if love.keyboard.isDown('d') then
 
         as1:play('Walk')
         as1.flip = true
         as1.position.x = as1.position.x + as1.speed * dt
-        as1.anim_changed = false
+        down = true
 
     elseif love.keyboard.isDown('a') then
 
@@ -47,8 +58,8 @@ function love.update(dt)
 
     else
         as1:play('Idle')
+        down = false
     end
-
 
 end
 
