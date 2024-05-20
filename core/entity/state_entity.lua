@@ -24,6 +24,8 @@ function StateEntity.new(x,y,image, speed, animation)
     local obj = AnimatedSprite.new(x,y, image)
     setmetatable(obj, StateEntity)
 
+    obj.name = "StateEntity"
+
     return obj
 end
 
