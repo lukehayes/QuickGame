@@ -26,7 +26,7 @@ function love.update(dt)
     as1:update(dt)
 
     if down == true and toggled ~= true then
-        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        --print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
         toggled = true
         as1.anim_changed = true
     end
@@ -67,9 +67,6 @@ function love.update(dt)
         down = false
     end
 
-
-    --print("Down: ", down, "Toggled", toggled)
-
 end
 
 function love.draw()
@@ -77,7 +74,6 @@ function love.draw()
     R:clear(Color.BLACK)
 
     as1:draw()
-
     --R:draw_batch()
 end
 

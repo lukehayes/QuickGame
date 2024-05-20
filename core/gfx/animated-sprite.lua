@@ -54,7 +54,6 @@ end
 
 function AnimatedSprite:play(animation)
 
-
     self.animation,
     self.start_frame,
     self.end_frame = self.data:get_animation(animation)
@@ -72,18 +71,14 @@ function AnimatedSprite:update(dt)
     if self.frame_timer >= self.anim_speed then
         self.frame = self.frame + 1
         self.frame_timer = 0
-        print("Frame ", self.frame)
     end
 
     if self.anim_changed then
-        print("CHANGED")
         self.frame = self.start_frame
     end
 
     if self.frame >= self.end_frame + 1 then
-
         self.frame = self.start_frame
-        print("Reset Frame to ", self.start_frame)
     end
 end
 
