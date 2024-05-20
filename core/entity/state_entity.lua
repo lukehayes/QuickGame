@@ -5,9 +5,6 @@
 --
 -- @classmod core.gfx.animated-sprite
 --
-local JSON    = require('libs.json')
-local Util    = require('core.util')
-local Data    = require('core.gfx.animation-data')
 local AnimatedSprite  = require('core.gfx.animated-sprite')
 
 local StateEntity = {}
