@@ -54,7 +54,6 @@ end
 
 function AnimatedSprite:play(animation)
 
-    self.anim_changed = true
 
     self.animation,
     self.start_frame,
@@ -62,6 +61,7 @@ function AnimatedSprite:play(animation)
 
     if self.anim_changed then
         self.frame = self.start_frame
+        self.anim_changed = true
     end
 end
 
