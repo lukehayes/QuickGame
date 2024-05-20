@@ -8,6 +8,8 @@ local AnimSprite      = require('core.gfx.animated-sprite')
 local AnimationData   = require('core.gfx.animation-data')
 local Color   = require('core.gfx.color')
 
+local StateEntity   = require('core.entity.state_entity')
+
 s1 = Sprite.new(20,10, Assets.image('rock1'))
 --R:add(s1)
 
@@ -15,6 +17,11 @@ as1 = AnimSprite.new(100,100, Assets.image('Pico8-Man'))
 
 local down = false
 local toggled = false
+
+
+local stateEntity = StateEntity.new(300,300, Assets.image('Pico8-Man'))
+
+as1 = stateEntity
 
 function love.load()
    p = P.new(100,100)
@@ -74,6 +81,7 @@ function love.draw()
     R:clear(Color.BLACK)
 
     as1:draw()
+    stateEntity:draw()
     --R:draw_batch()
 end
 
