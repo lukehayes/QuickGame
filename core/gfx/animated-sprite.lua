@@ -73,10 +73,6 @@ function AnimatedSprite:update(dt)
         self.frame_timer = 0
     end
 
-    if self.anim_changed then
-        self.frame = self.start_frame
-    end
-
     if self.frame >= self.end_frame + 1 then
         self.frame = self.start_frame
     end
