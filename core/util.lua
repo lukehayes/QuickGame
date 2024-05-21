@@ -12,7 +12,7 @@ local Util = {}
 -- @param  e          The element to search for.
 --
 -- @treturn Element if found, false otherwise.
-Util.find = function(t,e)
+Util.find_in_table = function(t,e)
 
     if #t == 0 then
         return false
