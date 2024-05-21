@@ -5,8 +5,6 @@
 -- @classmod core.gfx.animated-sprite
 --
 local Sprite  = require('core.gfx.sprite')
-local JSON    = require('libs.json')
-local Util    = require('core.util')
 local Data    = require('core.gfx.animation-data')
 
 local AnimatedSprite = {}
@@ -31,7 +29,7 @@ function AnimatedSprite.new(x,y,image, speed, animation)
 
     obj.animation,
     obj.start_frame,
-    obj.end_frame = obj.data:get_animation('Idle')
+    obj.end_frame = obj.data:get_animation(animation)
     obj.frame     = obj.start_frame
     obj.origin_x  = obj.data:get_tile_size() / 2
     obj.origin_y  = obj.data:get_tile_size() / 2

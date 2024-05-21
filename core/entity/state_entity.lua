@@ -18,7 +18,8 @@ StateEntity.__index = StateEntity
 -- @treturn StateEntity A new instance of StateEntity..
 function StateEntity.new(x,y,image, speed, animation)
 
-    local obj = AnimatedSprite.new(x,y, image)
+    local anim = animation or "Idle"
+    local obj = AnimatedSprite.new(x,y, image, speed, anim)
     setmetatable(obj, StateEntity)
 
     obj.name = "StateEntity"
