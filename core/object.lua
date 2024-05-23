@@ -29,6 +29,10 @@ function Object.new(x,y)
     return obj
 end
 
+function Object:update(dt)
+    print("Object Delta: ")
+end
+
 -----------------------------------------------------------
 -- Static helper method for inheritance.
 --
@@ -42,10 +46,16 @@ function Object:inherit(child, parent)
 
     -- TODO Implement this properly. Totally broken.
 
-    local obj = setmetatable(child, self)
-    setmetatable(self, parent)
+    local obj = setmetatable({}, Entity)
+    setmetatable(Entity, {__index = Object.new(x,y)})
+
 
     return obj
 end
+
+function Object:hello()
+    print("Object: hello")
+end
+
 
 return Object

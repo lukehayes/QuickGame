@@ -2,48 +2,41 @@ Base = {}
 Base.__index = Base
 
 function Base.new()
-    local obj = setmetatable({}, {__index = Base})
+    local obj = setmetatable({}, Base)
     obj.val = 1
+    obj.name = "Base"
+
     return obj
 end
 
-function Base:getFoo()
-    print("Value " .. self.val)
+function Base:getData()
+    print("Base --> Name: ", self.name, "Val: ", self.val)
 end
+
 
 Foo = {}
 Foo.__index = Foo
 
 function Foo.new()
     local obj = setmetatable({}, {__index = Foo})
-    setmetatable(Foo, Base)
+    --setmetatable(obj, { __index = Base.new() })
+
     obj.val = 2
-    return obj
-end
-
-Bar = {}
-Bar.__index = Bar
-
-function Bar.new()
-    local obj = setmetatable({}, {__index = Bar})
-    setmetatable(Bar, Foo.new())
-
-    obj.val = 3
+    obj.name = "Foo"
 
     return obj
 end
 
+function Foo:getData()
+    print("----------------------------------")
+        Base.getData(self)
+        print("Foo --> Name: ", self.name, "Val: ", self.val)
+    print("----------------------------------")
+end
 
-b1 = Base.new()
-print(b1.val)
-b1:getFoo()
 
-print("----")
-f1 = Foo.new()
-print(f1.val)
-f1:getFoo()
+local b = Base.new()
+b:getData()
 
-print("----")
-br1 = Bar.new()
-print(br1.val)
-br1:getFoo()
+local f = Foo.new()
+f:getData()

@@ -1,78 +1,43 @@
 local R        = require('core.gfx.render')
-local Assets   = require('core.assets')
-local AnimSprite      = require('core.gfx.animated-sprite')
 local Color   = require('core.gfx.color')
+local Entity  = require('core.entity.entity')
 
-local StateEntity   = require('core.entity.state_entity')
+--local StateEntity   = require('core.entity.state_entity')
+--local as1 = AnimSprite.new(100,100, Assets.image('Pico8-Man'))
+--local down = false
+--local toggled = false
+--local stateEntity = StateEntity.new(300,300, Assets.image('Pico8-Man'))
+--as1 = stateEntity
 
-local as1 = AnimSprite.new(100,100, Assets.image('Pico8-Man'))
 
-local down = false
-local toggled = false
+local e1 = Entity.new(300,300)
+local e2 = Entity.new(100,400)
+e2.color = {r=0.1, g = 0.9, b = 1, a = 1}
 
-local stateEntity = StateEntity.new(300,300, Assets.image('Pico8-Man'))
-
-as1 = stateEntity
+local e3 = Entity.new(300,100)
+e3.color = {r=0.1, g = 0.9, b = 0.2, a = 1}
 
 function love.load()
 end
 
+e1:hello()
+e2:hello()
+e3:hello()
+
 function love.update(dt)
-
-    as1.anim_changed = false
-    as1:update(dt)
-
-    if down == true and toggled ~= true then
-        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-        toggled = true
-        as1.anim_changed = true
-    end
-    
-    if down == false and toggled == true then
-        toggled = false
-        as1.anim_changed = false
-    end
-
-    if love.keyboard.isDown('d') then
-
-        as1:play('Walk')
-        as1.flip = true
-        as1.position.x = as1.position.x + as1.speed * dt
-        down = true
-
-    elseif love.keyboard.isDown('a') then
-
-        as1:play('Walk')
-        as1.flip = false
-        as1.position.x = as1.position.x - as1.speed * dt
-        down = true
-
-    elseif love.keyboard.isDown('w') then
-
-        as1:play('Walk')
-        as1.position.y = as1.position.y - as1.speed * dt
-        down = true
-
-    elseif love.keyboard.isDown('s') then
-
-        as1:play('Walk')
-        as1.position.y = as1.position.y + as1.speed * dt
-        down = true
-
-    else
-        as1:play('Idle')
-        down = false
-    end
-
+    e1:update(dt)
+    e2:update(dt)
+    e3:update(dt)
 end
 
 function love.draw()
 
     R:clear(Color.BLACK)
 
-    --as1:draw()
-    stateEntity:draw()
-    --R:draw_batch()
+    R:draw(e1)
+    R:draw(e2)
+    R:draw(e3)
+
 end
 
 function love.mousepressed(x, y, button, istouch)
