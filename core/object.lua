@@ -30,7 +30,7 @@ function Object.new(x,y)
 end
 
 function Object:update(dt)
-    print("Object Delta: ")
+    print("Object Delta: ", dt)
 end
 
 -----------------------------------------------------------

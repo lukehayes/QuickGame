@@ -17,19 +17,19 @@ Entity.__index = Entity
 function Entity.new(x,y)
 
     local obj = setmetatable({}, { __index = Entity } )
-    setmetatable(Entity, Object.new(x,y))
+    res = setmetatable(obj, { __index = Object.new(x,y) })
+    print(obj)
+    print(res)
+    print("-----")
 
     obj.name  = "Entity"
     obj.color = {r=0.5, g = 0.6, b = 1, a = 1}
+    obj.scale = 30
 
     return obj
     --return setmetatable(obj, Object.new(x,y) )
 end
 
-function Entity:hello()
-    Object.hello(self)
-    --print("Entity: xxx hello xxx")
-end
 
 -----------------------------------------------------------
 -- Update.
@@ -39,8 +39,8 @@ end
 -- @tparam number dt    Delta time.
 --
 function Entity:update(dt)
-    print("Entity update")
-    --self.position.x = self.position.x * 100 * dt
+    print("Entity update", self.position.x)
+    self.position.x = self.position.x + 1 * 100 * dt
 end
 
 function Entity:draw()

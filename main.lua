@@ -11,23 +11,21 @@ local Entity  = require('core.entity.entity')
 
 
 local e1 = Entity.new(300,300)
-local e2 = Entity.new(100,400)
-e2.color = {r=0.1, g = 0.9, b = 1, a = 1}
+e1.color = {r=0.1, g = 0.8, b = 0, a = 1}
 
-local e3 = Entity.new(300,100)
-e3.color = {r=0.1, g = 0.9, b = 0.2, a = 1}
+local e2 = Entity.new(100,500)
+
+print(e1.name)
+print(e2.name)
+print(e1.position)
+print(e2.position)
 
 function love.load()
 end
 
-e1:hello()
-e2:hello()
-e3:hello()
-
 function love.update(dt)
     e1:update(dt)
     e2:update(dt)
-    e3:update(dt)
 end
 
 function love.draw()
@@ -36,7 +34,6 @@ function love.draw()
 
     R:draw(e1)
     R:draw(e2)
-    R:draw(e3)
 
 end
 
