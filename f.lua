@@ -1,42 +1,45 @@
+-- *************************************************************************
+-- This version of inheritance if apparently working.
+-- *************************************************************************
+
 Base = {}
-Base.__index = Base
 
 function Base.new()
-    local obj = setmetatable({}, Base)
-    obj.val = 1
+    local obj = setmetatable({}, { __index = Base })
+
     obj.name = "Base"
+    obj.value = 1
 
     return obj
 end
 
-function Base:getData()
-    print("Base --> Name: ", self.name, "Val: ", self.val)
+function Base:get()
+    print("BASE: Name: ", self.name, " Value:", self.value)
 end
-
 
 Foo = {}
-Foo.__index = Foo
+Foo.__index = {}
 
 function Foo.new()
-    local obj = setmetatable({}, {__index = Foo})
-    --setmetatable(obj, { __index = Base.new() })
+    local obj = setmetatable(Foo, { __index = Base.new() })
 
-    obj.val = 2
     obj.name = "Foo"
+    obj.value = 2
 
     return obj
 end
 
-function Foo:getData()
-    print("----------------------------------")
-        Base.getData(self)
-        print("Foo --> Name: ", self.name, "Val: ", self.val)
-    print("----------------------------------")
+function Foo:get()
+    print("Foo: Name: ", self.name, " Value:", self.value)
 end
 
 
-local b = Base.new()
-b:getData()
+local b1 = Base.new()
+b1:get()
 
-local f = Foo.new()
-f:getData()
+local f1 = Foo.new()
+f1.value = 123123123
+f1:get()
+
+local f2 = Foo.new()
+f2:get()
