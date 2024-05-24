@@ -1,6 +1,7 @@
 local R        = require('core.gfx.render')
 local Color   = require('core.gfx.color')
 local Entity  = require('core.entity.entity')
+local StateEntity  = require('core.entity.state_entity')
 
 --local StateEntity   = require('core.entity.state_entity')
 --local as1 = AnimSprite.new(100,100, Assets.image('Pico8-Man'))
@@ -12,13 +13,19 @@ local Entity  = require('core.entity.entity')
 
 local e1 = Entity.new(300,300)
 e1.color = {r=0.1, g = 0.8, b = 0, a = 1}
+e1.speed = 300
 
 local e2 = Entity.new(100,500)
+
+local e3 = Entity.new(600,500)
+
+local s1 = StateEntity.new(100,100, 'assets/images/Pico8-Man.png', 0.2, 'Idle')
 
 print(e1.name)
 print(e2.name)
 print(e1.position)
 print(e2.position)
+
 
 function love.load()
 end
@@ -34,6 +41,9 @@ function love.draw()
 
     R:draw(e1)
     R:draw(e2)
+    R:draw(e3)
+
+    R:draw_sprite(s1)
 
 end
 

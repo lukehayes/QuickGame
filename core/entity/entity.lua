@@ -5,6 +5,9 @@
 -- @classmod core.entity.entity
 local Object  = require('core.object')
 
+--local Entity = setmetatable({}, Object)
+--Entity.__index = Entity
+
 local Entity = {}
 Entity.__index = Entity
 
@@ -16,20 +19,19 @@ Entity.__index = Entity
 -- @treturn Entity A new instance of Entity.
 function Entity.new(x,y)
 
-    local obj = setmetatable({}, { __index = Entity } )
-    res = setmetatable(obj, { __index = Object.new(x,y) })
-    print(obj)
-    print(res)
-    print("-----")
+    local obj = setmetatable(Object.new(x,y), Entity)
 
     obj.name  = "Entity"
-    obj.color = {r=0.5, g = 0.6, b = 1, a = 1}
+    obj.color = {r=0.5, g = 0.0, b = 0, a = 1}
     obj.scale = 30
 
     return obj
-    --return setmetatable(obj, Object.new(x,y) )
 end
 
+function Entity:update(dt)
+    print("Entity Delta: ", dt)
+    Object.update(self, dt)
+end
 
 -----------------------------------------------------------
 -- Update.
@@ -38,10 +40,6 @@ end
 --
 -- @tparam number dt    Delta time.
 --
-function Entity:update(dt)
-    print("Entity update", self.position.x)
-    self.position.x = self.position.x + 1 * 100 * dt
-end
 
 function Entity:draw()
     love.graphics.rectangle('fill', self.position.x, self.position.y,  self.scale,self.scale)

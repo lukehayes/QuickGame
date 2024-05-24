@@ -17,7 +17,7 @@ Object.__index = Object
 -- @treturn Object A new instance of Object..
 function Object.new(x,y)
 
-    local obj = setmetatable({}, Object)
+    local obj = setmetatable({}, {__index = Object})
 
     obj.name     = "Object"
     obj.position = V2:new(x,y)
@@ -31,6 +31,8 @@ end
 
 function Object:update(dt)
     print("Object Delta: ", dt)
+
+    self.position.x = self.position.x + 1 * self.speed * dt
 end
 
 -----------------------------------------------------------
