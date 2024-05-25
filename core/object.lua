@@ -30,8 +30,6 @@ function Object.new(x,y)
 end
 
 function Object:update(dt)
-    print("Object Delta: ", dt)
-
     self.position.x = self.position.x + 1 * self.speed * dt
 end
 

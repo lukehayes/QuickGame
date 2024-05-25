@@ -29,7 +29,6 @@ function Entity.new(x,y)
 end
 
 function Entity:update(dt)
-    print("Entity Delta: ", dt)
     Object.update(self, dt)
 end
 
