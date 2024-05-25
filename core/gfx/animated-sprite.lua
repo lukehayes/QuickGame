@@ -19,7 +19,6 @@ AnimatedSprite.__index = AnimatedSprite
 function AnimatedSprite.new(x,y,image, speed, animation)
 
     local obj = setmetatable(Sprite.new(x,y, image), AnimatedSprite )
-    setmetatable(obj, AnimatedSprite)
 
     obj.name = "AnimatedSprite"
     obj.data = Data.new('assets/images/Pico8-Man.json')

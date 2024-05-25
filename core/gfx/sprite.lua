@@ -23,9 +23,7 @@ Sprite.__index = Sprite
 -- @treturn Sprite A new instance of Sprite..
 function Sprite.new(x,y, image)
 
-    local obj = Entity.new(x,y)
-    setmetatable(obj, Sprite)
-    setmetatable(Sprite, Entity)
+    local obj = setmetatable(Entity.new(x,y), Sprite)
 
     obj.name  = "Sprite"
     obj.image = love.graphics.newImage(image)
