@@ -19,10 +19,11 @@ StateEntity.__index = StateEntity
 function StateEntity.new(x,y,image, speed, animation)
 
     local anim = animation or "Idle"
-    local obj = AnimatedSprite.new(x,y, image, speed, anim)
-    setmetatable(obj, StateEntity)
+    local obj = setmetatable(AnimatedSprite.new(x,y, image, speed, anim), StateEntity)
 
     obj.name = "StateEntity"
+
+    obj.states = {"Idle", "Walk"}
 
     return obj
 end
