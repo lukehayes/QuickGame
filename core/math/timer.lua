@@ -10,12 +10,17 @@ Timer.__index = Timer
 function Timer.new(duration, oneshot)
     local obj = setmetatable({}, Timer)
 
-    obj.duration =  duration or 1
+    obj.duration = duration or 1
     obj.oneshot  = oneshot or false
     obj.elapsed  = 0
+    obj.running  = true
     obj.finished = false
 
     return obj
+end
+
+function _timerFinished(timer)
+    return timer.elapsed >= timer.duration or false
 end
 
 function _updateTimer(timer, dt)
@@ -25,32 +30,25 @@ function _updateTimer(timer, dt)
 end
 
 function Timer:update(dt)
-    print("Elap: ", self.elapsed, "Fin?", self.finished)
 
-    -- TODO Implement timer fully.
+    -- TODO This is working now but needs a lot of work.
+    if self.finished and self.running then
 
-    if (not self.finished) then
+        if self.oneshot ~= false then
+            self.finished = true
+            self.running  = false
+        else
+            self.finished = false
+            self.elapsed  = 0
+        end
+    else
         _updateTimer(self, dt)
 
-        if (self.elapsed >= self.duration) then
+        if self.elapsed >= self.duration then
+            self.elapsed = 0
             self.finished = true
         end
     end
-
-
-    --if(self.elapsed >= self.duration) then
-        --self.elapsed = 0
-        --self.finished = true
-
-        --if self.oneshot then
-            --self.elapsed = 0
-            --self.finished = true
-        --else
-            --self.elapsed = 0
-            --self.finished = true
-            --_updateTimer(self, dt)
-        --end
-    --end
 end
 
 return Timer

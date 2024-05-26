@@ -20,7 +20,7 @@ s1.scale = 10
 local s2 = StateEntity.new(400,100, 'assets/images/Pico8-Man.png', 0.2, 'Idle')
 s2.scale = 7
 
-t1 = Timer.new(1,true)
+t1 = Timer.new(1, true)
 
 function love.load()
 end
@@ -34,12 +34,12 @@ function love.update(dt)
 
     t1:update(dt)
 
-    if t1.finished then
-        print(">>>>>>>>>>>>>>>>>>>>>>")
+    if t1.finished and t1.running then
+         --print(">>>>>>>>>>>>>>>>>>>>>>")
         s1.position.x = love.math.random(10,400)
         s1.position.y = love.math.random(10,400)
+        --t1.finished = false
     end
-
 end
 
 function love.draw()
