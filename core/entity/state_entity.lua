@@ -6,6 +6,7 @@
 -- @classmod core.gfx.animated-sprite
 --
 local AnimatedSprite  = require('core.gfx.animated-sprite')
+local Timer  = require('core.math.timer')
 
 local StateEntity = {}
 StateEntity.__index = StateEntity
@@ -25,6 +26,10 @@ function StateEntity.new(x,y,image, speed, animation)
 
     obj.states = {"Idle", "Walk"}
 
+    obj.timers = {
+        Timer.new(1, false)
+    }
+
     return obj
 end
 
@@ -34,6 +39,17 @@ end
 
 function StateEntity:update(dt)
     AnimatedSprite.update(self, dt)
+
+    for _, t in pairs(self.timers) do
+        t:update(dt)
+
+        if t.finished and t.running then
+            local state = self.states[love.math.random(1,2)]
+            self.position.x = self.position.x - 100 * dt
+            self:play(state)
+        end
+    end
+
 end
 
 function StateEntity:draw()

@@ -20,8 +20,6 @@ s1.scale = 10
 local s2 = StateEntity.new(400,100, 'assets/images/Pico8-Man.png', 0.2, 'Idle')
 s2.scale = 7
 
-t1 = Timer.new(1, true)
-
 function love.load()
 end
 
@@ -31,13 +29,6 @@ function love.update(dt)
 
     s1:update(dt)
     s2:update(dt)
-
-    t1:update(dt)
-
-    if t1.finished and t1.running then
-        s1.position.x = love.math.random(10,400)
-        s1.position.y = love.math.random(10,400)
-    end
 end
 
 function love.draw()
@@ -53,4 +44,15 @@ function love.draw()
 end
 
 function love.mousepressed(x, y, button, istouch)
+end
+
+function love.keypressed(key, scancode, isrepeat)
+   if key == "escape" then
+      love.event.quit()
+   end
+
+   if key == "space" then
+       print("Space")
+       s1:play('Walk')
+   end
 end
