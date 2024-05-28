@@ -9,11 +9,25 @@ function ECS.new()
         transform = {}
     }
 
+    obj.entities = {}
+
     return obj
 end
 
 function ECS:find_entity(id)
     --TODO Find all of the components that have a specific ID.
+
+    local entity = {}
+
+    for k,component in pairs(self.components) do
+        for _,c in pairs(component) do
+            if c.id == id then
+                table.insert(entity, c)
+            end
+        end
+    end
+
+    return entity
 end
 
 function ECS:sort_entities(id)
@@ -28,6 +42,7 @@ function ECS:add_transform(x, y, id)
         w     = 10,
         h     = 10,
         id    = id,
+        name  = "transform",
         color = {r=255, g = 0, b = 0, a = 0}
     }
 
