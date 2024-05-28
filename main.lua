@@ -8,10 +8,14 @@ local render  = require('game.ecs.system.render')
 local e = ECS.new()
 
 e:add_transform(100,100,1)
-e:add_transform(300,100,1)
+--e:add_transform(300,100,1)
+--e:add_transform(555,555,1)
+--e:add_transform(533,355,2)
 e:add_transform(100,300,2)
 
 print("Length ", #e.components.transform)
+print("Entity Length ", #e.entities)
+
 
 
 function love.load()

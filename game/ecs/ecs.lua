@@ -46,7 +46,14 @@ function ECS:add_transform(x, y, id)
         color = {r=255, g = 0, b = 0, a = 0}
     }
 
-    table.insert(self.components.transform, transform)
+    --self.entities[id].transform = transform
+
+    local e = {}
+
+    table.insert(e, transform)
+    table.insert(self.entities, e)
+
+    --table.insert(self.entities, transform, id)
 end
 
 
