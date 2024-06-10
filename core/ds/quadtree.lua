@@ -72,15 +72,15 @@ function QuadTree.insert(qt,point)
         table.insert(qt.points, point)
     else
 
-        if not qt.divided then
-            QuadTree.subdivide(qt)
-            qt.divided = true
-        end
+    if not qt.divided then
+        QuadTree.subdivide(qt)
+        qt.divided = true
+    end
 
-        QuadTree.insert(qt.ne, point)
-        QuadTree.insert(qt.nw, point)
-        QuadTree.insert(qt.se, point)
-        QuadTree.insert(qt.sw, point)
+    QuadTree.insert(qt.ne, point)
+    QuadTree.insert(qt.nw, point)
+    QuadTree.insert(qt.se, point)
+    QuadTree.insert(qt.sw, point)
     end
 end
 
