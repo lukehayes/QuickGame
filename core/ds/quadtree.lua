@@ -24,7 +24,8 @@ function QuadTree.new(boundary)
     qt.boundary = boundary
     qt.points   = {}
     qt.capacity = 4
-    qt.divided = false
+    qt.size     = 0
+    qt.divided  = false
 
     qt.nw = nil
     qt.ne = nil
