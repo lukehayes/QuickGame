@@ -2,28 +2,21 @@
 -- Render System
 -- ********************************************
 
-function update(components)
+function update(transforms)
 
-    if components == nil then return end
+    if transforms == nil then return end
 
-    for k, v in pairs(components.transform) do
-
-        --love.graphics.setColor(
-            --v.color.r,
-            --v.color.g,
-            --v.color.b,
-            --v.color.a
-        --)
+    for i=1, #transforms do
+        local t = transforms[i]
 
         love.graphics.rectangle(
-            "fill",
-            v.x,
-            v.y,
-            v.w,
-            v.h
+            'fill',
+            t.x,
+            t.y,
+            t.w,
+            t.h
         )
 
-        --love.graphics.setColor(255,255,255,255)
     end
 
 end

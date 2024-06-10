@@ -5,9 +5,7 @@ ECS.__index = ECS
 function ECS.new()
     local obj = setmetatable({}, ECS)
 
-    obj.components = {
-        transform = {}
-    }
+    obj.transforms = {}
 
     obj.entities = {}
 
@@ -48,10 +46,7 @@ function ECS:add_transform(x, y, id)
 
     --self.entities[id].transform = transform
 
-    local e = {}
-
-    table.insert(e, transform)
-    table.insert(self.entities, e)
+    table.insert(self.transforms, transform)
 
     --table.insert(self.entities, transform, id)
 end
