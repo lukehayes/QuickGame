@@ -2,33 +2,30 @@ local R      = require('core.gfx.render')
 local Color  = require('core.gfx.color')
 local Entity = require('game.ecs.entity.entity')
 local ECS    = require('game.ecs.ecs')
-local render  = require('game.ecs.system.render')
 
+require('game.ecs.system.system')
 
 local e = ECS.new()
 
-e:add_transform(100,100,1)
---e:add_transform(300,100,1)
---e:add_transform(555,555,1)
---e:add_transform(533,355,2)
+local t = e:add_transform(100,100,1)
+e:add_transform(333,355,2)
 e:add_transform(100,300,2)
-
-print("Length ", #e.components.transform)
-print("Entity Length ", #e.entities)
-
 
 
 function love.load()
 end
 
 function love.update(dt)
+    system_move(e.components, dt)
+
+    print(t.x)
 end
 
 function love.draw()
 
     R:clear(Color.BLACK)
 
-    render(e.components)
+    system_render(e.components.transforms)
 end
 
 function love.mousepressed(x, y, button, istouch)
