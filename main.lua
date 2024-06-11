@@ -9,7 +9,9 @@ local e = ECS.new()
 
 local t = e:add_transform(100,100,1)
 e:add_transform(333,355,2)
-e:add_transform(100,300,2)
+e:add_transform(100,300,3)
+e:add_transform(400,300,4)
+e:add_transform(400,300,10)
 
 
 function love.load()
@@ -17,15 +19,13 @@ end
 
 function love.update(dt)
     system_move(e.components, dt)
-
-    print(t.x)
 end
 
 function love.draw()
 
     R:clear(Color.BLACK)
 
-    system_render(e.components.transforms)
+    system_render(e.components)
 end
 
 function love.mousepressed(x, y, button, istouch)

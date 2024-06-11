@@ -40,13 +40,28 @@ function ECS:add_transform(x, y, id)
         w     = 10,
         h     = 10,
         id    = id,
+        dx    = love.math.random(-1,1),
+        dy    = love.math.random(-1,1),
         name  = "transform",
         color = {r=255, g = 0, b = 0, a = 0}
     }
 
-    table.insert(self.components.transform, transform)
+    table.insert(self.components.transform, id, transform)
 
     return transform
+end
+
+function ECS:add_movement(id)
+
+    local movement = {
+        dx     = love.math.random(-1,1),
+        dy     = love.math.random(-1,1),
+        name  = "movement",
+    }
+
+    table.insert(self.components.movement, id, movement)
+
+    return movement
 end
 
 

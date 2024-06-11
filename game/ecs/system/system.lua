@@ -9,44 +9,37 @@ function system_move(components, dt)
     if components == nil then return end
 
     for i=1,#components.transform do
-        print(i)
-        print("-----")
+
+        local transform = components.transform[i]
+
+        if transform then
+
+            transform.x = transform.x + transform.dx * transform.x * dt
+            transform.y = transform.y + transform.dy * transform.y * dt
+
+            if transform.x <= 2 or transform.x >= 760 then
+                transform.dx = -transform.dx
+            end
+
+            if transform.y <= 10 or transform.y >= 380 then
+                transform.dy = -transform.dy
+            end
+        end
+
+        love.graphics.setColor(255,255,255,255)
+
     end
-
-    --for k,v in pairs(components) do
-
-        --local transform = v.transform
-        --local movement  = v.movement
-
-        --if transform and movement then
-
-            --transform.x = transform.x + movement.dx * movement.x * dt
-            --transform.y = transform.y + movement.dy * movement.y * dt
-
-            --if transform.x <= 2 or transform.x >= 760 then
-                --movement.dx = -movement.dx
-            --end
-
-            --if transform.y <= 10 or transform.y >= 380 then
-                --movement.dy = -movement.dy
-            --end
-
-        --end
-
-    --end
-
-    love.graphics.setColor(255,255,255,255)
 end
 
 -- ********************************************
 -- Render System
 -- ********************************************
-function system_render(transforms)
+function system_render(components)
 
-    if transforms == nil then return end
+    if components == nil then return end
 
-    for i=1, #transforms do
-        local t = transforms[i]
+    for i=1, #components.transform do
+        local t = components.transform[i]
 
         love.graphics.rectangle(
             'fill',
@@ -55,9 +48,7 @@ function system_render(transforms)
             t.w,
             t.h
         )
-
     end
-
 end
 
 return System
