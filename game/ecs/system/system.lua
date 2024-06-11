@@ -1,9 +1,9 @@
 local System = {}
 System.__index = {}
 
--- ********************************************
+-- ----------------------------------------------------------------------------
 -- Movement System
--- ********************************************
+-- ----------------------------------------------------------------------------
 function System.move(components, dt)
 
     if components == nil then return end
@@ -28,8 +28,8 @@ function System.move(components, dt)
 
             -- Move collision
             if col then
-                col.x = transform.x
-                col.y = transform.y
+                col.x = transform.x - (col.w / 2)
+                col.y = transform.y - (col.h / 2)
             end
         end
 
@@ -38,15 +38,30 @@ function System.move(components, dt)
     end
 end
 
--- ********************************************
+-- ----------------------------------------------------------------------------
 -- Render System
--- ********************************************
+-- ----------------------------------------------------------------------------
 function System.render(components)
 
     if components == nil then return end
 
     for i=1, #components.transform do
         local t = components.transform[i]
+        local col = components.collision[i]
+
+        if col then
+            print("Collision", i)
+            love.graphics.setColor(0.5,0, 0.5,0.8)
+
+            love.graphics.rectangle(
+                'fill',
+                col.x,
+                col.y,
+                col.w,
+                col.h
+            )
+            love.graphics.setColor(1,1,1,1)
+        end
 
         love.graphics.rectangle(
             'fill',
@@ -55,6 +70,7 @@ function System.render(components)
             t.w,
             t.h
         )
+
     end
 end
 
