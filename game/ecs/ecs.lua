@@ -1,6 +1,12 @@
 ECS = {}
 ECS.__index = ECS
 
+-----------------------------------------------------------
+-- Constructor.
+--
+-- Create a new instance of the ECS.
+--
+-- @treturn ECS    A new ECS instance.
 function ECS.new()
     local obj = setmetatable({}, ECS)
 
@@ -10,6 +16,16 @@ function ECS.new()
     return obj
 end
 
+-----------------------------------------------------------
+-- find_entity
+--
+-- Find an entity
+--
+-- @tparam number id    The id of the entity to find.
+--
+-- @tparam string image    Path of the image to be drawn.
+--
+-- @treturn Entity    The instance of the entity with ID.
 function ECS:find_entity(id)
     --TODO Find all of the components that have a specific ID.
 
@@ -26,10 +42,42 @@ function ECS:find_entity(id)
     return entity
 end
 
-function ECS:sort_entities(id)
-    --TODO Sort all of the entities to be in ID order.
+-------------------------------------------------------------------------------
+-- get_entity_components
+--
+-- Get all of the components for an entity with a specific id.
+--
+-- @tparam number id    The id of the entity to find.
+--
+-- @treturn Entity    The instance of the entity with ID.
+function ECS:get_entity_components(id)
+
+    local entity = {
+        transform = self.components.transform[id]
+    }
+
+    print(entity.x)
+
+    return entity
 end
 
+
+
+
+
+
+
+
+-----------------------------------------------------------
+-- Add Transform
+--
+-- Add an entity transform component.
+--
+-- @tparam number x     The x position.
+-- @tparam number y     The y position.
+-- @tparam number id    The id of the entity.
+--
+-- @treturn Transform    Instance of the tranform component.
 function ECS:add_transform(x, y, id)
 
     local transform = {
