@@ -31,7 +31,7 @@ function ECS:find_entity(id)
 
     local entity = {}
 
-    for k,component in pairs(self.components) do
+    for _,component in pairs(self.components) do
         for _,c in pairs(component) do
             if c.id == id then
                 table.insert(entity, c)
@@ -56,17 +56,8 @@ function ECS:get_entity_components(id)
         transform = self.components.transform[id]
     }
 
-    print(entity.x)
-
     return entity
 end
-
-
-
-
-
-
-
 
 -----------------------------------------------------------
 -- Add Transform
