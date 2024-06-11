@@ -14,8 +14,8 @@ function system_move(components, dt)
 
         if transform then
 
-            transform.x = transform.x + transform.dx * transform.x * dt
-            transform.y = transform.y + transform.dy * transform.y * dt
+            transform.x = transform.x + transform.dx * transform.speed * transform.x * dt
+            transform.y = transform.y + transform.dy * transform.speed * transform.y * dt
 
             if transform.x <= 2 or transform.x >= 1270 then
                 transform.dx = -transform.dx

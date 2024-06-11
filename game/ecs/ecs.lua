@@ -40,6 +40,7 @@ function ECS:add_transform(x, y, id)
         w     = 10,
         h     = 10,
         id    = id,
+        speed = 1,
         dx    = love.math.random(-1,1),
         dy    = love.math.random(-1,1),
         name  = "transform",
