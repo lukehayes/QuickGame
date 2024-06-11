@@ -7,8 +7,6 @@ function ECS.new()
     obj.components = {}
     obj.components.transform = {}
 
-    obj.entities = {}
-
     return obj
 end
 
