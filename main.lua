@@ -3,7 +3,7 @@ local Color  = require('core.gfx.color')
 local Entity = require('game.ecs.entity.entity')
 local ECS    = require('game.ecs.ecs')
 
-require('game.ecs.system.system')
+local System = require('game.ecs.system.system')
 
 local e = ECS.new()
 
@@ -18,14 +18,14 @@ function love.load()
 end
 
 function love.update(dt)
-    system_move(e.components, dt)
+    System.move(e.components, dt)
 end
 
 function love.draw()
 
     R:clear(Color.BLACK)
 
-    system_render(e.components)
+    System.render(e.components)
 end
 
 function love.mousepressed(x, y, button, istouch)

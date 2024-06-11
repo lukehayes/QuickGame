@@ -4,7 +4,7 @@ System.__index = {}
 -- ********************************************
 -- Movement System
 -- ********************************************
-function system_move(components, dt)
+function System.move(components, dt)
 
     if components == nil then return end
 
@@ -34,7 +34,7 @@ end
 -- ********************************************
 -- Render System
 -- ********************************************
-function system_render(components)
+function System.render(components)
 
     if components == nil then return end
 
