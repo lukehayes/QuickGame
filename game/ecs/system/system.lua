@@ -17,11 +17,11 @@ function system_move(components, dt)
             transform.x = transform.x + transform.dx * transform.x * dt
             transform.y = transform.y + transform.dy * transform.y * dt
 
-            if transform.x <= 2 or transform.x >= 760 then
+            if transform.x <= 2 or transform.x >= 1270 then
                 transform.dx = -transform.dx
             end
 
-            if transform.y <= 10 or transform.y >= 380 then
+            if transform.y <= 10 or transform.y >= 710 then
                 transform.dy = -transform.dy
             end
         end
