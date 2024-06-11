@@ -15,23 +15,26 @@ function System.move(components, dt)
 
         if transform then
 
-            transform.x = transform.x + transform.dx * transform.speed * transform.x * dt
-            transform.y = transform.y + transform.dy * transform.speed * transform.y * dt
+            if col then
 
-            if transform.x <= 2 or transform.x >= 1270 then
-                transform.dx = -transform.dx
-            end
+                if col.x <= 2 or col.x + col.w >= 1280 then
+                    transform.dx = -transform.dx
+                end
 
-            if transform.y <= 10 or transform.y >= 710 then
-                transform.dy = -transform.dy
+                if col.y <= 2 or col.y + col.h >= 720 then
+                    transform.dy = -transform.dy
+                end
             end
+        end
+
+            transform.x = transform.x + transform.dx * transform.speed * dt
+            transform.y = transform.y + transform.dy * transform.speed * dt
 
             -- Move collision
             if col then
                 col.x = transform.x - (col.w / 2)
                 col.y = transform.y - (col.h / 2)
             end
-        end
 
         love.graphics.setColor(255,255,255,255)
 

@@ -7,14 +7,18 @@ local e = ECS.new()
 
 local t = e:add_transform(100,100,1)
 e:add_collision(1)
-e:add_transform(400,300,2)
-e:add_collision(2)
 
---for i=1,10 do
-    --local rx = love.math.random(10,1250)
-    --local ry = love.math.random(10,710)
-    --e:add_transform(rx,ry, i)
---end
+e:add_transform(300,340,2)
+e:add_collision(2)
+--e:add_transform(400,300,2)
+--e:add_collision(2)
+
+for i=1,10 do
+    local rx = love.math.random(10,1250)
+    local ry = love.math.random(10,710)
+    e:add_transform(rx,ry, i)
+    e:add_collision(i)
+end
 
 function love.load()
 end

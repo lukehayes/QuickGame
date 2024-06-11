@@ -78,8 +78,8 @@ function ECS:add_transform(x, y, id)
         w     = 10,
         h     = 10,
         id    = id,
-        speed = 1,
-        dx    = love.math.random(-1,1),
+        speed = 200,
+        dx    = love.math.random(1,1),
         dy    = love.math.random(-1,1),
         name  = "transform",
         color = {r=255, g = 0, b = 0, a = 0}
@@ -104,7 +104,7 @@ function ECS:add_collision(id)
         h     = col_h,
         id    = id,
         name  = "collision",
-        color = {r=0.8, g = 0, b = 0.8, a = 0.8}
+        color = {r=1, g = 0, b = 1, a = 0.8}
     }
 
     table.insert(self.components.collision, id, collision)
