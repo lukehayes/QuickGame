@@ -51,18 +51,4 @@ function ECS:add_transform(x, y, id)
     return transform
 end
 
-function ECS:add_movement(id)
-
-    local movement = {
-        dx     = love.math.random(-1,1),
-        dy     = love.math.random(-1,1),
-        name  = "movement",
-    }
-
-    table.insert(self.components.movement, id, movement)
-
-    return movement
-end
-
-
 return ECS
