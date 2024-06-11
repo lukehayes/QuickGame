@@ -12,6 +12,7 @@ function ECS.new()
 
     obj.components = {}
     obj.components.transform = {}
+    obj.components.collision = {}
 
     return obj
 end
@@ -87,6 +88,25 @@ function ECS:add_transform(x, y, id)
     table.insert(self.components.transform, id, transform)
 
     return transform
+end
+
+function ECS:add_collision(id)
+
+    local transform = self.components.transform[i]
+
+    local collision = {
+        x     = transform.x,
+        y     = transform.y,
+        w     = 10,
+        h     = 10,
+        id    = id,
+        name  = "collision",
+        color = {r=255, g = 0, b = 255, a = 0}
+    }
+
+    table.insert(self.components.collision, id, collision)
+
+    return collision
 end
 
 return ECS

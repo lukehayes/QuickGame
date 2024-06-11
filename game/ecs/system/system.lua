@@ -11,6 +11,7 @@ function System.move(components, dt)
     for i=1,#components.transform do
 
         local transform = components.transform[i]
+        local col = components.collision[i]
 
         if transform then
 
@@ -23,6 +24,12 @@ function System.move(components, dt)
 
             if transform.y <= 10 or transform.y >= 710 then
                 transform.dy = -transform.dy
+            end
+
+            -- Move collision
+            if col then
+                col.x = transform.x
+                col.y = transform.y
             end
         end
 
