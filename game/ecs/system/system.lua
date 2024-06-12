@@ -39,8 +39,9 @@ function System.render(components)
     if components == nil then return end
 
     for i=1, #components.transform do
-        local t = components.transform[i]
-        local col = components.collision[i]
+
+        local transform = components.transform[i]
+        local col       = components.collision[i]
 
         if col then
             love.graphics.setColor(0.5,0, 0.5,0.8)
@@ -57,10 +58,10 @@ function System.render(components)
 
         love.graphics.rectangle(
             'fill',
-            t.x,
-            t.y,
-            t.w,
-            t.h
+            transform.x,
+            transform.y,
+            transform.w,
+            transform.h
         )
 
     end
