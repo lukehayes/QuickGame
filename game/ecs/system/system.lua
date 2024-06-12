@@ -34,7 +34,7 @@ end
 -- ----------------------------------------------------------------------------
 -- Render System
 -- ----------------------------------------------------------------------------
-function System.render(components)
+function System.render(components, draw_collisions)
 
     if components == nil then return end
 
@@ -43,7 +43,7 @@ function System.render(components)
         local transform = components.transform[i]
         local col       = components.collision[i]
 
-        if col then
+        if col and draw_collisions then
             love.graphics.setColor(
                 col.color.r,
                 col.color.g,

@@ -5,20 +5,11 @@ local System = require('game.ecs.system.system')
 
 local e = ECS.new()
 
-local t = e:add_transform(100,100,1)
+local t = e:add_transform(1, 100,100)
 e:add_collision(1)
 
-e:add_transform(300,340,2)
+e:add_transform(2, 300,340)
 e:add_collision(2)
---e:add_transform(400,300,2)
---e:add_collision(2)
-
-for i=1,10 do
-    local rx = love.math.random(10,1250)
-    local ry = love.math.random(10,710)
-    e:add_transform(rx,ry, i)
-    e:add_collision(i)
-end
 
 function love.load()
 end
