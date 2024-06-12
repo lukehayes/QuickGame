@@ -117,13 +117,13 @@ function ECS:add_collision(id, width, height)
 
 
     local collision = {
-        x     = transform.x - (col_w / 2),
-        y     = transform.y - (col_h / 2),
+        x     = (transform.x + transform.w / 2) - (col_w / 2),
+        y     = (transform.y + transform.h / 2) - (col_h / 2),
         w     = col_w,
         h     = col_h,
         id    = id,
         name  = "collision",
-        color = {r=1, g = 1, b = 1, a = 0.9}
+        color = {r=1, g = 0, b = 1, a = 0.9}
     }
 
     table.insert(self.components.collision, id, collision)

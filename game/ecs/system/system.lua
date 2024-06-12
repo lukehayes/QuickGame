@@ -19,8 +19,8 @@ function System.move(components, dt)
 
             -- Move collision
             if col then
-                col.x = transform.x - (col.w / 2)
-                col.y = transform.y - (col.h / 2)
+                col.x = (transform.x + transform.w / 2) - (col.w / 2)
+                col.y = (transform.y + transform.h / 2) - (col.h / 2)
             end
 
         end
