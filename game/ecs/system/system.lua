@@ -14,19 +14,6 @@ function System.move(components, dt)
         local col = components.collision[i]
 
         if transform then
-
-            if col then
-
-                if col.x <= 2 or col.x + col.w >= 1280 then
-                    transform.dx = -transform.dx
-                end
-
-                if col.y <= 2 or col.y + col.h >= 720 then
-                    transform.dy = -transform.dy
-                end
-            end
-        end
-
             transform.x = transform.x + transform.dx * transform.speed * dt
             transform.y = transform.y + transform.dy * transform.speed * dt
 
@@ -35,6 +22,9 @@ function System.move(components, dt)
                 col.x = transform.x - (col.w / 2)
                 col.y = transform.y - (col.h / 2)
             end
+
+        end
+
 
         love.graphics.setColor(255,255,255,255)
 
@@ -53,7 +43,6 @@ function System.render(components)
         local col = components.collision[i]
 
         if col then
-            print("Collision", i)
             love.graphics.setColor(0.5,0, 0.5,0.8)
 
             love.graphics.rectangle(
@@ -74,6 +63,31 @@ function System.render(components)
             t.h
         )
 
+    end
+end
+
+-- ----------------------------------------------------------------------------
+-- Collision System
+-- ----------------------------------------------------------------------------
+function System.collision(components)
+
+    if components == nil then return end
+
+    for i=1,#components.transform do
+
+        local col = components.collision[i]
+        local transform = components.transform[i]
+
+        if col then
+
+            if col.x <= 2 or col.x + col.w >= 1280 then
+                transform.dx = -transform.dx
+            end
+
+            if col.y <= 2 or col.y + col.h >= 720 then
+                transform.dy = -transform.dy
+            end
+        end
     end
 end
 

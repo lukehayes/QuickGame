@@ -24,6 +24,7 @@ function love.load()
 end
 
 function love.update(dt)
+    System.collision(e.components)
     System.move(e.components, dt)
 end
 
