@@ -11,6 +11,19 @@ e:add_collision(1)
 e:add_transform(2, 300,340)
 e:add_collision(2)
 
+for i=1,10 do
+    local rx = love.math.random(10,1200)
+    local ry = love.math.random(10, 720)
+    local rc = love.math.random(1,100)
+
+    e:add_transform(i, rx,ry)
+
+    if rc > 50 then
+        e:add_collision(i)
+    end
+
+end
+
 function love.load()
 end
 
@@ -22,7 +35,7 @@ end
 function love.draw()
 
     R:clear(Color.BLACK)
-    System.render(e.components)
+    System.render(e.components, true)
 end
 
 function love.mousepressed(x, y, button, istouch)
