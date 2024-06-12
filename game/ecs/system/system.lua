@@ -44,7 +44,12 @@ function System.render(components)
         local col       = components.collision[i]
 
         if col then
-            love.graphics.setColor(0.5,0, 0.5,0.8)
+            love.graphics.setColor(
+                col.color.r,
+                col.color.g,
+                col.color.b,
+                col.color.a
+            )
 
             love.graphics.rectangle(
                 'fill',
