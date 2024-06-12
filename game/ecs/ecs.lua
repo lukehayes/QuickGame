@@ -65,12 +65,12 @@ end
 --
 -- Add an entity transform component.
 --
+-- @tparam number id    The id of the entity.
 -- @tparam number x     The x position.
 -- @tparam number y     The y position.
--- @tparam number id    The id of the entity.
 --
 -- @treturn Transform    Instance of the tranform component.
-function ECS:add_transform(x, y, id)
+function ECS:add_transform(id, x, y)
 
     local transform = {
         x     = x,
@@ -90,6 +90,16 @@ function ECS:add_transform(x, y, id)
     return transform
 end
 
+-----------------------------------------------------------
+-- Add Collision
+--
+-- Add an entity collision component.
+--
+-- @tparam number id    The id of the entity.
+-- @tparam number x     The x position.
+-- @tparam number y     The y position.
+--
+-- @treturn Transform    Instance of the tranform component.
 function ECS:add_collision(id, width, height)
 
     local transform = self.components.transform[id]
