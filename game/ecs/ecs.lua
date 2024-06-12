@@ -90,12 +90,21 @@ function ECS:add_transform(x, y, id)
     return transform
 end
 
-function ECS:add_collision(id)
+function ECS:add_collision(id, width, height)
 
     local transform = self.components.transform[id]
 
-    local col_w = 100
-    local col_h = 100
+    local col_w = width  or 30
+    local col_h = height or 30
+
+    if col_w <= transform.w then
+        col_w = transform.w
+    end
+
+    if col_h <= transform.h then
+        col_h = transform.h
+    end
+
 
     local collision = {
         x     = transform.x - (col_w / 2),
@@ -104,7 +113,7 @@ function ECS:add_collision(id)
         h     = col_h,
         id    = id,
         name  = "collision",
-        color = {r=1, g = 0, b = 1, a = 0.8}
+        color = {r=1, g = 1, b = 1, a = 0.9}
     }
 
     table.insert(self.components.collision, id, collision)
