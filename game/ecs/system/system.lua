@@ -12,6 +12,7 @@ function System.move(components, dt)
 
         local transform = components.transform[i]
         local col = components.collision[i]
+        local spr = components.sprites[i]
 
         if transform then
             transform.x = transform.x + transform.dx * transform.speed * dt
@@ -19,8 +20,20 @@ function System.move(components, dt)
 
             -- Move collision
             if col then
-                col.x = (transform.x + transform.w / 2) - (col.w / 2)
-                col.y = (transform.y + transform.h / 2) - (col.h / 2)
+                if spr then
+                    col.x = transform.x
+                    col.y = transform.y
+                    col.w = transform.w * spr.scale
+                    col.h = transform.h * spr.scale
+                else
+                    if not col.need_scaling then
+                        col.x = (transform.x + transform.w / 2) - (col.w / 2)
+                        col.y = (transform.y + transform.h / 2) - (col.h / 2)
+                    else
+                        col.x = transform.x
+                        col.y = transform.y
+                    end
+                end
             end
         end
 
@@ -43,8 +56,8 @@ function System.render(components, draw_collisions)
 
         if spr then
             love.graphics.draw(spr.image, transform.x, transform.y, 0, spr.scale, spr.scale)
+        end
 
-        else
             love.graphics.rectangle(
                 'fill',
                 transform.x,
@@ -52,7 +65,6 @@ function System.render(components, draw_collisions)
                 transform.w,
                 transform.h
             )
-        end
 
         -- Draw collision shapes on top of entity.
         if col and draw_collisions then

@@ -71,13 +71,13 @@ end
 -- @tparam number y     The y position.
 --
 -- @treturn Transform    Instance of the tranform component.
-function ECS:add_transform(id, x, y)
+function ECS:add_transform(id, x, y, w, h)
 
     local transform = {
         x     = x,
         y     = y,
-        w     = 10,
-        h     = 10,
+        w     = w or 16,
+        h     = h or 16,
         id    = id,
         speed = 200,
         dx    = love.math.random(1,1),
@@ -105,25 +105,31 @@ function ECS:add_collision(id, width, height)
 
     local transform = self.components.transform[id]
 
-    local col_w = width  or 30
-    local col_h = height or 30
+    local col_w = width
+    local col_h = height
+    local need_scaling = false
 
     if col_w <= transform.w then
         col_w = transform.w
+        need_scaling = true
     end
 
     if col_h <= transform.h then
         col_h = transform.h
+        need_scaling = true
     end
 
     local collision = {
         x     = (transform.x + transform.w / 2) - (col_w / 2),
         y     = (transform.y + transform.h / 2) - (col_h / 2),
+        --x     = transform.x,
+        --y     = transform.y,
         w     = col_w,
         h     = col_h,
         id    = id,
         name  = "collision",
-        color = {r=1, g = 0, b = 1, a = 0.5}
+        color = {r=1, g = 0, b = 1, a = 0.5},
+        need_scaling = need_scaling
     }
 
     table.insert(self.components.collision, id, collision)
@@ -131,11 +137,13 @@ function ECS:add_collision(id, width, height)
     return collision
 end
 
-function ECS:add_sprite(id, image)
+function ECS:add_sprite(id, image, scale)
+
+    local scale = scale or 2
 
     local sprite = {
         image = love.graphics.newImage(image),
-        scale = 10
+        scale = scale
     }
 
     sprite.image:setFilter('nearest', 'nearest')
