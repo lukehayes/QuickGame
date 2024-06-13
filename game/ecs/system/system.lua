@@ -56,8 +56,7 @@ function System.render(components, draw_collisions)
 
         if spr then
             love.graphics.draw(spr.image, transform.x, transform.y, 0, spr.scale, spr.scale)
-        end
-
+        else
             love.graphics.rectangle(
                 'fill',
                 transform.x,
@@ -65,6 +64,8 @@ function System.render(components, draw_collisions)
                 transform.w,
                 transform.h
             )
+        end
+
 
         -- Draw collision shapes on top of entity.
         if col and draw_collisions then
