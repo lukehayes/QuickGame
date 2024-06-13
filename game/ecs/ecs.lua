@@ -10,9 +10,10 @@ ECS.__index = ECS
 function ECS.new()
     local obj = setmetatable({}, ECS)
 
-    obj.components = {}
+    obj.components           = {}
     obj.components.transform = {}
     obj.components.collision = {}
+    obj.components.sprites   = {}
 
     return obj
 end
@@ -115,7 +116,6 @@ function ECS:add_collision(id, width, height)
         col_h = transform.h
     end
 
-
     local collision = {
         x     = (transform.x + transform.w / 2) - (col_w / 2),
         y     = (transform.y + transform.h / 2) - (col_h / 2),
@@ -123,12 +123,28 @@ function ECS:add_collision(id, width, height)
         h     = col_h,
         id    = id,
         name  = "collision",
-        color = {r=1, g = 0, b = 1, a = 0.9}
+        color = {r=1, g = 0, b = 1, a = 0.5}
     }
 
     table.insert(self.components.collision, id, collision)
 
     return collision
 end
+
+function ECS:add_sprite(id, image)
+
+    local sprite = {
+        image = love.graphics.newImage(image),
+        scale = 10
+    }
+
+    sprite.image:setFilter('nearest', 'nearest')
+
+    table.insert(self.components.sprites, id, sprite)
+end
+
+
+
+
 
 return ECS

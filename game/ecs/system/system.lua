@@ -22,12 +22,9 @@ function System.move(components, dt)
                 col.x = (transform.x + transform.w / 2) - (col.w / 2)
                 col.y = (transform.y + transform.h / 2) - (col.h / 2)
             end
-
         end
 
-
         love.graphics.setColor(255,255,255,255)
-
     end
 end
 
@@ -42,7 +39,22 @@ function System.render(components, draw_collisions)
 
         local transform = components.transform[i]
         local col       = components.collision[i]
+        local spr       = components.sprites[i]
 
+        if spr then
+            love.graphics.draw(spr.image, transform.x, transform.y, 0, spr.scale, spr.scale)
+
+        else
+            love.graphics.rectangle(
+                'fill',
+                transform.x,
+                transform.y,
+                transform.w,
+                transform.h
+            )
+        end
+
+        -- Draw collision shapes on top of entity.
         if col and draw_collisions then
             love.graphics.setColor(
                 col.color.r,
@@ -60,14 +72,7 @@ function System.render(components, draw_collisions)
             )
             love.graphics.setColor(1,1,1,1)
         end
-
-        love.graphics.rectangle(
-            'fill',
-            transform.x,
-            transform.y,
-            transform.w,
-            transform.h
-        )
+        
 
     end
 end
