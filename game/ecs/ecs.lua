@@ -76,7 +76,7 @@ end
 function ECS:add_transform(id, x, y, w, h)
 
     local transform = {
-        position = Vec2.new(x,y),
+        position = Vec2:new(x,y),
         w     = w or 16,
         h     = h or 16,
         id    = id,
