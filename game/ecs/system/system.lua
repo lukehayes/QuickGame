@@ -15,23 +15,23 @@ function System.move(components, dt)
         local spr = components.sprites[i]
 
         if transform then
-            transform.x = transform.x + transform.dx * transform.speed * dt
-            transform.y = transform.y + transform.dy * transform.speed * dt
+            transform.position.x = transform.position.x + transform.dx * transform.speed * dt
+            transform.position.y = transform.position.y + transform.dy * transform.speed * dt
 
             -- Move collision
             if col then
                 if spr then
-                    col.x = transform.x
-                    col.y = transform.y
+                    col.x = transform.position.x
+                    col.y = transform.position.y
                     col.w = transform.w * spr.scale
                     col.h = transform.h * spr.scale
                 else
                     if not col.need_scaling then
-                        col.x = (transform.x + transform.w / 2) - (col.w / 2)
-                        col.y = (transform.y + transform.h / 2) - (col.h / 2)
+                        col.x = (transform.position.x + transform.w / 2) - (col.w / 2)
+                        col.y = (transform.position.y + transform.h / 2) - (col.h / 2)
                     else
-                        col.x = transform.x
-                        col.y = transform.y
+                        col.x = transform.position.x
+                        col.y = transform.position.y
                     end
                 end
             end
@@ -55,12 +55,12 @@ function System.render(components, draw_collisions)
         local spr       = components.sprites[i]
 
         if spr then
-            love.graphics.draw(spr.image, transform.x, transform.y, 0, spr.scale, spr.scale)
+            love.graphics.draw(spr.image, transform.position.x, transform.position.y, 0, spr.scale, spr.scale)
         else
             love.graphics.rectangle(
                 'fill',
-                transform.x,
-                transform.y,
+                transform.position.x,
+                transform.position.y,
                 transform.w,
                 transform.h
             )

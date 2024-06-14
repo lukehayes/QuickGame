@@ -1,3 +1,5 @@
+local Vec2 = require('core.math.vec2')
+
 ECS = {}
 ECS.__index = ECS
 
@@ -74,8 +76,7 @@ end
 function ECS:add_transform(id, x, y, w, h)
 
     local transform = {
-        x     = x,
-        y     = y,
+        position = Vec2.new(x,y),
         w     = w or 16,
         h     = h or 16,
         id    = id,
@@ -120,10 +121,10 @@ function ECS:add_collision(id, width, height)
     end
 
     local collision = {
-        x     = (transform.x + transform.w / 2) - (col_w / 2),
-        y     = (transform.y + transform.h / 2) - (col_h / 2),
-        --x     = transform.x,
-        --y     = transform.y,
+        x     = (transform.position.x + transform.w / 2) - (col_w / 2),
+        y     = (transform.position.y + transform.h / 2) - (col_h / 2),
+        --x     = transform.position.x,
+        --y     = transform.position.y,
         w     = col_w,
         h     = col_h,
         id    = id,
