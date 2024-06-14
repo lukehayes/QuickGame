@@ -156,6 +156,8 @@ function ECS:add_sprite(id, image, scale)
         scale = scale
     }
 
+    sprite.size = sprite.image:getWidth()
+
     sprite.image:setFilter('nearest', 'nearest')
 
     table.insert(self.components.sprites, id, sprite)
