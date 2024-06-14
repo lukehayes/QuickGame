@@ -105,6 +105,8 @@ end
 function ECS:add_collision(id, width, height)
 
     local transform = self.components.transform[id]
+    
+    -- TODO Check if sprite exists and create collision box if it exists.
 
     local col_w = width
     local col_h = height
