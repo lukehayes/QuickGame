@@ -20,7 +20,7 @@ function ECS.new()
     return obj
 end
 
------------------------------------------------------------
+-------------------------------------------------------------------------------
 -- find_entity
 --
 -- Find an entity
@@ -63,7 +63,7 @@ function ECS:get_entity_components(id)
     return entity
 end
 
------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- Add Transform
 --
 -- Add an entity transform component.
@@ -80,7 +80,7 @@ function ECS:add_transform(id, x, y, w, h)
         w     = w or 16,
         h     = h or 16,
         id    = id,
-        speed = 200,
+        speed = love.math.random(100,300),
         dx    = love.math.random(1,1),
         dy    = love.math.random(-1,1),
         name  = "transform",
@@ -92,7 +92,7 @@ function ECS:add_transform(id, x, y, w, h)
     return transform
 end
 
------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- Add Collision
 --
 -- Add an entity collision component.
@@ -138,12 +138,21 @@ function ECS:add_collision(id, width, height)
     return collision
 end
 
+-----------------------------------------------------------
+-- Add Sprite
+--
+-- Add a single sprite to an entity
+--
+-- @tparam number id       The id of the entity.
+-- @tparam string image    The path of the image - .png format only.
+--
+-- @treturn Transform    Instance of the tranform component.
 function ECS:add_sprite(id, image, scale)
 
     local scale = scale or 2
 
     local sprite = {
-        image = love.graphics.newImage(image),
+        image = love.graphics.newImage('assets/images/'..image..'.png'),
         scale = scale
     }
 
