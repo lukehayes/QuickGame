@@ -106,20 +106,23 @@ function ECS:add_collision(id, width, height)
 
     local transform = self.components.transform[id]
     local spr = self.components.sprites[id]
+    local sprite_scale = nil
+    --local sprite_scale_changed = false
 
     -- TODO Check if sprite exists and create collision box if it exists.
-    
+
     if spr then
         print("Entity", id, "has sprite")
         print("Sprite Size", spr.size, " Col W", col_w)
 
-        col_w = width or spr.size
-        col_h = height or spr.size
         x = transform.position.x
         y = transform.position.y
+        col_w = spr.size * spr.scale or transform.w
+        col_h = spr.size * spr.scale or transform.h
     else
-        x = transform.position.x + transform.w / 2
-        y = transform.position.y + transform.h / 2
+        x = (transform.position.x + transform.w / 2) - (col_w / 2)
+        y = (transform.position.y + transform.h / 2) - (col_h / 2)
+        --y = transform.position.y + transform.h / 2
         col_w = width or transform.w
         col_h = height or transform.h
     end
@@ -127,10 +130,6 @@ function ECS:add_collision(id, width, height)
     local collision = {
         x     = x,
         y     = y,
-        --x     = (transform.position.x + transform.w / 2) - (col_w / 2),
-        --y     = (transform.position.y + transform.h / 2) - (col_h / 2),
-        --x     = transform.position.x,
-        --y     = transform.position.y,
         w     = col_w,
         h     = col_h,
         id    = id,
