@@ -5,30 +5,24 @@ local System = require('game.ecs.system.system')
 
 local e = ECS.new()
 
-local t = e:add_transform(1, 100,100)
-e:add_collision(1,8, 8)
-e:add_sprite(1, "assets/images/spaceship-blue.png", 4)
+e:add_transform(1, 100,100)
+e:add_sprite(1, "debug32", 4)
+e:add_collision(1)
 
-e:add_transform(2, 300,340)
-e:add_collision(2, 2,2)
+e:add_transform(2, 300,100)
+e:add_sprite(2, "debug32")
+e:add_collision(2,16,16)
 
-e:add_transform(3, 200,540)
-e:add_collision(3, 100,100)
+e:add_transform(3, 500,100)
+e:add_sprite(3, "debug16")
+e:add_collision(3)
 
---e:add_sprite(2, "assets/images/face.png")
+e:add_transform(4, 500,500)
+e:add_collision(4)
 
-for i=1,100 do
-    local rx = love.math.random(10,1200)
-    local ry = love.math.random(10, 720)
-    local rc = love.math.random(1,100)
-
-    e:add_transform(i, rx,ry)
-    e:add_sprite(i, "assets/images/spaceship-blue.png",4)
-
-    if rc > 50 then
-        e:add_collision(i,32,32)
-    end
-end
+e:add_transform(5, 500,500)
+e:add_sprite(5, "debug16", 10)
+e:add_collision(5)
 
 function love.load()
 end
@@ -41,8 +35,8 @@ end
 function love.draw()
 
     R:clear(Color.BLACK)
-    --System.render(e.components, true)
-    System.render(e.components, false)
+    System.render(e.components, true)
+    --System.render(e.components, false)
 end
 
 function love.mousepressed(x, y, button, istouch)
