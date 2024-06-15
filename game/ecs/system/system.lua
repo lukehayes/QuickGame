@@ -20,20 +20,8 @@ function System.move(components, dt)
 
             -- Move collision
             if col then
-                if spr then
-                    col.x = transform.position.x
-                    col.y = transform.position.y
-                    col.w = transform.w * spr.scale
-                    col.h = transform.h * spr.scale
-                else
-                    if not col.need_scaling then
-                        col.x = (transform.position.x + transform.w / 2) - (col.w / 2)
-                        col.y = (transform.position.y + transform.h / 2) - (col.h / 2)
-                    else
-                        col.x = transform.position.x
-                        col.y = transform.position.y
-                    end
-                end
+                col.x = (transform.position.x + transform.w / 2) - (col.w / 2)
+                col.y = (transform.position.y + transform.h / 2) - (col.h / 2)
             end
         end
 
