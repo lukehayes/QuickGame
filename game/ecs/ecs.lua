@@ -151,7 +151,7 @@ end
 -- @treturn Transform    Instance of the tranform component.
 function ECS:add_sprite(id, image, scale)
 
-    local scale = scale or 2
+    local scale = scale or 1
 
     local sprite = {
         image = love.graphics.newImage('assets/images/'..image..'.png'),
