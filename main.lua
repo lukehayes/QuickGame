@@ -5,31 +5,22 @@ local System = require('game.ecs.system.system')
 
 local e = ECS.new()
 
+local base_size = 1
+
 e:add_transform(1, 100,100)
-e:add_sprite(1, "debug32", 4)
-e:add_collision(1)
+e:add_sprite(1, "debug32")
+e:add_collision(1, 16,16)
 
-e:add_transform(2, 300,100)
-e:add_sprite(2, "debug32")
-e:add_collision(2,16,16)
-
-e:add_transform(3, 500,100)
-e:add_sprite(3, "debug16")
-e:add_collision(3)
-
-e:add_transform(4, 500,500)
-e:add_collision(4)
-
-e:add_transform(5, 500,500)
-e:add_sprite(5, "debug16", 10)
-e:add_collision(5)
+e:add_transform(2, 300,400)
+e:add_sprite(2, "debug16")
+e:add_collision(2,32,32)
 
 function love.load()
 end
 
 function love.update(dt)
     System.collision(e.components)
-    System.move(e.components, dt)
+    --System.move(e.components, dt)
 end
 
 function love.draw()
