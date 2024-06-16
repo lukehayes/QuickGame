@@ -72,7 +72,7 @@ end
 -- @tparam number x     The x position.
 -- @tparam number y     The y position.
 --
--- @treturn Transform    Instance of the tranform component.
+-- @treturn Transform    Instance of the transform component.
 function ECS:add_transform(id, x, y, w, h)
 
     local transform = {
@@ -101,25 +101,39 @@ end
 -- @tparam number x     The x position.
 -- @tparam number y     The y position.
 --
--- @treturn Transform    Instance of the tranform component.
+-- @treturn Transform    Instance of the transform component.
 function ECS:add_collision(id, width, height)
 
     local transform = self.components.transform[id]
     local spr = self.components.sprites[id]
     local sprite_scale = nil
+
+    local col_w = width or 100
+    local col_h = height or 100
     --local sprite_scale_changed = false
 
     -- TODO Check if sprite exists and create collision box if it exists.
 
     if spr then
-        print("Entity", id, "has sprite")
-        print("Sprite Size", spr.size, " Col W", col_w)
+        
+        --  If colllsion box smaller
+        if width < spr.size then
+            print("Collision box smaller than sprite")
 
-        x = transform.position.x
-        y = transform.position.y
-        col_w = spr.size * spr.scale or transform.w
-        col_h = spr.size * spr.scale or transform.h
+            x = transform.position.x + transform.w / 2
+            y = transform.position.y + transform.h / 2
+            col_w = width
+            col_h = height
+        end
+
+        --  If colllsion box bigger
+        if width > spr.size then
+            print("Collision box bigger than sprite")
+        end
+
     else
+        col_w = width
+        col_h = height
         x = (transform.position.x + transform.w / 2) - (col_w / 2)
         y = (transform.position.y + transform.h / 2) - (col_h / 2)
         --y = transform.position.y + transform.h / 2
@@ -151,7 +165,7 @@ end
 -- @tparam number id       The id of the entity.
 -- @tparam string image    The path of the image - .png format only.
 --
--- @treturn Transform    Instance of the tranform component.
+-- @treturn Transform    Instance of the transform component.
 function ECS:add_sprite(id, image, scale)
 
     local scale = scale or 1
