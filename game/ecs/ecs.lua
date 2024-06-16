@@ -115,6 +115,8 @@ function ECS:add_collision(id, width, height)
     -- TODO Check if sprite exists and create collision box if it exists.
 
     if spr then
+
+        print("Sprite size:", spr.size)
         
         --  If colllsion box smaller
         if width < spr.size then
@@ -129,6 +131,11 @@ function ECS:add_collision(id, width, height)
         --  If colllsion box bigger
         if width > spr.size then
             print("Collision box bigger than sprite")
+
+            x = transform.position.x - spr.size / 2
+            y = transform.position.y - spr.size / 2
+            col_w = width
+            col_h = height
         end
 
     else
