@@ -7,20 +7,39 @@ local e = ECS.new()
 
 local base_size = 1
 
-e:add_transform(1, 100,100)
-e:add_sprite(1, "debug32")
-e:add_collision(1, 16,16)
+e:add_transform(1, 400,100)
+e:add_sprite(1, "debug16",1)
+e:add_collision(1, 64,64)
 
-e:add_transform(2, 300,400)
-e:add_sprite(2, "debug16")
-e:add_collision(2,32,32)
+
+--for i=1,100 do
+    --local rx = love.math.random(10,600)
+    --local ry = love.math.random(10,600)
+    --local rs = love.math.random(8,64)
+
+    --e:add_transform(i, rx,ry)
+    --e:add_sprite(i, "debug16")
+    --e:add_collision(i, rs,rs)
+--end
+
+--e:add_transform(2, 200,400)
+--e:add_sprite(2, "debug32")
+--e:add_collision(2, 128,128)
+
+--e:add_transform(3, 400,600)
+--e:add_sprite(3, "debug16")
+--e:add_collision(3, 64,64)
+
 
 function love.load()
 end
 
 function love.update(dt)
     System.collision(e.components)
-    --System.move(e.components, dt)
+
+    if toggle then
+        System.move(e.components, dt)
+    end
 end
 
 function love.draw()
@@ -40,5 +59,6 @@ function love.keypressed(key, scancode, isrepeat)
 
    if key == "space" then
        print("Space")
+        toggle = not toggle
    end
 end
