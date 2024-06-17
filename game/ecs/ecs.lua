@@ -82,6 +82,7 @@ function ECS:add_transform(id, x, y, w, h)
         id    = id,
         speed = love.math.random(100,300),
         dx    = love.math.random(1,1),
+        dx    = love.math.random(-1,1),
         dy    = love.math.random(-1,1),
         name  = "transform",
         color = {r=255, g = 0, b = 0, a = 0}
