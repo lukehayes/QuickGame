@@ -115,35 +115,22 @@ function ECS:add_collision(id, width, height)
     -- TODO Check if sprite exists and create collision box if it exists.
 
     if spr then
-
-        print("Sprite size:", spr.size)
-        
         --  If colllsion box smaller
         if width < spr.size then
-            print("Collision box smaller than sprite")
-
-            x = transform.position.x + transform.w / 2
-            y = transform.position.y + transform.h / 2
-            col_w = width
-            col_h = height
+            x = transform.position.x + (transform.w / 2)
+            y = transform.position.y + (transform.h / 2)
         end
 
         --  If colllsion box bigger
-        if width > spr.size then
-            print("Collision box bigger than sprite")
-
-            x = transform.position.x - spr.size / 2
-            y = transform.position.y - spr.size / 2
-            col_w = width
-            col_h = height
+        if width >= spr.size then
+            x = transform.position.x + (spr.size - width) / 2
+            y = transform.position.y + (spr.size - height) / 2
         end
-
     else
         col_w = width
         col_h = height
         x = (transform.position.x + transform.w / 2) - (col_w / 2)
         y = (transform.position.y + transform.h / 2) - (col_h / 2)
-        --y = transform.position.y + transform.h / 2
         col_w = width or transform.w
         col_h = height or transform.h
     end
@@ -156,7 +143,6 @@ function ECS:add_collision(id, width, height)
         id    = id,
         name  = "collision",
         color = {r=1, g = 0, b = 1, a = 0.5},
-        need_scaling = need_scaling
     }
 
     table.insert(self.components.collision, id, collision)
@@ -178,7 +164,7 @@ function ECS:add_sprite(id, image, scale)
     local scale = scale or 1
 
     local sprite = {
-        image = love.graphics.newImage('assets/images/'..image..'.png'),
+        image = love.graphics.newImage('assets/images/'.. image ..'.png'),
         scale = scale
     }
 
