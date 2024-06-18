@@ -26,6 +26,7 @@ end
 
 function love.update(dt)
     System.collision(e.components)
+    System.collisionWithEntities(e.components)
 
     if toggle then
         System.move(e.components, dt)
@@ -35,16 +36,17 @@ end
 function love.draw()
 
     R:clear(Color.BLACK)
-    --System.render(e.components, true)
-    System.render(e.components, false)
+    System.render(e.components, true)
+    --System.render(e.components, false)
 end
 
 function love.mousepressed(x, y, button, istouch)
 
     local rs = love.math.random(16,64)
+    local s = {"debug32", "debug16"}
 
     e:add_transform(c, x,y)
-    e:add_sprite(c, "debug32")
+    e:add_sprite(c, s[love.math.random(1,2)])
     e:add_collision(c,rs,rs)
 
     c = c + 1
