@@ -111,16 +111,8 @@ function ECS:add_collision(id, width, height)
 
     local col_w = width or 100
     local col_h = height or 100
-    --local sprite_scale_changed = false
-
-    -- TODO Check if sprite exists and create collision box if it exists.
 
     if spr then
-
-           print("Spr scale", spr.scale)
-
-        -- TODO Sprite scale not taken into account yet.
-
         --  If colllsion box same size
         if width == spr.size * spr.scale then
             x = transform.position.x

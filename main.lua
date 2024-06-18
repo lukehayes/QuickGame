@@ -19,6 +19,8 @@ e:add_transform(3, 500,400)
 e:add_sprite(3, "debug32")
 e:add_collision(3,32,32)
 
+c = 4
+
 function love.load()
 end
 
@@ -33,11 +35,19 @@ end
 function love.draw()
 
     R:clear(Color.BLACK)
-    System.render(e.components, true)
-    --System.render(e.components, false)
+    --System.render(e.components, true)
+    System.render(e.components, false)
 end
 
 function love.mousepressed(x, y, button, istouch)
+
+    local rs = love.math.random(16,64)
+
+    e:add_transform(c, x,y)
+    e:add_sprite(c, "debug32")
+    e:add_collision(c,rs,rs)
+
+    c = c + 1
 end
 
 function love.keypressed(key, scancode, isrepeat)
