@@ -1,3 +1,5 @@
+local M = require("core.math.math")
+
 local System = {}
 System.__index = {}
 
@@ -105,6 +107,35 @@ function System.collision(components)
 
             if col.y <= 2 or col.y + col.h >= 720 then
                 transform.dy = -transform.dy
+            end
+        end
+    end
+end
+
+-- ----------------------------------------------------------------------------
+-- Collision System for colliding with other entities.
+-- ----------------------------------------------------------------------------
+function System.collisionWithEntities(components)
+
+    if components == nil then return end
+
+    for i=1,#components.transform do
+
+        local col = components.collision[i]
+        local transform = components.transform[i]
+
+        if col then
+            for _,comp in pairs(components.collision) do
+
+                if col ~= comp then
+                    if M.aabb(col.x, col.y, col.w, col.h,
+                        comp.x, comp.y, comp.w,comp.h
+                        ) then
+
+                        transform.dx = -transform.dx
+                        transform.dy = -transform.dy
+                    end
+                end
             end
         end
     end
