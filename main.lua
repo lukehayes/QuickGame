@@ -8,28 +8,16 @@ local e = ECS.new()
 local base_size = 1
 
 e:add_transform(1, 400,100)
-e:add_sprite(1, "debug16",1)
-e:add_collision(1, 64,64)
+e:add_sprite(1, "debug16", 2)
+e:add_collision(1, 48,48)
 
+e:add_transform(2, 100,100)
+e:add_sprite(2, "debug32", 2)
+e:add_collision(2, 100,100)
 
---for i=1,100 do
-    --local rx = love.math.random(10,600)
-    --local ry = love.math.random(10,600)
-    --local rs = love.math.random(8,64)
-
-    --e:add_transform(i, rx,ry)
-    --e:add_sprite(i, "debug16")
-    --e:add_collision(i, rs,rs)
---end
-
---e:add_transform(2, 200,400)
---e:add_sprite(2, "debug32")
---e:add_collision(2, 128,128)
-
---e:add_transform(3, 400,600)
---e:add_sprite(3, "debug16")
---e:add_collision(3, 64,64)
-
+e:add_transform(3, 500,400)
+e:add_sprite(3, "debug32")
+e:add_collision(3,32,32)
 
 function love.load()
 end
