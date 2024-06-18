@@ -117,19 +117,35 @@ function ECS:add_collision(id, width, height)
 
     if spr then
 
+           print("Spr scale", spr.scale)
 
         -- TODO Sprite scale not taken into account yet.
 
         --  If colllsion box smaller
-        if width < spr.size then
-            x = transform.position.x + (transform.w / 2)
-            y = transform.position.y + (transform.h / 2)
+        if width < spr.size * spr.scale then
+            print("Smaller", width, spr.size * spr.scale)
+            x = transform.position.x + (spr.size * spr.scale - width)  / 2
+            y = transform.position.y + (spr.size * spr.scale - height)  / 2
+            col_w = width
+            col_h = height
+        end
+
+        --  If colllsion box same size
+        if width == spr.size * spr.scale then
+            print("Equal size", "Width", width, "size * scale", spr.size * spr.scale)
+            x = transform.position.x
+            y = transform.position.y
+            col_w = spr.size * spr.scale
+            col_h = spr.size * spr.scale
         end
 
         --  If colllsion box bigger
-        if width >= spr.size then
-            x = transform.position.x + (spr.size - width) / 2
-            y = transform.position.y + (spr.size - height) / 2
+        if width > spr.size * spr.scale then
+            print("Bigger", "Width", width, "size * scale", spr.size * spr.scale)
+            x = transform.position.x + (spr.size * spr.scale - width)  / 2
+            y = transform.position.y + (spr.size * spr.scale - height)  / 2
+            col_w = width
+            col_h = height
         end
     else
         col_w = width
@@ -147,7 +163,7 @@ function ECS:add_collision(id, width, height)
         h     = col_h,
         id    = id,
         name  = "collision",
-        color = {r=1, g = 0, b = 1, a = 0.5},
+        color = {r=0, g = 1, b = 1, a = 0.7},
     }
 
     table.insert(self.components.collision, id, collision)
