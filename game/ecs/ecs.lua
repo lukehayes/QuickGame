@@ -116,6 +116,10 @@ function ECS:add_collision(id, width, height)
     -- TODO Check if sprite exists and create collision box if it exists.
 
     if spr then
+
+
+        -- TODO Sprite scale not taken into account yet.
+
         --  If colllsion box smaller
         if width < spr.size then
             x = transform.position.x + (transform.w / 2)
