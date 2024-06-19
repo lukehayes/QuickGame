@@ -14,6 +14,7 @@ function ECS.new()
 
     obj.components           = {}
     obj.components.transform = {}
+    obj.components.physics   = {}
     obj.components.collision = {}
     obj.components.sprites   = {}
 
@@ -81,7 +82,6 @@ function ECS:add_transform(id, x, y, w, h)
         h     = h or 16,
         id    = id,
         speed = love.math.random(100,300),
-        dx    = love.math.random(1,1),
         dx    = love.math.random(-1,1),
         dy    = love.math.random(-1,1),
         name  = "transform",
@@ -91,6 +91,23 @@ function ECS:add_transform(id, x, y, w, h)
     table.insert(self.components.transform, id, transform)
 
     return transform
+end
+
+function ECS:add_physics(id, xv, yv)
+
+    local physics = {
+        velocity       = Vec2:new(xv,yv),
+        acceleration   = Vec2:new(2,2),
+        speed          = 50,
+        ACC_RATE       = 0.07,
+        SLOW_DOWN_RATE = 0.01,
+        direction      = Vec2:new(1,1),
+        reset_time     = 3
+   }
+
+   table.insert(self.components.physics, id, physics)
+
+   return physics
 end
 
 -- ----------------------------------------------------------------------------

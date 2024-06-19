@@ -33,11 +33,33 @@ function System.move(components, dt)
 
             end
         end
-
-        love.graphics.setColor(255,255,255,255)
     end
 end
 
+-- ----------------------------------------------------------------------------
+-- Velocity System
+-- ----------------------------------------------------------------------------
+function System.physics(components, dt)
+
+    if components == nil then return end
+
+    for i=1,#components.physics do
+
+        local t = components.transform[i]
+        local p = components.physics[i]
+
+        -- TODO Make velocity work.
+        --
+        -- Timer to regenerate movement when slowed to a certain speed
+        -- Get the direction of the velocity.
+        -- Work out when stopped or very slow.
+
+        if p then
+            t.position.x = t.position.x + p.acceleration.x * p.speed * dt
+            t.position.y = t.position.y + p.acceleration.y * p.speed * dt
+        end
+    end
+end
 -- ----------------------------------------------------------------------------
 -- Render System
 -- ----------------------------------------------------------------------------
