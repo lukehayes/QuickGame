@@ -95,14 +95,18 @@ end
 
 function ECS:add_physics(id, xv, yv)
 
+    local rx = love.math.random(-1,1)
+    local ry = love.math.random(-1,1)
+
     local physics = {
         velocity       = Vec2:new(xv,yv),
-        acceleration   = Vec2:new(2,2),
+        acceleration   = Vec2:new(1,1),
         speed          = 50,
-        ACC_RATE       = 0.07,
+        ACC_RATE       = 0.07, -- This actually moves things?
         SLOW_DOWN_RATE = 0.01,
-        direction      = Vec2:new(1,1),
-        reset_time     = 3
+        dir            = Vec2:new(rx,ry),
+        reset_time     = 3,
+        time           = 0
    }
 
    table.insert(self.components.physics, id, physics)

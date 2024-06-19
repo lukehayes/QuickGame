@@ -55,8 +55,24 @@ function System.physics(components, dt)
         -- Work out when stopped or very slow.
 
         if p then
-            t.position.x = t.position.x + p.acceleration.x * p.speed * dt
-            t.position.y = t.position.y + p.acceleration.y * p.speed * dt
+
+            p.time = p.time + dt
+
+            if p.time >= p.reset_time then
+
+                p.time  = love.math.random(0.2,4)
+                p.dir.x = love.math.random(-1,1)
+                p.dir.y = love.math.random(-1,1)
+
+                p.acceleration.x = M.lerp(p.acceleration.x,p.speed, p.ACC_RATE)
+                p.acceleration.y = M.lerp(p.acceleration.y,p.speed, p.ACC_RATE)
+            end
+
+            p.acceleration.x = M.lerp(p.acceleration.x,0 , p.SLOW_DOWN_RATE)
+            p.acceleration.y = M.lerp(p.acceleration.y,0 , p.SLOW_DOWN_RATE)
+
+            t.position.x = t.position.x + p.dir.x * p.acceleration.x * p.speed * dt
+            t.position.y = t.position.y + p.dir.y * p.acceleration.y * p.speed * dt
         end
     end
 end
