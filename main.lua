@@ -40,20 +40,21 @@ function love.load()
 end
 
 function love.update(dt)
-    System.collision(e.components)
-    --System.collisionWithEntities(e.components)
+    System.collisionWithEntities(e.components)
 
     if toggle then
-        --System.move(e.components, dt)
+        -- Collision and Physics order is important!
+        System.collision(e.components)
         System.physics(e.components, dt)
+        System.move(e.components, dt)
     end
 end
 
 function love.draw()
 
     R:clear(Color.BLACK)
-    --System.render(e.components, true)
-    System.render(e.components, false)
+    System.render(e.components, true)
+    --System.render(e.components, false)
 end
 
 function love.mousepressed(x, y, button, istouch)
