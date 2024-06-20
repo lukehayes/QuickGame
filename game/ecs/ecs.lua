@@ -101,8 +101,8 @@ function ECS:add_physics(id, xv, yv)
     local physics = {
         velocity       = Vec2:new(xv,yv),
         acceleration   = Vec2:new(1,1),
-        speed          = 50,
-        ACC_RATE       = 0.07, -- This actually moves things?
+        speed          = 25,
+        ACC_RATE       = 0.7, -- This actually moves things?
         SLOW_DOWN_RATE = 0.01,
         dir            = Vec2:new(rx,ry),
         reset_time     = 3,
