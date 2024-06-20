@@ -17,8 +17,8 @@ function System.move(components, dt)
         local spr = components.sprites[i]
 
         if transform then
-            transform.position.x = transform.position.x + transform.dx * transform.speed * dt
-            transform.position.y = transform.position.y + transform.dy * transform.speed * dt
+            --transform.position.x = transform.position.x + transform.dx * transform.speed * dt
+            --transform.position.y = transform.position.y + transform.dy * transform.speed * dt
 
             -- Move collision
             if col then
@@ -136,15 +136,19 @@ function System.collision(components)
 
         local col = components.collision[i]
         local transform = components.transform[i]
+        local p = components.physics[i]
 
-        if col then
+        -- TODO Add movement if there is a physics component
+        if p then
 
             if col.x <= 2 or col.x + col.w >= 1280 then
                 transform.dx = -transform.dx
+                p.dir.x = -p.dir.x
             end
 
             if col.y <= 2 or col.y + col.h >= 720 then
                 transform.dy = -transform.dy
+                p.dir.y = -p.dir.y
             end
         end
     end
