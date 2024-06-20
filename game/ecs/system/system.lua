@@ -63,13 +63,17 @@ function System.physics(components, dt)
                 p.time  = love.math.random(0.2,4)
                 p.dir.x = love.math.random(-1,1)
                 p.dir.y = love.math.random(-1,1)
+                p.speed = love.math.random(2,20)
+                p.acceleration.x = love.math.random(-1,1)
+                p.acceleration.y = love.math.random(-1,1)
+                p.ACC_RATE = love.math.random(0.1, 1.0)
 
                 p.acceleration.x = M.lerp(p.acceleration.x,p.speed, p.ACC_RATE)
                 p.acceleration.y = M.lerp(p.acceleration.y,p.speed, p.ACC_RATE)
             end
 
-            p.acceleration.x = M.lerp(p.acceleration.x,0 , p.SLOW_DOWN_RATE)
-            p.acceleration.y = M.lerp(p.acceleration.y,0 , p.SLOW_DOWN_RATE)
+            p.velocity.x = M.lerp(p.acceleration.x,0 , p.SLOW_DOWN_RATE)
+            p.velocity.y = M.lerp(p.acceleration.y,0 , p.SLOW_DOWN_RATE)
 
             t.position.x = t.position.x + p.dir.x * p.acceleration.x * p.speed * dt
             t.position.y = t.position.y + p.dir.y * p.acceleration.y * p.speed * dt
@@ -88,6 +92,7 @@ function System.render(components, draw_collisions)
         local transform = components.transform[i]
         local col       = components.collision[i]
         local spr       = components.sprites[i]
+        local p         = components.physics[i]
 
         if spr then
             love.graphics.draw(spr.image, transform.position.x, transform.position.y, 0, spr.scale, spr.scale)
@@ -138,17 +143,21 @@ function System.collision(components)
         local transform = components.transform[i]
         local p = components.physics[i]
 
+        col.triggered = false
+
         -- TODO Add movement if there is a physics component
         if p then
 
             if col.x <= 2 or col.x + col.w >= 1280 then
                 transform.dx = -transform.dx
                 p.dir.x = -p.dir.x
+                col.triggered = true
             end
 
             if col.y <= 2 or col.y + col.h >= 720 then
                 transform.dy = -transform.dy
                 p.dir.y = -p.dir.y
+                col.triggered = true
             end
         end
     end
@@ -167,6 +176,7 @@ function System.collisionWithEntities(components)
         local transform = components.transform[i]
 
         if col then
+
             for _,comp in pairs(components.collision) do
 
                 if col ~= comp then

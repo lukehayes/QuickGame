@@ -164,6 +164,7 @@ function ECS:add_collision(id, width, height)
         id    = id,
         name  = "collision",
         color = {r=0, g = 1, b = 1, a = 0.7},
+        triggered = false
     }
 
     table.insert(self.components.collision, id, collision)
