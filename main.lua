@@ -17,6 +17,17 @@ e:add_physics(2, 30,30)
 e:add_collision(2, 64,64)
 
 
+for i=1,10 do
+    local rx = love.math.random(10,500)
+    local ry = love.math.random(10,500)
+
+    e:add_transform(i, rx,ry)
+    e:add_sprite(i, "debug16", 2)
+    --e:add_physics(i, 30,30)
+    e:add_collision(i, 64,64)
+end
+
+
 function love.load()
 end
 

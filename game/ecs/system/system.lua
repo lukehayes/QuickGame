@@ -183,11 +183,19 @@ function System.collision(components)
         if col.x <= 2 or col.x + col.w >= 1280 then
             trn.dx  = -trn.dx
             col.triggered = true
+            col.color.r = love.math.random(0.1,1)
+            col.color.g = love.math.random(0.1,1)
+            col.color.b = love.math.random(0.1,1)
+            col.color.a = 0.5
         end
 
         if col.y <= 2 or col.y + col.h >= 720 then
             trn.dy = -trn.dy
             col.triggered = true
+            col.color.r = love.math.random(0.1,1)
+            col.color.g = love.math.random(0.1,1)
+            col.color.b = love.math.random(0.1,1)
+            col.color.a = 0.5
         end
     end
 end
