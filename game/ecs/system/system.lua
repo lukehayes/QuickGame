@@ -12,23 +12,28 @@ function System.move(components, dt)
 
     for i=1,#components.transform do
 
-        local transform = components.transform[i]
-        local col = components.collision[i]
-        local spr = components.sprites[i]
+        local tran  = components.transform[i]
+        local col   = components.collision[i]
+        local spr   = components.sprites[i]
+        local phy   = components.physics[i]
 
-        if transform then
-            --transform.position.x = transform.position.x + transform.dx * transform.speed * dt
-            --transform.position.y = transform.position.y + transform.dy * transform.speed * dt
+        -- If there is a physics component then use that system instead
+        if phy then return end
+
+        if tran then
+
+            tran.position.x = tran.position.x + tran.dx * tran.speed * dt
+            tran.position.y = tran.position.y + tran.dy * tran.speed * dt
 
             -- Move collision
             if col then
                 if col.w == spr.size then
-                    col.x = transform.position.x
-                    col.y = transform.position.y
+                    col.x = tran.position.x
+                    col.y = tran.position.y
 
                 else
-                    col.x = transform.position.x + (spr.size * spr.scale - col.w)  / 2
-                    col.y = transform.position.y + (spr.size * spr.scale - col.h)  / 2
+                    col.x = tran.position.x + (spr.size * spr.scale - col.w)  / 2
+                    col.y = tran.position.y + (spr.size * spr.scale - col.h)  / 2
                 end
 
             end
