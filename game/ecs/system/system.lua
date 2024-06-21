@@ -6,31 +6,48 @@ System.__index = {}
 -- ----------------------------------------------------------------------------
 -- Movement System
 -- ----------------------------------------------------------------------------
+
+
 function System.move(components, dt)
+    for i=1,#components.transform do
+        local trn  = components.transform[i]
+        local phy  = components.physics[i]
+
+        if trn and not phy then
+            trn.position.x = trn.position.x + trn.dx * trn.speed * dt
+            trn.position.y = trn.position.y + trn.dy * trn.speed * dt
+        end
+    end
+end
+
+-- OLD SYSTEM IS NOT USED
+function System.move_old(components, dt)
 
     if components == nil then return end
 
     for i=1,#components.transform do
 
-        local transform = components.transform[i]
-        local col = components.collision[i]
-        local spr = components.sprites[i]
+        local tran = components.transform[i]
+        local col  = components.collision[i]
+        local spr  = components.sprites[i]
+        local phy  = components.physics[i]
 
-        if transform then
-            --transform.position.x = transform.position.x + transform.dx * transform.speed * dt
-            --transform.position.y = transform.position.y + transform.dy * transform.speed * dt
+        -- If there is a physics component then use that system instead
+
+        if tran and not phy then
+
+            tran.position.x = tran.position.x + tran.dx * tran.speed * dt
+            tran.position.y = tran.position.y + tran.dy * tran.speed * dt
 
             -- Move collision
-            if col then
+            if col and spr then
                 if col.w == spr.size then
-                    col.x = transform.position.x
-                    col.y = transform.position.y
-
+                    col.x = tran.position.x
+                    col.y = tran.position.y
                 else
-                    col.x = transform.position.x + (spr.size * spr.scale - col.w)  / 2
-                    col.y = transform.position.y + (spr.size * spr.scale - col.h)  / 2
+                    col.x = tran.position.x + (spr.size * spr.scale - col.w)  / 2
+                    col.y = tran.position.y + (spr.size * spr.scale - col.h)  / 2
                 end
-
             end
         end
     end
@@ -59,6 +76,7 @@ function System.physics(components, dt)
             p.time = p.time + dt
 
             if p.time >= p.reset_time then
+                print("Reset")
 
                 p.time  = love.math.random(0.2,4)
                 p.dir.x = love.math.random(-1,1)
@@ -80,6 +98,7 @@ function System.physics(components, dt)
         end
     end
 end
+
 -- ----------------------------------------------------------------------------
 -- Render System
 -- ----------------------------------------------------------------------------
@@ -92,7 +111,6 @@ function System.render(components, draw_collisions)
         local transform = components.transform[i]
         local col       = components.collision[i]
         local spr       = components.sprites[i]
-        local p         = components.physics[i]
 
         if spr then
             love.graphics.draw(spr.image, transform.position.x, transform.position.y, 0, spr.scale, spr.scale)
@@ -104,6 +122,11 @@ function System.render(components, draw_collisions)
                 transform.w,
                 transform.h
             )
+        end
+
+
+        if col.triggered then
+            transform.position.x = love.math.random(10,300)
         end
 
 
@@ -137,28 +160,34 @@ function System.collision(components)
 
     if components == nil then return end
 
-    for i=1,#components.transform do
+    for i=1,#components.collision do
 
         local col = components.collision[i]
-        local transform = components.transform[i]
-        local p = components.physics[i]
+        local trn = components.transform[i]
+        local spr = components.sprites[i]
 
         col.triggered = false
 
-        -- TODO Add movement if there is a physics component
-        if p then
-
-            if col.x <= 2 or col.x + col.w >= 1280 then
-                transform.dx = -transform.dx
-                p.dir.x = -p.dir.x
-                col.triggered = true
+        -- Move collision box.
+        -- If sprite is present then scale is taken into account.
+        if col and spr then
+            if col.w == spr.size then
+                col.x = trn.position.x
+                col.y = trn.position.y
+            else
+                col.x = trn.position.x + (spr.size * spr.scale - col.w)  / 2
+                col.y = trn.position.y + (spr.size * spr.scale - col.h)  / 2
             end
+        end
 
-            if col.y <= 2 or col.y + col.h >= 720 then
-                transform.dy = -transform.dy
-                p.dir.y = -p.dir.y
-                col.triggered = true
-            end
+        if col.x <= 2 or col.x + col.w >= 1280 then
+            trn.dx  = -trn.dx
+            col.triggered = true
+        end
+
+        if col.y <= 2 or col.y + col.h >= 720 then
+            trn.dy = -trn.dy
+            col.triggered = true
         end
     end
 end
