@@ -300,8 +300,8 @@ end
 -- @return bool True if overlap occured, false otherwise.
 function CoreMath.overlaps(a, b)
 
-  assert(entity_a ~= nil, "First collision argument is nil. It should be of type Entity.")
-  assert(entity_b ~= nil, "Second collision argument is nil. It should be of type Entity.")
+  -- assert(entity_a ~= nil, "First collision argument is nil. It should be of type Entity.")
+  -- assert(entity_b ~= nil, "Second collision argument is nil. It should be of type Entity.")
 
     return a.position.x < b.position.x + b.scale and
            b.position.x < a.position.x + a.scale and
