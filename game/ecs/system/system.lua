@@ -12,7 +12,7 @@ function System.move(components, dt)
         local trn  = components.transform[i]
         local phy  = components.physics[i]
 
-        if trn and not phy then
+        if trn and phy == nil then
             trn.position.x = trn.position.x + trn.dx * trn.speed * dt
             trn.position.y = trn.position.y + trn.dy * trn.speed * dt
         end
@@ -37,30 +37,36 @@ function System.physics(components, dt)
         -- Get the direction of the velocity.
         -- Work out when stopped or very slow.
 
+        print("Physics System")
+
         if p then
 
             p.time = p.time + dt
 
             if p.time >= p.reset_time then
-                print("Reset")
 
                 p.time  = love.math.random(0.2,4)
                 p.dir.x = love.math.random(-1,1)
                 p.dir.y = love.math.random(-1,1)
-                p.speed = love.math.random(2,20)
+                p.speed = love.math.random(10,100)
                 p.acceleration.x = love.math.random(-1,1)
                 p.acceleration.y = love.math.random(-1,1)
                 p.ACC_RATE = love.math.random(0.1, 1.0)
-
-                p.acceleration.x = M.lerp(p.acceleration.x,p.speed, p.ACC_RATE)
-                p.acceleration.y = M.lerp(p.acceleration.y,p.speed, p.ACC_RATE)
             end
 
-            p.velocity.x = M.lerp(p.acceleration.x,0 , p.SLOW_DOWN_RATE)
-            p.velocity.y = M.lerp(p.acceleration.y,0 , p.SLOW_DOWN_RATE)
 
-            t.position.x = t.position.x + p.dir.x * p.acceleration.x * p.speed * dt
-            t.position.y = t.position.y + p.dir.y * p.acceleration.y * p.speed * dt
+            -- TODO Add edge detection for physics bodies.
+
+
+            --p.velocity.x = M.lerp(p.acceleration.x,0 , p.SLOW_DOWN_RATE)
+            --p.velocity.y = M.lerp(p.acceleration.y,0 , p.SLOW_DOWN_RATE)
+            --p.acceleration.x = p.velocity.x * dt
+            --p.acceleration.y = p.velocity.y * dt
+            p.velocity.x = p.velocity.x + p.dir.x + p.acceleration.x * p.speed * dt
+            p.velocity.y = p.velocity.y + p.dir.y + p.acceleration.y * p.speed * dt
+
+            t.position.x = t.position.x + p.velocity.x * dt
+            t.position.y = t.position.y + p.velocity.y * dt
         end
     end
 end
@@ -77,6 +83,7 @@ function System.render(components, draw_collisions)
         local transform = components.transform[i]
         local col       = components.collision[i]
         local spr       = components.sprites[i]
+        local phy       = components.physics[i]
 
         if spr then
             love.graphics.draw(spr.image, transform.position.x, transform.position.y, 0, spr.scale, spr.scale)
@@ -87,6 +94,17 @@ function System.render(components, draw_collisions)
                 transform.position.y,
                 transform.w,
                 transform.h
+            )
+        end
+
+        local ang = math.atan2(phy.velocity.y, phy.velocity.x)
+
+        if phy then
+            love.graphics.line(
+                math.cos(ang) + phy.velocity.x,
+                math.sin(ang) + phy.velocity.y,
+                transform.position.x - transform.w / 2,
+                transform.position.y - transform.h / 2
             )
         end
 

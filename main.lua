@@ -7,25 +7,25 @@ local e = ECS.new()
 local base_size = 1
 
 e:add_transform(1, 400,100)
-e:add_sprite(1, "debug16", 2)
+e:add_sprite(1, "spaceship-blue", 4)
 e:add_collision(1, 48,48)
---e:add_physics(1, 30,30)
+e:add_physics(1, 30,30)
 --
-e:add_transform(2, 300,100)
-e:add_sprite(2, "debug32", 2)
-e:add_physics(2, 30,30)
-e:add_collision(2, 64,64)
+--e:add_transform(2, 300,100)
+--e:add_sprite(2, "debug32", 2)
+--e:add_physics(2, 30,30)
+--e:add_collision(2, 64,64)
 
 
-for i=1,10 do
-    local rx = love.math.random(10,500)
-    local ry = love.math.random(10,500)
+--for i=1,10 do
+    --local rx = love.math.random(10,500)
+    --local ry = love.math.random(10,500)
 
-    e:add_transform(i, rx,ry)
-    e:add_sprite(i, "debug16", 2)
+   --e:add_transform(i, rx,ry)
+    --e:add_sprite(i, "debug16", 2)
     --e:add_physics(i, 30,30)
-    e:add_collision(i, 64,64)
-end
+    --e:add_collision(i, 64,64)
+--end
 
 
 function love.load()
@@ -37,7 +37,7 @@ function love.update(dt)
     if toggle then
         -- Collision and Physics order is important!
         System.collision(e.components)
-        --System.physics(e.components, dt)
+        System.physics(e.components, dt)
         System.move(e.components, dt)
     end
 end
