@@ -7,7 +7,6 @@ System.__index = {}
 -- Movement System
 -- ----------------------------------------------------------------------------
 
-
 function System.move(components, dt)
     for i=1,#components.transform do
         local trn  = components.transform[i]
@@ -16,39 +15,6 @@ function System.move(components, dt)
         if trn and not phy then
             trn.position.x = trn.position.x + trn.dx * trn.speed * dt
             trn.position.y = trn.position.y + trn.dy * trn.speed * dt
-        end
-    end
-end
-
--- OLD SYSTEM IS NOT USED
-function System.move_old(components, dt)
-
-    if components == nil then return end
-
-    for i=1,#components.transform do
-
-        local tran = components.transform[i]
-        local col  = components.collision[i]
-        local spr  = components.sprites[i]
-        local phy  = components.physics[i]
-
-        -- If there is a physics component then use that system instead
-
-        if tran and not phy then
-
-            tran.position.x = tran.position.x + tran.dx * tran.speed * dt
-            tran.position.y = tran.position.y + tran.dy * tran.speed * dt
-
-            -- Move collision
-            if col and spr then
-                if col.w == spr.size then
-                    col.x = tran.position.x
-                    col.y = tran.position.y
-                else
-                    col.x = tran.position.x + (spr.size * spr.scale - col.w)  / 2
-                    col.y = tran.position.y + (spr.size * spr.scale - col.h)  / 2
-                end
-            end
         end
     end
 end
@@ -125,11 +91,6 @@ function System.render(components, draw_collisions)
         end
 
 
-        if col.triggered then
-            transform.position.x = love.math.random(10,300)
-        end
-
-
         -- Draw collision shapes on top of entity.
         if col and draw_collisions then
             love.graphics.setColor(
@@ -180,22 +141,15 @@ function System.collision(components)
             end
         end
 
+        -- Detect a collision width the edge of the screen.
         if col.x <= 2 or col.x + col.w >= 1280 then
             trn.dx  = -trn.dx
             col.triggered = true
-            col.color.r = love.math.random(0.1,1)
-            col.color.g = love.math.random(0.1,1)
-            col.color.b = love.math.random(0.1,1)
-            col.color.a = 0.5
         end
 
         if col.y <= 2 or col.y + col.h >= 720 then
             trn.dy = -trn.dy
             col.triggered = true
-            col.color.r = love.math.random(0.1,1)
-            col.color.g = love.math.random(0.1,1)
-            col.color.b = love.math.random(0.1,1)
-            col.color.a = 0.5
         end
     end
 end
