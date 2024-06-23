@@ -1,4 +1,5 @@
 local Vec2 = require('core.math.vec2')
+local M = require("core.math.math")
 
 ECS = {}
 ECS.__index = ECS
@@ -110,6 +111,9 @@ function ECS:add_physics(id, xv, yv)
         angle          = 0,
         show_velocity  = false
    }
+
+    local norm = M.norm(physics.velocity)
+    physics.angle = math.atan2(norm.y, norm.x)
 
    table.insert(self.components.physics, id, physics)
 
