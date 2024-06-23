@@ -37,8 +37,6 @@ function System.physics(components, dt)
         -- Get the direction of the velocity.
         -- Work out when stopped or very slow.
 
-        print("Physics System")
-
         if p then
 
             p.time = p.time + dt
@@ -46,24 +44,21 @@ function System.physics(components, dt)
             if p.time >= p.reset_time then
 
                 p.time  = love.math.random(0.2,4)
-                p.dir.x = love.math.random(-1,1)
-                p.dir.y = love.math.random(-1,1)
-                p.speed = love.math.random(10,100)
-                p.acceleration.x = love.math.random(-1,1)
-                p.acceleration.y = love.math.random(-1,1)
-                p.ACC_RATE = love.math.random(0.1, 1.0)
+                --p.dir.x = love.math.random(-1,1)
+                --p.dir.y = love.math.random(-1,1)
+                --p.speed = love.math.random(10,100)
+                p.acceleration.x = love.math.random(-30,30)
+                p.acceleration.y = love.math.random(-30,30)
             end
+
+            p.velocity.x = p.velocity.x + p.acceleration.x * dt
+            p.velocity.y = p.velocity.y + p.acceleration.y * dt
+
+            local norm = M.norm(p.velocity)
+            p.angle = math.atan2(norm.y, norm.x)
 
 
             -- TODO Add edge detection for physics bodies.
-
-
-            --p.velocity.x = M.lerp(p.acceleration.x,0 , p.SLOW_DOWN_RATE)
-            --p.velocity.y = M.lerp(p.acceleration.y,0 , p.SLOW_DOWN_RATE)
-            --p.acceleration.x = p.velocity.x * dt
-            --p.acceleration.y = p.velocity.y * dt
-            p.velocity.x = p.velocity.x + p.dir.x + p.acceleration.x * p.speed * dt
-            p.velocity.y = p.velocity.y + p.dir.y + p.acceleration.y * p.speed * dt
 
             t.position.x = t.position.x + p.velocity.x * dt
             t.position.y = t.position.y + p.velocity.y * dt
@@ -86,7 +81,7 @@ function System.render(components, draw_collisions)
         local phy       = components.physics[i]
 
         if spr then
-            love.graphics.draw(spr.image, transform.position.x, transform.position.y, 0, spr.scale, spr.scale)
+            love.graphics.draw(spr.image, transform.position.x, transform.position.y, phy.angle, spr.scale, spr.scale)
         else
             love.graphics.rectangle(
                 'fill',
@@ -97,14 +92,14 @@ function System.render(components, draw_collisions)
             )
         end
 
-        local ang = math.atan2(phy.velocity.y, phy.velocity.x)
 
-        if phy then
+        -- Render using the physics component data.
+        if phy and phy.show_velocity then
             love.graphics.line(
-                math.cos(ang) + phy.velocity.x,
-                math.sin(ang) + phy.velocity.y,
-                transform.position.x - transform.w / 2,
-                transform.position.y - transform.h / 2
+                transform.position.x + transform.w / 2,
+                transform.position.y + transform.h / 2,
+                30 * math.cos(phy.angle) + transform.position.x + transform.w,
+                30 * math.sin(phy.angle) + transform.position.y + transform.h
             )
         end
 
