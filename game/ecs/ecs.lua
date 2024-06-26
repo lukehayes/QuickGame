@@ -18,6 +18,7 @@ function ECS.new()
     obj.components.physics   = {}
     obj.components.collision = {}
     obj.components.sprites   = {}
+    obj.components.timers    = {}
 
     return obj
 end
@@ -109,7 +110,7 @@ function ECS:add_physics(id, xv, yv)
         reset_time     = 3,
         time           = 0,
         angle          = 0,
-        show_velocity  = false
+        show_velocity  = true
    }
 
     local norm = M.norm(physics.velocity)
@@ -203,6 +204,20 @@ function ECS:add_sprite(id, image, scale)
     table.insert(self.components.sprites, id, sprite)
 end
 
+function ECS:add_timer(id, time, repeats)
+
+    local timer  = {
+        finished = false,
+        oneshot  = oneshot or false,
+        elapsed  = 0,
+        time     = time,
+        timeout  = false,
+        current_repeats  = 0,
+        repeats  = repeats
+    }
+
+    table.insert(self.components.timers, id, timer)
+end
 
 
 

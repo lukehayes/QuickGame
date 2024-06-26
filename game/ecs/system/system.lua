@@ -50,13 +50,12 @@ function System.physics(components, dt)
                 p.acceleration.x = love.math.random(-30,30)
                 p.acceleration.y = love.math.random(-30,30)
             end
-
+            
             p.velocity.x = p.velocity.x + p.acceleration.x * dt
             p.velocity.y = p.velocity.y + p.acceleration.y * dt
 
             local norm = M.norm(p.velocity)
             p.angle = math.atan2(norm.y, norm.x)
-
 
             -- TODO Add edge detection for physics bodies.
 
@@ -194,6 +193,41 @@ function System.collisionWithEntities(components)
                 end
             end
         end
+    end
+end
+
+
+function System.timer(components, dt)
+
+    for i=1,#components.timers do
+        local timer = components.timers[i]
+
+        if timer then
+            timer.elapsed = timer.elapsed + dt
+
+            if timer.elapsed >= timer.time then
+                timer.finished = true
+            end
+
+            local rep = timer.current_repeats ~= timer.repeats
+            print(rep, timer.current_repeats, timer.repeats)
+
+            if timer.finished and timer.timeout ~= true then
+
+                local tr = components.transform[i]
+                tr.position.x = love.math.random(10,500)
+                tr.position.y = love.math.random(10,500)
+
+                timer.timeout = false
+
+                if timer.current_repeats ~= timer.repeats then
+                    timer.current_repeats = timer.current_repeats + 1
+                    timer.timeout = true
+                end
+            end
+        end
+
+
     end
 end
 
