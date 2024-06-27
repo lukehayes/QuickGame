@@ -204,7 +204,7 @@ function ECS:add_sprite(id, image, scale)
     table.insert(self.components.sprites, id, sprite)
 end
 
-function ECS:add_timer(id, time, repeats)
+function ECS:add_timer(id, table_pos, time, repeats)
 
     local timer  = {
         finished = false,
@@ -215,6 +215,16 @@ function ECS:add_timer(id, time, repeats)
         current_repeats  = 0,
         repeats  = repeats
     }
+
+    local timers = self.components.timers
+
+    print("Timers", timers[id])
+
+    if timers[id] then
+        print("Entity",id, "has a timer")
+    else
+        print("No timers")
+    end
 
     table.insert(self.components.timers, id, timer)
 end

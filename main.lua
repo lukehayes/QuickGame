@@ -10,7 +10,8 @@ e:add_transform(1, 400,100)
 --e:add_sprite(1, "spaceship-blue", 4)
 e:add_collision(1, 48,48)
 --e:add_physics(1, 30, 30)
-e:add_timer(1, 2, false)
+e:add_timer(1,1, 2, false)
+e:add_timer(1,2, 2, false)
 
 --
 --e:add_transform(2, 300,100)
