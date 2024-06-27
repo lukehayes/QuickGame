@@ -200,34 +200,38 @@ end
 function System.timer(components, dt)
 
     for i=1,#components.timers do
-        local timer = components.timers[i]
+        local timers = components.timers[i]
 
-        if timer then
-            timer.elapsed = timer.elapsed + dt
+        for j=1,#timers do
+            local timer = timers[j]
 
-            if timer.elapsed >= timer.time then
-                timer.finished = true
-            end
+            if timer then
+                timer.elapsed = timer.elapsed + dt
 
-            local rep = timer.current_repeats ~= timer.repeats
-            print(rep, timer.current_repeats, timer.repeats)
+                if timer.elapsed >= timer.time then
+                    timer.finished = true
+                    timer.elapsed = 0
+                end
 
-            if timer.finished and timer.timeout ~= true then
+                print("Current Repeats: ", timer.current_repeats, " Actual repeats:", timer.repeats)
+                print(timer.elapsed)
 
-                local tr = components.transform[i]
-                tr.position.x = love.math.random(10,500)
-                tr.position.y = love.math.random(10,500)
+                if timer.finished and timer.timeout ~= true then
 
-                timer.timeout = false
+                    if timer.callback then
+                        timer.callback()
+                        timer.timeout = true
+                    end
 
-                if timer.current_repeats ~= timer.repeats then
-                    timer.current_repeats = timer.current_repeats + 1
-                    timer.timeout = true
+
+                    if timer.current_repeats ~= timer.repeats then
+                        timer.current_repeats = timer.current_repeats + 1
+                        --timer.timeout = true
+                        --timer.finished = false
+                    end
                 end
             end
         end
-
-
     end
 end
 
