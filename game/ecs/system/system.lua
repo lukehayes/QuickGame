@@ -82,6 +82,14 @@ function System.render(components, draw_collisions)
         if spr then
             love.graphics.draw(spr.image, transform.position.x, transform.position.y, phy.angle, spr.scale, spr.scale)
         else
+
+            love.graphics.setColor(
+                transform.color.r,
+                transform.color.g,
+                transform.color.b,
+                transform.color.a
+            )
+
             love.graphics.rectangle(
                 'fill',
                 transform.position.x,
@@ -89,6 +97,7 @@ function System.render(components, draw_collisions)
                 transform.w,
                 transform.h
             )
+            love.graphics.setColor(1,1,1,1)
         end
 
 
@@ -121,8 +130,6 @@ function System.render(components, draw_collisions)
             )
             love.graphics.setColor(1,1,1,1)
         end
-        
-
     end
 end
 
@@ -202,6 +209,9 @@ function System.timer(components, dt)
     for i=1,#components.timers do
         local timers = components.timers[i]
         local transform = components.transform[i]
+
+        --if timers == nil then break end
+
 
         for j=1,#timers do
             local timer = timers[j]
