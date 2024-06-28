@@ -87,7 +87,7 @@ function ECS:add_transform(id, x, y, w, h)
         dx    = love.math.random(-1,1),
         dy    = love.math.random(-1,1),
         name  = "transform",
-        color = {r=255, g = 0, b = 0, a = 0}
+        color = {r=0.5, g = 0.5, b = 0.6, a = 1}
     }
 
     table.insert(self.components.transform, id, transform)
