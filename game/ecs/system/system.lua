@@ -206,28 +206,31 @@ function System.timer(components, dt)
             local timer = timers[j]
 
             if timer then
+
+                -- If the timer has finished, move on.
+                if timer.finished then
+                    break
+                end
+
                 timer.elapsed = timer.elapsed + dt
 
                 if timer.elapsed >= timer.time then
-                    timer.finished = true
+                    timer.timeout = true
                     timer.elapsed = 0
                 end
 
-                print("Current Repeats: ", timer.current_repeats, " Actual repeats:", timer.repeats)
-                print(timer.elapsed)
+                if timer.timeout then
+                    timer.callback()
+                    timer.timeout = false
 
-                if timer.finished and timer.timeout ~= true then
-
-                    if timer.callback then
-                        timer.callback()
-                        timer.timeout = true
-                    end
-
-
-                    if timer.current_repeats ~= timer.repeats then
+                    -- If the timer should repeat, increment its counter.
+                    if timer.current_repeats < timer.repeats then
                         timer.current_repeats = timer.current_repeats + 1
-                        --timer.timeout = true
-                        --timer.finished = false
+                        print("-------", timer.current_repeats)
+                    else
+                        --There are no more repeats, so the timer has finished.
+                        timer.finished = true
+                        print("Timer ",j ,"Finished")
                     end
                 end
             end
