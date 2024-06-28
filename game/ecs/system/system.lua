@@ -201,6 +201,7 @@ function System.timer(components, dt)
 
     for i=1,#components.timers do
         local timers = components.timers[i]
+        local transform = components.transform[i]
 
         for j=1,#timers do
             local timer = timers[j]
@@ -220,17 +221,15 @@ function System.timer(components, dt)
                 end
 
                 if timer.timeout then
-                    timer.callback()
+                    timer.callback(transform)
                     timer.timeout = false
 
                     -- If the timer should repeat, increment its counter.
                     if timer.current_repeats < timer.repeats then
                         timer.current_repeats = timer.current_repeats + 1
-                        print("-------", timer.current_repeats)
                     else
                         --There are no more repeats, so the timer has finished.
                         timer.finished = true
-                        print("Timer ",j ,"Finished")
                     end
                 end
             end

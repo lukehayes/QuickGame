@@ -204,7 +204,21 @@ function ECS:add_sprite(id, image, scale)
     table.insert(self.components.sprites, id, sprite)
 end
 
-function ECS:add_timer(id, table_pos, time, repeats, callback)
+-----------------------------------------------------------
+-- Add Timer
+--
+-- Add a timer to the entity. Each entity has their own
+-- table of timers so can have any amount.
+--
+-- @tparam number id           The id of the entity.
+-- @tparam number timer_id     The id of the specific timer.
+-- @tparam number time         The runtime of the timer.
+-- @tparam number repeats      The number of repeats the timer has.
+-- @tparam function callback   The function to run on timeout.
+-- @tparam string name         The name of the timer for identification.
+--
+-- @treturn
+function ECS:add_timer(id, timer_id, time, repeats, callback, name)
 
     local timer  = {
         finished = false,
@@ -214,17 +228,18 @@ function ECS:add_timer(id, table_pos, time, repeats, callback)
         timeout  = false,
         current_repeats  = 0,
         repeats  = repeats,
-        callback = callback
+        callback = callback,
+        name     = name or "Timer"
     }
 
     local timers = self.components.timers
 
     if timers[id] then
-        table.insert(self.components.timers[id], table_pos, timer)
+        table.insert(self.components.timers[id], timer_id, timer)
     else
         local entity_timers = {}
 
-        table.insert(entity_timers, table_pos, timer)
+        table.insert(entity_timers, timer_id, timer)
         table.insert(self.components.timers, id, entity_timers)
     end
 end
