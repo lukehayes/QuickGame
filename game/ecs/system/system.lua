@@ -50,7 +50,7 @@ function System.physics(components, dt)
                 p.acceleration.x = love.math.random(-30,30)
                 p.acceleration.y = love.math.random(-30,30)
             end
-            
+
             p.velocity.x = p.velocity.x + p.acceleration.x * dt
             p.velocity.y = p.velocity.y + p.acceleration.y * dt
 
@@ -210,40 +210,40 @@ function System.timer(components, dt)
         local timers = components.timers[i]
         local transform = components.transform[i]
 
-        --if timers == nil then break end
+        if timers ~= nil then
+            for j=1,#timers do
+                local timer = timers[j]
 
+                if timer then
 
-        for j=1,#timers do
-            local timer = timers[j]
+                    -- If the timer has finished, move on.
+                    if timer.finished then
+                        break
+                    end
 
-            if timer then
+                    timer.elapsed = timer.elapsed + dt
 
-                -- If the timer has finished, move on.
-                if timer.finished then
-                    break
-                end
+                    if timer.elapsed >= timer.time then
+                        timer.timeout = true
+                        timer.elapsed = 0
+                    end
 
-                timer.elapsed = timer.elapsed + dt
+                    if timer.timeout then
+                        timer.callback(transform)
+                        timer.timeout = false
 
-                if timer.elapsed >= timer.time then
-                    timer.timeout = true
-                    timer.elapsed = 0
-                end
-
-                if timer.timeout then
-                    timer.callback(transform)
-                    timer.timeout = false
-
-                    -- If the timer should repeat, increment its counter.
-                    if timer.current_repeats < timer.repeats then
-                        timer.current_repeats = timer.current_repeats + 1
-                    else
-                        --There are no more repeats, so the timer has finished.
-                        timer.finished = true
+                        -- If the timer should repeat, increment its counter.
+                        if timer.current_repeats < timer.repeats then
+                            timer.current_repeats = timer.current_repeats + 1
+                        else
+                            --There are no more repeats, so the timer has finished.
+                            timer.finished = true
+                        end
                     end
                 end
             end
         end
+
     end
 end
 
