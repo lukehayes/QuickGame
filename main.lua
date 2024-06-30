@@ -16,7 +16,9 @@ function love.draw()
 end
 
 function love.load()
-    p = Player.new(100,100, 10)
+    p = Player.new(100,100, 20)
+    cursor = love.mouse.newCursor("assets/images/cursor-48px.png", 0, 0)
+    love.mouse.setCursor(cursor)
 end
 
 function love.update(dt)
@@ -31,12 +33,10 @@ function love.update(dt)
     end
 
     if Game.mob_can_generate then
-        print("Mob")
         MobUtil.mob_generate(p)
         Game.mob_can_generate = false
     end
 
-    
     PlayerUtil.player_shoot(p,dt)
 
     for _,b in pairs(Game.player_shots) do
@@ -73,6 +73,10 @@ end
 function love.keypressed(key, scancode, isrepeat)
    if key == "escape" then
       love.event.quit()
+   end
+
+   if key == "p" then
+       Game.player_fire_rate = 0.1
    end
 
    --if key == "space" then
