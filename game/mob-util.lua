@@ -14,12 +14,11 @@ function MobUtil.mob_generate(p)
         p
     )
 
-    print("Gen: ", mob.name)
-
     e.name   = mob.name
     e.health = mob.health
     e.speed  = mob.speed
     e.color  = mob.color
+    e.scale  = mob.scale
 
     game_add_mob(Game, e)
 end
