@@ -26,7 +26,7 @@ function love.update(dt)
 
     Player.update(p, dt)
     
-    PlayerUtil.player_shoot(p)
+    PlayerUtil.player_shoot(p,dt)
 
     for _,b in pairs(Game.player_shots) do
         b:update(dt)
