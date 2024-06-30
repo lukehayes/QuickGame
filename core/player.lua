@@ -26,7 +26,7 @@ function Player.new(x,y, scale)
     p.direction      = V2:new(0,0)
 
     p.sprite = SF.spaceship
-    p.blur = SF.spaceship_blur
+    p.blur   = SF.spaceship_blur
 
     return p
 end
@@ -75,7 +75,7 @@ end
 -- @param Player p    The player.
 function Player.show_velocity(p)
 
-    local N = p.acceleration:length() / 10
+    local N = p.acceleration:length() / 20
     p.direction.x = -p.direction.x
     p.direction.y = -p.direction.y
 
