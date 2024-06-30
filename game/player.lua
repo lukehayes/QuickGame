@@ -13,8 +13,6 @@ function PlayerUtil.player_shoot(p)
         )
 
         game_add_player_bullet(Game, b)
-
-        print("Player Shoot", p.scale)
     end
 end
 

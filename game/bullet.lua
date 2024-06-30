@@ -9,24 +9,23 @@ function Bullet.new(x,y, target)
 
     bullet.color = {r=0.8, g = 0.0, b = 0, a = 1}
     bullet.scale = 5
-    bullet.speed = 500
+    bullet.speed = 100
 
     local mx,my = love.mouse.getPosition()
-    bullet.target = Vec2:new(x,y)
+    bullet.target = Vec2:new(mx,my)
+
+    bullet.angle = math.atan2(
+        bullet.target.y - bullet.position.y,
+        bullet.target.x - bullet.position.x
+    )
 
     return bullet
 end
 
 function Bullet:update(dt)
-    local angle = math.atan2(
-        self.target.y - self.position.y,
-        self.target.x - self.position.x
-    )
 
-    print("Angle", angle)
-
-    self.position.x = self.position.x + math.cos(angle) * self.speed * dt
-    self.position.y = self.position.y + math.sin(angle) * self.speed * dt
+    self.position.x = self.position.x + math.cos(self.angle) * self.speed * dt
+    self.position.y = self.position.y + math.sin(self.angle) * self.speed * dt
 end
 
 
