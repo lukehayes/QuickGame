@@ -5,9 +5,7 @@ local System = require('core.ecs.system.system')
 local Player = require('core.player')
 local PlayerUtil = require('game.player')
 local Game = require('game.game')
-
-print(Game)
-print(Game)
+local MobUtil = require('game.mob-util')
 
 
 local delta = 0
@@ -25,11 +23,28 @@ function love.update(dt)
     delta = dt
 
     Player.update(p, dt)
+    Game.mob_gen_counter = Game.mob_gen_counter + dt
+
+    if Game.mob_gen_counter >= Game.mob_gen_rate then
+        Game.mob_can_generate = true
+        Game.mob_gen_counter = 0
+    end
+
+    if Game.mob_can_generate then
+        print("Mob")
+        MobUtil.mob_generate(p)
+        Game.mob_can_generate = false
+    end
+
     
     PlayerUtil.player_shoot(p,dt)
 
     for _,b in pairs(Game.player_shots) do
         b:update(dt)
+    end
+
+    for _,m in pairs(Game.mobs) do
+        m:update(dt)
     end
 
 end
@@ -39,8 +54,12 @@ function love.draw()
     R:clear(Color.BLACK)
     R:draw(p)
 
-    for k,v in pairs(Game.player_shots) do
-        R:draw(v)
+    for k,b in pairs(Game.player_shots) do
+        R:draw(b)
+    end
+
+    for k,m in pairs(Game.mobs) do
+        R:draw(m)
     end
 
     -- ECS
