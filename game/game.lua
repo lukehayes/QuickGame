@@ -1,4 +1,8 @@
 local Game = {
+
+    width = 1280,
+    height = 720,
+
     player_shots = {},
     mobs         = {},
 
