@@ -9,7 +9,7 @@ function Bullet.new(x,y, target)
 
     bullet.color = {r=0.8, g = 0.0, b = 0, a = 1}
     bullet.scale = 5
-    bullet.speed = 100
+    bullet.speed = 300
 
     local mx,my = love.mouse.getPosition()
     bullet.target = Vec2:new(mx,my)
