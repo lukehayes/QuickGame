@@ -1,6 +1,6 @@
-local R      = require('core.gfx.render')
-local Color  = require('core.gfx.color')
-local Game = require('game.game')
+local R          = require('core.gfx.render')
+local Color      = require('core.gfx.color')
+local Game       = require('game.game')
 local DebugLevel = require('game.levels.debug-level')
 
 local dblv = DebugLevel.new()
