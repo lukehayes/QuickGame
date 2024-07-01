@@ -1,11 +1,10 @@
 -----------------------------------------------------------
--- Game.
--- Acts as a single location for helpful information that
--- is useful globally.
+-- Engine.
 --
--- @classmod core.game
-local Game = {}
-
+-- Table contains system information the game might use.
+--
+-- @classmod core.engine
+local Engine = {}
 
 -----------------------------------------------------------
 -- @field Playing     The playing state.
@@ -25,6 +24,6 @@ Game.states = {
 --
 -- @treturn number    The width of the game.
 -- @treturn number    The height of the game.
-Game.width, Game.height = love.window.getMode()
+Engine.width, Engine.height = love.window.getMode()
 
-return Game
+return Engine
