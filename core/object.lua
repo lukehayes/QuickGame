@@ -21,16 +21,12 @@ function Object.new(x,y)
 
     obj.name     = "Object"
     obj.position = V2:new(x,y)
-    obj.scale    = 10
-    obj.color    = {r=1, g = 0, b = 1, a = 1}
-    obj.style    = 'fill'
-    obj.speed    = 200
 
     return obj
 end
 
 function Object:update(dt)
-    self.position.x = self.position.x + 1 * self.speed * dt
+    print("Object:Update Abstract! Re-implement")
 end
 
 -----------------------------------------------------------

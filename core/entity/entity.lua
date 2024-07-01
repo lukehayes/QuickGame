@@ -24,12 +24,14 @@ function Entity.new(x,y)
     obj.name  = "Entity"
     obj.color = {r=0.5, g = 0.0, b = 0, a = 1}
     obj.scale = 30
+    obj.style = 'fill'
+    obj.speed = 200
 
     return obj
 end
 
 function Entity:update(dt)
-    Object.update(self, dt)
+    print("Entity Update")
 end
 
 -----------------------------------------------------------
