@@ -9,8 +9,7 @@ function love.draw()
 end
 
 function love.load()
-    --cursor = love.mouse.newCursor("assets/images/cursor-48px.png", 0, 0)
-    --love.mouse.setCursor(cursor)
+    love.mouse.setCursor(Game.cursor)
 end
 
 function love.update(dt)

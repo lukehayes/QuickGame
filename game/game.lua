@@ -1,9 +1,15 @@
 local Game = {
 
+    -- Engine specifc properties.
+    --
     delta = 99999999,
     width = 1280,
     height = 720,
 
+    cursor = love.mouse.newCursor("assets/images/cursor.png", 0, 0),
+
+    -- Game specifc properties.
+    --
     player_shots = {},
     mobs         = {},
 
