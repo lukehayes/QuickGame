@@ -9,4 +9,8 @@ SpriteFactory.spaceship:setFilter('nearest', 'nearest')
 SpriteFactory.pico_man = love.graphics.newImage('assets/images/Pico8-Man.png')
 SpriteFactory.pico_man:setFilter('nearest', 'nearest')
 
+-- The mouse cursor.
+SpriteFactory.cursor = love.graphics.newImage('assets/images/cursor-48px.png')
+SpriteFactory.cursor:setFilter('nearest', 'nearest')
+
 return SpriteFactory
