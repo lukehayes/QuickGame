@@ -1,6 +1,7 @@
 local Scene      = require('core.scene.scene')
 local R          = require('core.gfx.render')
 local G          = require('game.game')
+local E          = require('core.engine')
 local Player     = require('core.player')
 local PlayerUtil = require('game.player')
 local MobUtil    = require('game.mob-util')
@@ -12,14 +13,13 @@ function DebugLevel.new()
     local scene = setmetatable(Scene.new(), DebugLevel)
     scene.name = "DebugLevel"
 
-    scene.p = Player.new(100,100, 10)
+    scene.p = Player.new(E.width / 2, E.height / 2, 10)
 
     return scene
 end
 
 function DebugLevel:update(dt)
-    print("Game Deltax", G.delta)
-    Player.update(self.p, dt)
+
 
     G.mob_gen_counter = G.mob_gen_counter + dt
 
@@ -40,10 +40,15 @@ function DebugLevel:update(dt)
     for _,m in pairs(G.mobs) do
         m:update(dt)
     end
+
+    Player.update(self.p, dt)
+
+    PlayerUtil.player_shoot(self.p, dt)
 end
 
 function DebugLevel:render()
-    --R:draw(self.p)
+
+    R:draw(self.p)
 
     for _,b in pairs(G.player_shots) do
         R:draw(b)

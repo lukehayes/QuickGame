@@ -12,12 +12,12 @@ local Engine = {}
 -- @field PlayerWin   The player win state.
 -- @field PlayerLose  The player lose state.
 -- @table states
-Game.states = {
-    "Playing",
-    "Paused",
-    "PlayerWin",
-    "PlayerLose"
-}
+--Game.states = {
+    --"Playing",
+    --"Paused",
+    --"PlayerWin",
+    --"PlayerLose"
+--}
 
 -----------------------------------------------------------
 -- Game width and height values
