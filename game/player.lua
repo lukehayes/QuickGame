@@ -3,17 +3,16 @@ local Bullet = require('game.bullet')
 
 local PlayerUtil = {}
 
-
 function PlayerUtil.player_shoot(p,dt)
 
     Game.player_fire_counter = Game.player_fire_counter + dt
 
     if Game.player_fire_counter >= Game.player_fire_rate then
-        Game.player_can_shoot = true
+        Game.player_can_shoot    = true
         Game.player_fire_counter = 0
     end
 
-    if love.keyboard.isDown('space') then
+    if love.keyboard.isDown('space') or love.mouse.isDown(1) then
 
         if Game.player_can_shoot then
             local b = Bullet.new(
