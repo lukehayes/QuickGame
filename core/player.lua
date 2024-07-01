@@ -18,7 +18,7 @@ function Player.new(x,y, scale)
     ----------------
     --  MOVEMENT  --
     ----------------
-    p.speed          = 550
+    p.speed          = 250
     p.velocity       = V2:new(0,0)
     p.acceleration   = V2:new(0,0)
     p.ACC_RATE       = 0.07
