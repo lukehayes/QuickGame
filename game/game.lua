@@ -1,5 +1,6 @@
 local Game = {
 
+    delta = 99999999,
     width = 1280,
     height = 720,
 
