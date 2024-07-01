@@ -2,13 +2,17 @@ local Game = {
 
     -- Engine specifc properties.
     --
+    version = 0.01,
+
+    -- Game specifc properties.
+    --
     delta = 99999999,
     width = 1280,
     height = 720,
 
     cursor = love.mouse.newCursor("assets/images/cursor.png", 0, 0),
 
-    -- Game specifc properties.
+    -- Gameplay specifc properties.
     --
     player_shots = {},
     mobs         = {},
@@ -21,6 +25,11 @@ local Game = {
     mob_gen_rate     = 1,
     mob_can_generate = false
 }
+
+function game_init(g)
+    print("Initiializing Game:", g)
+end
+
 
 function game_add_player_bullet(g, b)
     table.insert(g.player_shots, b)
