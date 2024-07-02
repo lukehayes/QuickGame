@@ -1,9 +1,5 @@
 local Game = {
 
-    -- Engine specifc properties.
-    --
-    version = 0.01,
-
     -- Game specifc properties.
     --
     delta = 99999999,
