@@ -26,6 +26,8 @@ local Engine = {}
 -- @treturn number    The height of the game.
 Engine.width, Engine.height = love.window.getMode()
 
+-----------------------------------------------------------
+-- Current Engine Version
 Engine.version = 0.01
 
 return Engine

@@ -2,8 +2,10 @@ local R          = require('core.gfx.render')
 local Color      = require('core.gfx.color')
 local Game       = require('game.game')
 local DebugLevel = require('game.levels.debug-level')
+local Player     = require('core.player')
 
 local dblv = DebugLevel.new()
+dblv:add(Player.new(10,10,10))
 
 function love.draw()
 end

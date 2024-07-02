@@ -68,6 +68,8 @@ function Player.input(p, dt)
 
 end
 
+function Player:render()
+end
 
 --- Show a line representing velocity ontop of the player
 -- (In the top left corner)

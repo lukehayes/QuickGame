@@ -11,11 +11,17 @@ DebugLevel.__index = DebugLevel
 
 function DebugLevel.new()
     local scene = setmetatable(Scene.new(), DebugLevel)
-    scene.name = "DebugLevel"
+    scene.name  = "DebugLevel"
 
-    scene.p = Player.new(E.width / 2, E.height / 2, 10)
+    scene.mobs = {}
+    scene.player_shots = {}
 
     return scene
+end
+
+function DebugLevel:add(e)
+    print("Scene Instance", Scene)
+    --Scene:add(e)
 end
 
 function DebugLevel:update(dt)
@@ -29,34 +35,37 @@ function DebugLevel:update(dt)
     end
 
     if G.mob_can_generate then
-        MobUtil.mob_generate(self.p)
+        MobUtil.mob_generate(self.entities[1])
         G.mob_can_generate = false
     end
 
-    for _,b in pairs(G.player_shots) do
-        b:update(dt)
-    end
+    --for _,b in pairs(G.player_shots) do
+        --b:update(dt)
+    --end
 
-    for _,m in pairs(G.mobs) do
-        m:update(dt)
-    end
+    --for _,m in pairs(G.mobs) do
+        --m:update(dt)
+    --end
 
-    Player.update(self.p, dt)
+    --Player.update(self.p, dt)
 
-    PlayerUtil.player_shoot(self.p, dt)
+    --PlayerUtil.player_shoot(self.p, dt)
 end
 
 function DebugLevel:render()
 
-    R:draw(self.p)
+    --R:draw(self.p)
+   
+    Scene.render(self)
 
-    for _,b in pairs(G.player_shots) do
-        R:draw(b)
-    end
 
-    for _,m in pairs(G.mobs) do
-        R:draw(m)
-    end
+    --for _,b in pairs(G.player_shots) do
+        --R:draw(b)
+    --end
+
+    --for _,m in pairs(G.mobs) do
+        --R:draw(m)
+    --end
 end
 
 return DebugLevel
