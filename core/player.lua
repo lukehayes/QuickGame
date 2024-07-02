@@ -1,15 +1,15 @@
 
 local M       = require('core.math.math')
+local R       = require('core.gfx.render')
 local Color   = require 'core.gfx.color'
 local V2      = require('core.math.vec2')
 local Factory = require('core.factory.object-factory')
-local SF      = require('core.factory.sprite-factory')
 
 local Player = {}
 
 function Player.new(x,y, scale)
 
-    local p = setmetatable({}, {__index = Factory:initObject(x,y)})
+    local p = setmetatable({}, {__index = Factory:initEntity(x,y)})
 
     p.name  = 'Player'
     p.color = Color.DEBUG
@@ -25,9 +25,6 @@ function Player.new(x,y, scale)
     p.SLOW_DOWN_RATE = 0.01
     p.direction      = V2:new(0,0)
 
-    p.sprite = SF.spaceship
-    p.blur   = SF.spaceship_blur
-
     return p
 end
 
@@ -37,7 +34,27 @@ function Player.update(p, dt)
     p.direction = M.norm(p.acceleration)
 end
 
-function Player.input(p, dt)
+
+function Player:render()
+    R:draw(p)
+end
+
+
+---------------------------------------------------------------------------------
+--                               Static Methods                                --
+---------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------
+-- Player control
+-- 
+-- This function can be used to attach simple player controls to an entity.
+--
+-- @tparam Player p   The player object.
+-- @tparam float  dt  Delta time.
+--
+-- @classmod core.engine
+-- @classmod game.player
+function Player.set_control(p, dt)
 
     if love.keyboard.isDown('d') then
         p.acceleration.x = M.lerp(p.acceleration.x,p.speed, p.ACC_RATE)
@@ -65,11 +82,8 @@ function Player.input(p, dt)
 
     p.position.x = p.position.x + p.acceleration.x * dt
     p.position.y = p.position.y + p.acceleration.y * dt
-
 end
 
-function Player:render()
-end
 
 --- Show a line representing velocity ontop of the player
 -- (In the top left corner)

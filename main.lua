@@ -3,9 +3,12 @@ local Color      = require('core.gfx.color')
 local Game       = require('game.game')
 local DebugLevel = require('game.levels.debug-level')
 local Player     = require('core.player')
+local Entity     = require('core.entity.entity')
 
 local dblv = DebugLevel.new()
 dblv:add(Player.new(10,10,10))
+
+local p = Player.new(100,100, 100)
 
 function love.draw()
 end
@@ -17,13 +20,17 @@ end
 function love.update(dt)
     Game.delta = dt
 
-    dblv:update(dt)
+    Player.set_control(p,dt)
+
+    --dblv:update(dt)
 end
 
 function love.draw()
 
     --R:clear(Color.BLACK)
-    dblv:render()
+    --dblv:render()
+
+    p:render()
 
     -- ECS
     --System.render(e.components, true)
