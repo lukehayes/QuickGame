@@ -3,10 +3,8 @@ local Color      = require('core.gfx.color')
 local Game       = require('game.game')
 local DebugLevel = require('game.levels.debug-level')
 
-local dblv = DebugLevel.new()
 
-function love.draw()
-end
+local dblv = DebugLevel.new()
 
 function love.load()
     love.mouse.setCursor(Game.cursor)
