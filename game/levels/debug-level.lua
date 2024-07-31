@@ -10,6 +10,7 @@ local DebugLevel = {}
 DebugLevel.__index = DebugLevel
 
 function DebugLevel.new()
+
     local scene = setmetatable(Scene.new(), DebugLevel)
     scene.name = "DebugLevel"
 
@@ -20,9 +21,9 @@ end
 
 function DebugLevel:update(dt)
 
-
     G.mob_gen_counter = G.mob_gen_counter + dt
 
+    -- Generate Mobs
     if G.mob_gen_counter >= G.mob_gen_rate then
         G.mob_can_generate = true
         G.mob_gen_counter = 0
@@ -32,18 +33,25 @@ function DebugLevel:update(dt)
         MobUtil.mob_generate(self.p)
         G.mob_can_generate = false
     end
+    -- End Generate Mobs
 
+
+    -- Update Player Shots
     for _,b in pairs(G.player_shots) do
         b:update(dt)
     end
+    -- End Update Player Shots
 
+    -- Update Mobs
     for _,m in pairs(G.mobs) do
         m:update(dt)
     end
+    -- End Update Mobs
 
+    -- Player Logic
     Player.update(self.p, dt)
-
     PlayerUtil.player_shoot(self.p, dt)
+    -- End Player Logic
 end
 
 function DebugLevel:render()
