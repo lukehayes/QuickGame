@@ -1,45 +1,22 @@
-local R          = require('core.gfx.render')
-local Color      = require('core.gfx.color')
-local Game       = require('game.game')
-local DebugLevel = require('game.levels.debug-level')
+local AStar = require('core.ai.astar')
+local GridNode = require('core.ai.grid-node')
 
 
-local dblv = DebugLevel.new()
+local grid = {
+  {0,0,0,0},
+  {0,0,0,0},
+  {0,0,0,0},
+  {0,0,0,0}
+}
 
-function love.load()
-    love.mouse.setCursor(Game.cursor)
+test = {}
+test.__index = test
+test.__tostring = function()
+  return "TEST"
 end
 
-function love.update(dt)
-    Game.delta = dt
+g1 = GridNode.new(100,100, test)
+g2 = GridNode.new(200,200)
 
-    dblv:update(dt)
-end
-
-function love.draw()
-
-    --R:clear(Color.BLACK)
-    dblv:render()
-
-    -- ECS
-    --System.render(e.components, true)
-    --System.render(e.components, false)
-end
-
-function love.mousepressed(x, y, button, istouch)
-end
-
-function love.keypressed(key, scancode, isrepeat)
-   if key == "escape" then
-      love.event.quit()
-   end
-
-   if key == "p" then
-       Game.player_fire_rate = 0.1
-   end
-
-   --if key == "space" then
-       --print("Space")
-        --toggle = not toggle
-   --end
-end
+print(g1)
+print(g2)

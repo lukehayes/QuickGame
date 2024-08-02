@@ -1,33 +1,9 @@
-local Object = require 'core.object'
-
-local Node = {}
-Node.__index = Node
-
-Node.__tostring = function(a)
-  return "Node: { x: " ..
-          a.position.x .. ", y: " ..
-          a.position.y .. " }"
-end
-
-Node.__eq = function(a,b)
-  return (rawequal(a,b))
-end
-
-function Node.new(x,y)
-    local obj = setmetatable(Object.new(x,y), Node)
-
-    obj.g = 0
-    obj.h = 0
-    obj.f = 0
-
-    return obj
-end
-
-
+-- Simple astar path finding algorithm
+--
 function AStar(grid, start, finish)
 
   startNode = Node.new(start)
-  endNode = Node.new(finish)
+  endNode   = Node.new(finish)
 
   openGrid   = {}
   closedGrid = {}
@@ -54,4 +30,4 @@ function AStar(grid, start, finish)
 
 end
 
-return Node
+return AStar
